@@ -1,394 +1,267 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Memphis Navigator</title>
-    <script src="js/jquery.js"></script>
-    <script type="text/javascript" src="js/w2ui.js"></script>
-    <link rel="stylesheet" type="text/css" href="css/w2ui.css" />
-    <link rel="stylesheet" type="text/css" href="css/index.css" />
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
+<title>Select names</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/4.0.0/flatly/bootstrap.min.css">
+<link href="docs/bundle.css" rel="stylesheet" type="text/css">
+<!--<link rel="stylesheet" href="css/demo.css">
+<link rel="stylesheet" href="css/listnav.css">-->
+<script src="grids.js"></script>
+<!--<script src="dropdown_persons.js"></script>
+<script src="dropdown_objects.js"></script>
+<script src="dropdown_titles.js"></script>-->
+
+<style>
+body { background-color: #FFFFFF; overflow-y: hidden;  }
+.container { margin-top: 70px; max-width: 450px; }
+.limenu {background-color:white; margin-left: 3px; margin-top: 1px; margin-bottom: 10px;width:12px; height:12px; font-size:15px; font-color:black; opacity:1;}
+.form-control{border:0px;font-size:16px}
+.btn.btn-primary.dropdown-toggle {border-radius:0.65rem; }
+a {display: block;}
+.text-white {background-color: black; display:inline;}
+.badge.badge-dark.mr-1.mb-1{background-color:white; color:black;font-size:15px; display:inline;}
+
+.dropdown-menu.dropdown-menu-right.show{
+     position:absolute;
+     top: -330px;
+     right: -400px;
+     opacity: 0.8;
+     width: 120px;
+}
+
+a.selected {
+  background-color:#1F75CC;
+  color:white;
+  z-index:100;
+}
+
+.main_letter {
+
+    background-color:white;
+    margin-bottom:2px;
+    width:430px;
+    height: 30px;
+    z-index: 100000;
+    position:absolute;
+       
+
+}
+
+
+</style>
 </head>
+
 <body>
-<button id="backbutton" class="backbutton">Back to search Menu</button>
-<div id="main" class="main" style="width: 100%; height: 1000px;"></div>
+<!-- MAIN MENU -->
+<div id="mySidenav" class="sidenav">
+  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+  <a href="#" onclick="window.open('detail/projectinformation.html')">Project </a>
+  <a href="#" onclick="window.open('detail/instructions.html')">Instructions </a>
+  <a href="#">Help</a>
+  <!--<a href="#" onclick="kalauer()">Kalauer des Tages</a>-->
+</div>
 
-<script type="text/javascript">
+<div id="upper">
+<span style="font-size:30px;cursor:pointer;" onclick="openNav()"><h4>&#9776; Project & Help</h4></span>
+<p class="radio" id="searchfield" style="display:inline; font-size:20px;cursor:pointer; top:0; left:40%; opacity:0">Text Search: <input type="text" id="searchfields" value=""></p>
+<br>
+<a class="radio" style="display:inline; top:7%; left:40%; opacity:0"><input type="radio" name="query" value="is" checked="checked" >is  </input></a>
+<a class="radio" style="display:inline; top:7%; margin-left:10px; opacity:0"><input type="radio" name="query" value="begins"> begins  </input></a>
+<a class="radio" style="display:inline; top:7%; margin-left:10px;  opacity:0"><input type="radio" name="query" value="contains"> contains  </input></a>
+<a class="radio" style="display:inline; top:7%; margin-left:10px;  opacity:0"><input type="radio" name="query" value="ends"> ends  </input></a>
 
-function reload_cart() {
+<span style="position: absolute; font-size:30px;cursor:pointer; top:22px; right:20px; opacity:0" id="back"><h4>&#8617; Back to current Menu</h4></span>
+<span style="position: absolute; font-size:30px;cursor:pointer; top:0px; right:20px; opacity:1" id="reset"><h4>&#9776; Main Menu</h4></span>
+<div style="opacity:0; top:0; right:48%; position:absolute" id="bgroup" >
+  <span style="font-size:30px;cursor:pointer;"  id="p0"> << </span>
+  <span style="font-size:30px;cursor:pointer;"  id="p1"> >> </span>
+</div>
 
- //w2ui.layout.content('main', '<div id="Search" style="background: #c8d3ce; height: 100%; font-size:17px; font-family: Arial, Helvetica, sans-serif;"><h2>PERSONS</h2><h3>Name</h3><div id="dropdown1"><select id="dd1"></select></div><h3>Other name</h3><div id="dropdown2"><select id="dd2">Other name</select></div><h3>Name translat english</h3><div id="dropdown3"><select id="dd3">Name translat english</select></div><button id="bt1">Start Search</button></div>');
+</div> 
+<div id="selectedvalues" style="position: absolute; top:12%; left:2px;" >
+  <div id="header" style="position: absolute; top:200px; left:20px; width:400px;" >
+    </div>
+</div>
 
-w2ui.layout.content('main', '<nav role="navigation"><ul class="dropdown"><li id="dd1"><a href="#">Name</a><ul id="dropdown1"></ul></li><li><a href="#">Other name</a><ul id="dropdown2"></ul></li><li><a href="#">Name translit (englisch)</a><ul id="dropdown3"></ul></li></ul></nav>');
+<script>
+function openNav() {
+  document.getElementById("mySidenav").style.width = "300px";
+}
 
+function closeNav() {
+  document.getElementById("mySidenav").style.width = "0";
+}
+</script>
+<script>
+function kalauer() {
+alert("Wie nennt man eine Frau ohne Arsch? Geschieden!")
+}
 
-                    $.each(persons[3][0], function( index, p ) {
-                             $('#dropdown1').append('<li><a href="#" value='+index+'>'+p+'</a></li>');
-                    });
-                    $.each(persons[3][1], function( index, p ) {
-                             $('#dropdown2').append('<li><a href="#"  value='+index+'>'+p+'</a></li>');
-                    });
-                    $.each(persons[3][2], function( index, p ) {
-                             $('#dropdown3').append('<li><a href="#"  value='+index+'>'+p+'</a></li>');
-                    });
-                             
-                    var var1=""; var var2=""; var var3="";
-                    SearchArray=[];
-                    $('#dd1').click(function(){ 
-                    
-                      var1= $('#dropdown1 t :selected').text();
-                      alert(var1) 
-                    });
-                      $('#dd2').click(function(){ 
-                      var2= $('#dd2 :selected').text();
-                      
-                      });
-                      $('#dd3').click(function(){ 
-                      var3= $('#dd3 :selected').text();
-                     
-                      });
-                      $('#bt1').click(function(){ 
-                          if (var1!="") {SearchArray.push({ field: 'name', value: var1, operator: 'is'})}
-                          if (var2!="") {SearchArray.push({ field: 'name_other', value: var2, operator: 'is'})}
-                          if (var3!="") {SearchArray.push({ field: 'name_translit', value: var3, operator: 'is'})}
-                          w2ui.grid1.search(SearchArray, 'AND');
-                          w2ui.grid1.save();
-                          w2ui.layout.content('main', '<iframe class="row" id="Content2" style="height: 100%"></iframe>' )
-                          document.getElementById('Content2').setAttribute('src',"further/singleview_persons.html?ids="+w2ui.grid1.getCellValue(0, 0).toString()+"&name=test")
-                          
-                          w2ui.layout.content('top', w2ui.grid1);
-                          
-                          w2ui['layout'].hide('left', window.instant)
-                          w2ui['layout'].show('top', window.instant)
-                        
-                      });
-                     
-}; 
+</script>
 
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script src="dist/fuse.js"></script>
+<script src="dist/bootstrap-select-dropdown.js"></script>
 
-function getValue(file){
+<title>Memphis Navigator</title>
+
+<script type="text/javascript" src="js/w2ui.js"></script>
+<link rel="stylesheet" type="text/css" href="css/w2ui.css" />
+<link rel="stylesheet" type="text/css" href="css/index.css" />
+<div id="but" class="center" style="width: 20%; height: 2px;"></div>
+
+<div class="container" id="container">
+<div class="form-group" id="msall">
+    <h1> Memphis Navigator</h1>
+    <h5> A tool designed for database navigation</h5>
+    <br>
+    <br>
+     
+    <span style="font-size:30px;cursor:pointer" id="sel_pers"><h4>&#9776; Persons</h4></span>
+    <span style="font-size:30px;cursor:pointer" id="sel_obj"><h4>&#9776; Objects</h4></span>
+    <span style="font-size:30px;cursor:pointer" id="sel_title"><h4>&#9776; Titles</h4></span>
+</div>
+
+<h2 id="persname" style="opacity:0">Persons</h2>
+<h2 id="objectsl" style="opacity:0">Objects</h2>
+<h2 id="title" style="opacity:0; top:10px">Titles</h2>
+
+<span style="font-size:30px;cursor:pointer; opacity:0" id="selectionresult" ><h4>Current Selection   <button id="selectionresult" class="btn btn-primary" style="font-size:0.75rem;">Show results</button></h4></span>
+<span style="font-size:30px;cursor:pointer; opacity:0" id="moreoptions"><h4>&#9776; Select more?</h4></span>
+</div>
+<div id="main1" class="main1" style="width: 100%; height: 2000px; background-color: #ffffff; overflow-y:hidden"></div>
+
+</div>
+<div id="main_content_engl" class="main_letter" ><ul style="background-color:white; margin-bottom:40px"></ul></div>
+<div id="main_content_orig" class="main_letter" ><ul style="background-color:white; margin-bottom:40px"></ul></div>
+
+<script>
+
+function getParameters()
+{
+    var parameterFragments = location.search.substr(1).split("&");
+    var parameters = {}
+    for(var i = 0; i < parameterFragments.length; i++)
+    {
+        var splittedParameter = parameterFragments[i].split("=");
+        parameters[splittedParameter[0]] = decodeURIComponent(splittedParameter[1]);
+    }
+    return parameters;
+}
+var parameters = getParameters();
+
+  //data import
+   function getValue(file){
    var value= $.ajax({ 
       url: file, 
       async: false
    }).responseText;
    return value;
 }
+  var pstyle = 'background: #ffffff;  overflow-y: hidden;';
+  persons=$.parseJSON(getValue('data/persons.json')) 
+  objects=$.parseJSON(getValue('data/objects.json'))
+  titles=$.parseJSON(getValue('data/titles.json'))
 
-var pstyle = 'background: #c8d3ce;';
-persons=$.parseJSON(getValue('data/persons.json'))
-persons_sel=$.parseJSON(getValue('data/persons_selection.json'))
-objects=$.parseJSON(getValue('data/objects.json'))
-objects_sel=$.parseJSON(getValue('data/objects_selection.json'))
-titles=$.parseJSON(getValue('data/titles.json'))
-titles_sel=$.parseJSON(getValue('data/titles_selection.json'))
-relationright=$.parseJSON(getValue('data/relation_rightleftid.json'))  
-relationleft=$.parseJSON(getValue('data/relation_leftrightid.json'))  
-dating=$.parseJSON(getValue('data/dating_selection.json'))  
-objects_with_image=$.parseJSON(getValue('data/objects_with_image.json'))  
-selection=$.parseJSON(getValue('data/selection.json'))  
+		       
+  $("html, body").css({
+      overflow: 'hidden',
+      height: '100%'
+  });
+  
 
-//define nested layout
-$('#grid1').w2grid({
-    name    : 'grid1',
- show: { 
-            toolbar: true,
-            footer: true
-        },
-multiSearch: true,
-    searches: persons[0],
-        columns: persons[1],
-        records: persons[2],
-        onSearch: function (target, info) {
-	    var grid = this;
-            //console.log(grid)
-	    
-	},
-        onClick: function(event) {
 
-        var grid = this;
-        event.onComplete = function() {
-        var sel_rec_ids = grid.getSelection();
-        
-        if (sel_rec_ids.length) {
-        //w2ui['layout'].show('right', window.instant)
-        var sel_record = grid.get(sel_rec_ids[0]);
-        w2ui.layout.content('main', '<iframe class="row" id="Content2" style="height: 100%"></iframe>' )
-        document.getElementById('Content2').setAttribute('src',"further/singleview_persons.html?ids="+(sel_record.id_persons).toString()+"&name="+(sel_record.name_translit).toString())
-       
-}
-}}
-});
+//##########################################
+//Call function allTables defined in grids.js
 
-$('#grid2').w2grid({
-    name    : 'grid2',
- show: { 
-            toolbar: true,
-            footer: true
-        },
-multiSearch: true,
-    searches: objects[0],
-        columns: objects[1],
-        records: objects[2],
-        onSearch: function (target, info) {
-	    var grid = this;
-	    
-	},
-        onClick: function(event) {
+  currentIds=(1,2,3,4,5,6)
+  allTables()
 
-        var grid = this;
-        event.onComplete = function() {
-        var sel_rec_ids = grid.getSelection();
-        
-        if (sel_rec_ids.length) {
-        //w2ui['layout'].show('right', window.instant)
-        var sel_record = grid.get(sel_rec_ids[0]);
-        w2ui.layout.content('main', '<iframe class="row" id="Content2" style="height: 100%"></iframe>' )
-        document.getElementById('Content2').setAttribute('src',"further/singleview_objects.html?ids="+(sel_record.id_objects).toString()+"&type="+(sel_record.object_type).toString())
-       
-}
-}}
-});
- 
-$('#grid3').w2grid({
-    name    : 'grid3',
- show: { 
-            toolbar: true,
-            footer: true
-        },
-multiSearch: true,
-    searches: titles[0],
-        columns: titles[1],
-        records: titles[2],
-        onSearch: function (target, info) {
-	    var grid = this;
-            //console.log(grid)
-	    
-	},
-        onClick: function(event) {
+//#############################################
 
-        var grid = this;
-        event.onComplete = function() {
-        var sel_rec_ids = grid.getSelection();
-        
-        if (sel_rec_ids.length) {
-        //w2ui['layout'].show('right', window.instant)
-        var sel_record = grid.get(sel_rec_ids[0]);
-        w2ui.layout.content('main', '<iframe class="row" id="Content2" style="height: 100%"></iframe>' )
-        document.getElementById('Content2').setAttribute('src',"further/singleview_titles.html?ids="+(sel_record.id).toString()+"&title="+(sel_record.titles_translat_eng).toString());
+$(document).ready(function(){
       
-       
-}
-}}
-});
+$.getScript( "dist/bootstrap-select-dropdown.js", function() {
 
-$('#grid12').w2grid({
-        name: 'grid12',
-        show : { toolbar : true,
-                 toolbar     : true,
-                 footer        : true,
-                 lineNumbers    : true,
-                 selectColumn: true,
-                 expandColumn: false},
-        multiSearch: true,
-        searches: objects_with_image[0],
-        columns: objects_with_image[1],
-        records: objects_with_image[2],
-        onClick: function(event) {
-
-        var grid = this;
-        event.onComplete = function() {
-        var sel_rec_ids = grid.getSelection();
-        
-        if (sel_rec_ids.length) {
-     
-        var sel_record = grid.get(sel_rec_ids[0]);
-        w2ui.layout.content('main','<iframe class="row" id="Content2" style="height: 100%"></iframe>');
-        document.getElementById('Content2').setAttribute('src',"further/singleview_objects.html?ids="+(sel_record.id_objects).toString());
-       
-}
-}}});
-
-
-var config = {
-
- layout:{
-        name: 'layout',
-        padding: 0,
-        panels: [
-            { type: 'top', size: 250, resizable: true, minSize: 250, style: pstyle},
-            { type: 'left', size: 200, resizable: true, minSize: 120, style: pstyle},
-            { type: 'right', minSize: 900, resizable: true, overflow: 'hidden' },
-            { type: 'main', resizable: true, overflow: 'hidden', style: pstyle }
- 
-        ]
-    },
-    sidebar: {
-        name: 'sidebar',
-        topHTML    : '<div style="background-color: #eee; padding: 10px 5px; border-top: 1px solid silver; font-size:22px;color:gray">Memphis Navigator</div>',
-       
-        nodes: [ 
-       { id: 'general1', text: '<p align="center" style="font-size:15px;color:gray">General</p>', img: 'icon-folder', expanded: true, group: true,
-              nodes: [ { id: 'p1', text: 'Project information', img: 'icon-folder', count: 5,
-                           nodes: [
-                           { id: 'grid4', text: 'Project', icon: 'fa-star-empty' },
-                           { id: 'grid5', text: 'Project description', icon: 'fa-star-empty' },
-                           { id: 'grid7', text: 'Database', icon: 'fa-star-empty' },
-                           { id: 'grid8', text: 'Museums and Archives', icon: 'fa-star-empty' },
-                           { id: 'grid9', text: 'Relevant Bibliography', icon: 'fa-star-empty' },
-                          
-
-                       ]},
-                    
-                     ]
-            },
-      { id: 'general2', text: '<p style="font-size:15px;color:gray">SQL Selection</p>',  img: 'icon-folder', expanded: true, group: true,
-              nodes: [ { id: 'p2', text: 'Tables', img: 'icon-folder', count: 4,
-                           nodes: [
-                           { id: 'grid1', text: 'Persons', icon: 'fa-star-empty' },
-                           { id: 'grid2', text: 'Objects', icon: 'fa-star-empty' },
-                           { id: 'grid3', text: 'Titles', icon: 'fa-star-empty' },
-                          { id: 'grid12', text: 'Objects with image', icon: 'fa-star-empty' }
-
-                       ]},
-                          { id: 'p3', text: 'Relations', img: 'icon-folder', count: 1,
-                           nodes: [
-                           { id: 'grid13', text: 'Object types', icon: 'fa-star-empty' }
-                         
-                       ]}
-
-,
-                    
-                     ]
-            },
-
-
-            { id: 'general3', text: '<p style="font-size:15px;color:gray">Statistics</p>', group: true, expanded: true, nodes: [
-                { id: 'grid6', text: 'Dating', img: 'icon-folder', selected: true },
-                { id: 'grid11', text: 'Tombs and Owner', img: 'icon-folder', selected: true },
-                { id: 'grid17', text: 'Tree', img: 'icon-folder', selected: true }
- 
-            
-            ]},       
-             { id: 'general4', text: '<p style="font-size:15px;color:gray">Help</p>', group: true, expanded: true, nodes: [
-                { id: 'grid10', text: 'Navigator', img: 'icon-folder', selected: true }
-            
-            ]}     
-        ],
-        onClick: function (event) {
-            $('#sidebar').css('width', (event.goFlat ? '35px' : '200px'));
-            switch (event.target) {
-                case 'grid1':
-                    /*
-                     $(document).ready(function() {
-                       reload_cart();
-                      })//end ready function
-                      
-                            $('#backbutton').click(function(){ 
-                            w2ui['layout'].show('left', window.instant)
-                            w2ui['layout'].hide('top', window.instant)
-                            reload_cart();
-                            //w2ui.layout.destroy('left');
-                            //$('#main').w2layout(config.layout);
-                            //w2ui.layout.set('left', { size: 50 });
-                            //w2ui.layout.content('left', $().w2sidebar(config.sidebar));
-                      });
-                    */
-                    w2ui.layout.content('main', w2ui.grid1);
-                    break;
-                    //w2ui['layout'].hide('right', window.instant)
-                    //break;
-                case 'grid2':
-                    w2ui.layout.content('main', w2ui.grid2);
-                    break;
-                case 'grid3':
-                    w2ui.layout.content('main', w2ui.grid3);
-                    break;
-                case 'grid12':
-                    w2ui.layout.content('main', w2ui.grid12);
-                    break;
-                case 'grid13':
-                    w2ui.layout.content('main', w2ui.grid13);
-                    break;
-                case 'grid4':
-                    w2ui.layout.content('main', '<iframe class="PI" id="ProjectInformation" src="projectinformation/the_project.html" style="width: 100%; height: 100%"></iframe>');
-                    break;
-                case 'grid5':
-                    w2ui.layout.content('main', '<iframe class="PI" id="ProjectInformation" src="projectinformation/project_description.html" style="width: 100%; height: 100%"></iframe>');
-                    break;
-               case 'grid7':
-                    w2ui.layout.content('main', '<iframe class="PI" id="ProjectInformation" src="projectinformation/database.html" style="width: 100%; height: 100%"></iframe>');
-                    break;
-              case 'grid8':
-                    w2ui.layout.content('main', '<iframe class="PI" id="ProjectInformation" src="projectinformation/museums_and_archives.html" style="width: 100%; height: 100%"></iframe>');
-                    break;
-              case 'grid9':
-                    w2ui.layout.content('main', '<iframe class="PI" id="ProjectInformation" src="projectinformation/relevant_bibliography.html" style="width: 100%; height: 100%"></iframe>');
-                    break;
-              case 'grid10':
-                    w2ui.layout.content('main', '<iframe class="PI" id="ProjectInformation" src="further/instructions.html" style="width: 100%; height: 100%"></iframe>');
-                    break;
-              case 'grid11':
-                    w2ui.layout.content('main', '<iframe class="PI" id="ProjectInformation" src="statistics/tombs.html" style="width: 100%; height: 100%"></iframe>');
-                    break;
-              case 'grid6':
-                    w2ui.layout.content('main', '<iframe class="Statistics" id="Statistics" src="statistics/dating.html" style="width: 100%; height: 100%"></iframe>');
-                    break;
-              case 'grid17':
-                    w2ui.layout.content('main', '<iframe class="Statistics1" id="Statistics1" src="statistics/graph_ext.html" style="width: 100%; height: 100%"></iframe>');
-                    break;
-
-            }
-        }
-    },
     
+    $(".dropdown-menu.dropdown-menu-right.show").appendTo("#container")
+    $("#back").click(function() {
+	$("#searchfield").show()
+	$("#textfieldsearch").show()
+	$(".radio").show()
+	$("#back").css("opacity", "1");
+	$("#bgroup").css("opacity", "0");
+	w2ui['layout'].hide('main', window.instant)
+	$( ".container" ).show();
+    })
+})
+
+    var collection=[]
+   
+   
+
+
+//#####################
+//      PERSONS       #
+//#####################
+
+$( "#sel_pers" ).on("click", function () {
+    $.getScript( "dropdown_persons.js", function() {
+	
+	getDropdownPersons();
+    });
     
 
- grid13: { 
-        name: 'grid13',
-        show : { toolbar : true,
-                 toolbar     : true,
-                 footer        : true,
-                 lineNumbers    : true,
-                 selectColumn: true,
-                 expandColumn: false},
-        multiSearch: true,
-        searches: selection[0],
-        columns: selection[1],
-        records: selection[2],
-        onClick: function(event) {
 
-        var grid = this;
-        event.onComplete = function() {
-        var sel_rec_ids = grid.getSelection();
-        
-        if (sel_rec_ids.length) {
-     
-        var sel_record = grid.get(sel_rec_ids[0]);
-        w2ui.layout.content('main','<iframe class="row" id="Content2" style="height: 100%"></iframe>');
-        document.getElementById('Content2').setAttribute('src',"further/singleview_objects.html?ids="+(sel_record.obj_id).toString());
-       
-}
-}}}
-};
-
-$(function () {
-    // initialization
-    $('#main').w2layout(config.layout);
-    w2ui['layout'].hide('right', window.instant)
-    w2ui['layout'].hide('top', window.instant)
-    w2ui.layout.content('left', $().w2sidebar(config.sidebar));
-    w2ui.layout.content('main', '<iframe class="PI" id="ProjectInformation" src="projectinformation/the_project.html" style="width: 100%; height: 100%"></iframe>');
-    // in memory initialization
-    w2ui['grid1'].hideColumn('notes','to_do','link_bonner_totenbuch','link_trismegistos','link_tla','person_no_ranke')
-    w2ui['grid2'].hideColumn('object_subtype_other','object_provenance_detail','object_provenance_reconstructed','object_component','object_material','object_text_format','object_image_format','object_location_detail','condition','obejct_technique','object_height','object_lenght','object_width','object_description','notes','to_do','measurements_unit','weblink','literature')
-    w2ui['grid3'].hideColumn('titles_index','titles_translat','region','gott_kult','ad_sec','field2','field3','field5','field6','titel_hierach','titel_kern','titel_spez_taetigkeit','titel_spez_gott_koenig_pers','titel_spez_epitheton','titel_spez_institution','titel_spez_toponym','old_ids')
-    w2ui['grid12'].hideColumn('object_subtype_other','object_provenance_detail','object_provenance_reconstructed','object_location','object_component','object_material','object_text_format','object_image_format','object_location_detail','condition','obejct_technique','object_height','object_lenght','object_width','object_description','notes','to_do','measurements_unit','weblink','literature')
-
-    $().w2grid(config.grid1);
-    $().w2grid(config.grid2);
-    $().w2grid(config.grid3);
-    $().w2grid(config.grid12);
-    $().w2grid(config.grid13);
 });
 
+//#####################
+//      OBJECTS       #
+//#####################
+
+$( "#sel_obj" ).click(function() {
+$.getScript( "dropdown_objects.js", function() {
+    getDropdownObjects();
+});
+});
+    
+//#################
+// TITLES         #
+//#################
+
+$( "#sel_title" ).click(function() {
+	$.getScript( "dropdown_titles.js", function() {
+	    getDropdownTitles();
+});
+});
+  });
+
+</script>
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-36251023-1']);
+  _gaq.push(['_setDomainName', 'jqueryscript.net']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+<script>
+$("#reset").click(function(){
+window.location.reload(true);
+})
 </script>
 </body>
 </html>

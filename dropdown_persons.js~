@@ -1,0 +1,100 @@
+{
+
+    $("#persname").css("opacity","1")
+    $(".radio").css("opacity","1")
+    var myObject = new Object();
+    var myObject_orig = new Object();
+    
+    $.each(alphabet, function(index) {
+	myObject[alphabet[index]] = [persons[3].english[alphabet[index]], "pers_engl", "pers", "engl_name", "Select english name beginning with "+alphabet[index],alphabet[index] , "#"+alphabet[index],"#bsd"+String(index+1)+"-container", "name_translit","english"];
+    })
+    var i=Object.keys(myObject).length
+    myObject["gender"]=[persons[3].gender, "pers_gender", "pers", "gender", "Select Gender", "gender","#gender", "#bsd"+(i+1)+"-container", "gender","gender"]
+    $.each(numbers, function(index) {
+	myObject[numbers[index]] = [persons[3].ID[numbers[index]], "pers_id", "pers", "id", "Select id beginning with "+numbers[index], numbers[index] , "#"+numbers[index],"#bsd"+String(index+i+2)+"-container", "ID","id"];
+    })
+
+
+    var vars = JSON.stringify(myObject);
+    var obj = jQuery.parseJSON( vars );
+
+    //var i=Object.keys(myObject).length
+   /* $.each(alphabet_orig, function(index) {
+	myObject_orig[alphabet_orig[index]]=[persons[3].name[alphabet_orig[index]], "pers_name", "pers", "orig_name", "Select original name beginning with "+alphabet_orig[index], alphabet_orig[index], "#"+alphabet_orig[index], "#bsd"+String(index+i+2)+"-container", "name","original"];})
+    */
+    
+    
+    $.getScript( "dist/bootstrap-select-dropdown.js", function() { 
+	$.each(alphabet, function(index) {
+	    $(obj[alphabet[index]][6]).selectDropdown();
+	    $(obj[alphabet[index]][7]+" .input-group .form-control").attr("placeholder", obj[alphabet[index]][4]);
+	    $(obj[alphabet[index]][7]).find('.dropdown-menu').css("z-index","12000")
+	    $(obj[alphabet[index]][7]).css("margin-bottom","22px")
+	    if (index==0){$(obj[alphabet[index]][7]).show()}
+	    else {$(obj[alphabet[index]][7]).hide()}
+	});
+	
+	$(obj["gender"][6]).selectDropdown();
+	$(obj["gender"][7]+" .input-group .form-control").attr("placeholder", obj["gender"][4]);
+	$(obj["gender"][7]).find('.dropdown-menu').css("z-index","12000")
+	$(obj["gender"][7]).css("margin-bottom","22px")
+
+        $.each(numbers, function(index) {
+	    $(obj[numbers[index]][6]).selectDropdown();
+	    $(obj[numbers[index]][7]+" .input-group .form-control").attr("placeholder", obj[numbers[index]][4]);
+	    $(obj[numbers[index]][7]).find('.dropdown-menu').css("z-index","12000")
+	    $(obj[numbers[index]][7]).css("margin-bottom","22px")
+	    if (index==0){$(obj[numbers[index]][7]).show()}
+	    else {$(obj[numbers[index]][7]).hide()}
+	});
+
+
+    });
+    
+    BasicMenu("#pers", par1=obj, par2=0, par3="");
+    DropdownMenu("#pers", w2ui.grid1, par1=obj);
+    SelectionMenu("#pers", par1=obj, "grid1");
+    $(".form-control").css({"border":"0px","font-size":"12px"})
+    
+
+        $("#container").on("click","[id*=-button]", function() {
+        
+	
+	if ($(this).attr("id").match(/^bsd[0-9]{1,1}-button$/)) {
+        
+	$("#main_content_engl").appendTo("#container");
+		       $("#main_content_engl").show();
+		       $("#main_content_id").hide();
+        v="#"+$(this).attr("id")
+		   
+	$("[id*=-button]").find(".dropdown-menu.dropdown-menu-right").hide();
+	$(v).find(".dropdown-menu.dropdown-menu-right").show();
+		       }
+        
+        if ($(this).attr("id").match(/^bsd[2-4][1-9]{1,1}-button$/)) {
+        
+        $("#main_content_engl").hide();
+        $("#main_content_id").appendTo("#container");
+        $("#main_content_id").show();
+        v="#"+$(this).attr("id")
+		   
+	$("[id*=-button]").find(".dropdown-menu.dropdown-menu-right").hide();
+	$(v).find(".dropdown-menu.dropdown-menu-right").show();
+		       
+	}
+      
+        if ($(this).attr("id").match("bsd20-button")) 
+         {
+		       $("#main_content_engl").hide();
+		       $("#main_content_id").hide();
+	$("[id*=-button]").find(".dropdown-menu.dropdown-menu-right").hide();
+	
+	$("#bsd20-button").css({position: 'relative'});
+      	$("#bsd20-button").find(".dropdown-menu.dropdown-menu-right").css({"top": "210px","left":"165px","width":"100px","position":"absolute"})
+	$("#bsd20-button").find(".dropdown-menu.dropdown-menu-right.show").css({"top": "210px","left":"165px","width":"100px","position":"absolute"})
+	$("#bsd20-button").find(".dropdown-menu.dropdown-menu-right").show()
+	
+    }
+     
+    });
+}

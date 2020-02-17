@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
+<title>Select names</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/4.0.0/flatly/bootstrap.min.css">
+<!--<link href="dist/bootstrap-select-dropdown.css" rel="stylesheet" type="text/css">-->
+<link href="docs/bundle.css" rel="stylesheet" type="text/css">
+<script src="grids.js"></script>
+<style>
+body { background-color: #FFFFFF; overflow-y: hidden;  }
+.container { margin-top: 150px; max-width: 450px; }
+
+</style>
+</head>
+
+<body>
+<!-- MAIN MENU -->
+<div id="mySidenav" class="sidenav">
+  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+  <a href="#">Project</a>
+  <a href="#">Help</a>
+  <a href="#" onclick="kalauer()">Kalauer des Tages</a>
+</div>
+
+<div id="upper">
+<span style="font-size:30px;cursor:pointer;" onclick="openNav()"><h4>&#9776; Project & Help</h4></span>
+<span style="position: absolute; font-size:30px;cursor:pointer; top:0; right:30px; opacity:0" id="back"><h4>&#8617; Back to current Menu</h4></span>
+<span style="position: absolute; font-size:30px;cursor:pointer; top:0; right:20px; opacity:0" id="reset"><h4>&#9776; Reset</h4></span>
+<div style="opacity:0; top:0; right:48%; position:absolute" id="bgroup" >
+  <span style="font-size:30px;cursor:pointer;"  id="p0"> << </span>
+  <span style="font-size:30px;cursor:pointer;"  id="p1"> >> </span>
+</div>
+</div> 
+
+<script>
+function openNav() {
+  document.getElementById("mySidenav").style.width = "300px";
+}
+
+function closeNav() {
+  document.getElementById("mySidenav").style.width = "0";
+}
+</script>
+<script>
+function kalauer() {
+alert("Wie nennt man eine Frau ohne Arsch? Geschieden!")
+}
+
+</script>
+
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script src="dist/fuse.js"></script>
+<script src="dist/bootstrap-select-dropdown.js"></script>
+
+<title>Memphis Navigator</title>
+
+<script type="text/javascript" src="js/w2ui.js"></script>
+<link rel="stylesheet" type="text/css" href="css/w2ui.css" />
+<link rel="stylesheet" type="text/css" href="css/index.css" />
+<div id="but" class="center" style="width: 20%; height: 2px;"></div>
+<div class="container" id="container">
+
+<div class="form-group" id="msall">
+    <h1> Memphis Navigator</h1>
+    <h5> A tool designed for database navigation</h5>
+    <br>
+    <br>
+    <span style="font-size:30px;cursor:pointer" id="sel_pers"><h4>&#9776; Persons</h4></span>
+    <span style="font-size:30px;cursor:pointer" id="sel_obj"><h4>&#9776; Objects</h4></span>
+    <span style="font-size:30px;cursor:pointer; opacity:0.12" id="sel_title"><h4>&#9776; Titles</h4></span>
+</div>
+<!-- define selection menu (start)-->
+
+<h2 id="pers" style="opacity:0">Persons</h2>
+<h2 id="obj" style="opacity:0">Objects</h2>
+<!--</script>-->
+
+<span style="font-size:30px;cursor:pointer; opacity:0" id="namepers1"><h4>&#9776; Show Selection Result</h4></span>
+<span style="font-size:30px;cursor:pointer; opacity:0" id="moreoptions"><h4>&#9776; Select more?</h4></span>
+</div>
+<div id="main1" class="main1" style="width: 100%; height: 2000px; background-color: #ffffff; overflow-y:hidden"></div>
+<!--<script>-->
+
+<script>
+
+//Save status of div container
+//var divClone = $("#container").clone();
+
+
+function getParameters()
+{
+    var parameterFragments = location.search.substr(1).split("&");
+    var parameters = {}
+    for(var i = 0; i < parameterFragments.length; i++)
+    {
+        var splittedParameter = parameterFragments[i].split("=");
+        parameters[splittedParameter[0]] = decodeURIComponent(splittedParameter[1]);
+    }
+    return parameters;
+}
+var parameters = getParameters();
+
+  //data import
+   function getValue(file){
+   var value= $.ajax({ 
+      url: file, 
+      async: false
+   }).responseText;
+   return value;
+}
+  var pstyle = 'background: #ffffff;  overflow-y: hidden;';
+  persons=$.parseJSON(getValue('data/persons.json')) 
+  persons_sel=$.parseJSON(getValue('data/persons_selection.json'))
+  objects=$.parseJSON(getValue('data/objects.json'))
+  objects_sel=$.parseJSON(getValue('data/objects_selection.json'))
+  titles=$.parseJSON(getValue('data/titles.json'))
+  titles_sel=$.parseJSON(getValue('data/titles_selection.json'))
+  relationright=$.parseJSON(getValue('data/relation_rightleftid.json'))  
+  relationleft=$.parseJSON(getValue('data/relation_leftrightid.json'))  
+  dating=$.parseJSON(getValue('data/dating_selection.json'))  
+  objects_with_image=$.parseJSON(getValue('data/objects_with_image.json'))  
+  selection=$.parseJSON(getValue('data/selection.json')) 
+
+  //persons[3].english[0]
+  //persons[3].ID[0]
+  alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
+  vars=[[["pers_engl", "pers", "engl_name", "select english name", "ms_persons_engl", alphabet, "#ms_persons_engl", "#bsd1-container", "name_translit"],
+	["pers_orig", "pers", "orig_name", "select original name", "ms_persons_orig", persons[3].name[0], "#ms_persons_orig", "#bsd2-container", "name"],
+	["pers_gender", "pers", "gender", "select gender", "ms_persons_gender", persons[3].gender,"#ms_persons_gender", "#bsd3-container", "gender"],
+	["pers_id", "pers", "id", "select id", "ms_persons_id",[1,2,3,21] , "#ms_persons_id", "#bsd4-container", "id_persons"]],
+        [["obj_id", "obj", "id", "select id", "ms_objects_id",[1,2,3,21] , "#ms_objects_id", "#bsd1-container", "id_objects"],
+	["obj_type", "obj", "type", "select type", "ms_objects_type",["rund","eckig"] , "#ms_objects_type", "#bsd2-container", "type"]]
+       ];
+  values=["#ms_persons_engl","#ms_persons_orig","#ms_persons_gender","#ms_persons_id","#ms_persons_engl1"]
+  var keys = [];
+  for (var k in persons[2][0]) keys.push(k);
+  $.each(vars[0], function( index) {
+    c=$("<div class=\"form-group\" id="+vars[0][index][0]+"><div id="+vars[0][index][1]+"><h6 id="+vars[0][index][2]+"></h6></div></div>")
+    //console.log("<div class=\"form-group\" id="+vars[0][index][0]+"><div id="+vars[0][index][1]+"><h6 id="+vars[0][index][2]+"></h6></div></div>")
+    var data = vars[0][index][5]
+    var s = $("<select id="+vars[0][index][4]+" class=\"form-control\" multiple/>");
+    for(var val in data) {
+       $("<option />", {value: data[val], text: data[val]}).appendTo(s);
+          c.appendTo("#container")
+          s.appendTo("#pers");
+       }
+});
+
+$("html, body").css({
+    overflow: 'hidden',
+    height: '100%'
+});
+
+$.each(vars[0], function( index) {
+$(vars[0][index][0]).hide();     
+});
+  
+//Define Tables from grids.js
+allTables()
+
+$(document).ready(function(){
+    $.getScript( "dist/bootstrap-select-dropdown.js", function() {
+	$.each(vars[0], function( index) {
+        $(vars[0][index][6]).selectDropdown();    
+	});
+
+$("#back").click(function() {
+$("#reset").css("opacity", "1");
+$("#back").css("opacity", "0");
+$("#bgroup").css("opacity", "0");
+w2ui['layout'].hide('main', window.instant)
+$( ".container" ).show();
+})
+
+$("#moreoptions,#moreoptions1").click(function() {
+$.each(vars[0], function( index) {
+      $(vars[0][index][7]).css("opacity","1")
+      $(vars[0][index][0]).css("opacity","1")
+      });
+ 
+  $("#moreoptions").css("opacity", "0")
+  $("#namepers1").css("opacity", "0.3")
+  
+});
+
+// Define person group
+
+$( "#sel_pers" ).click(function() {
+	   
+$(" .dropdown-menu-right" ).css({"margin-left":"1150px", "position":"fixed", "margin-top":"0px"})
+       $.each(vars[0], function( index) {
+       $(vars[0][index][7]+" .input-group .form-control").attr("placeholder", vars[0][index][3])
+       $(".form-group#"+vars[0][index][0]).show()});
+  
+  $("#msall").hide()
+  $("#pers").css("opacity", "1")
+  $("#namepers1").css("opacity", "0.3")
+  $("#moreoptions").css("opacity", "0")
+  w2ui.layout.content('main', w2ui.grid1);
+});
+
+	// Define object group
+
+$( "#sel_obj" ).click(function() {
+    $(" .dropdown-menu-right" ).css({"margin-left":"1150px", "position":"fixed", "margin-top":"0px"})
+    $.each(vars[1], function( index) {
+    $(vars[1][index][7]+" .input-group .form-control").attr("placeholder", vars[1][index][3])
+    $(".form-group#"+vars[1][index][1]).show()});
+	    
+  //$(".form-group#digi").show()
+  $("#msall").hide()
+  $("#obj").css("opacity", "1")
+  $("#namepers1").css("opacity", "0.3")
+  $("#moreoptions1").css("opacity", "0")
+  w2ui.layout.content('main', w2ui.grid2);
+  
+});
+
+$.each(vars[0], function(index) {
+   if ( vars[0][index][7]=="#bsd1-container" ) {
+   $( vars[0][index][7]+" .dropdown-item" ).click(function() {
+   selectedValue=$(vars[0][index][6]).val()
+   
+   c_pers=$("<div class=\"form-group\" id=\"pers_engl\"><div id=\"pers\"><h6 id=\"engl_name\"></h6></div></div>")
+   c_obj=$("<div class=\"form-group\" id=\"pers_engl\"><div id=\"pers\"><h6 id=\"engl_name\"></h6></div></div>")
+   var s = $("<select id=\"ms_persons_engl1\" class=\"form-control\" multiple/>");
+   var data=persons[3].english[selectedValue]
+   $("#bsd1-container").hide()
+   $("#bsd2-container").hide()
+   $("#bsd3-container").hide()
+   $("#bsd4-container").hide()
+   $("#pers_engl").hide()
+   $("#namepers1").css("opacity", "1")
+
+   $("#moreoptions").css("opacity", "1")
+   
+   for(var val in data) {
+   $("<option />", {value: data[val], text: data[val]}).appendTo(s);
+   c_pers.appendTo("#container")
+   s.appendTo("#pers");
+   }
+   $("#ms_persons_engl1").selectDropdown();   
+   $( "#bsd5-container .input-group .form-control").attr("placeholder", "persons with a")
+   $( "#bsd5-container .dropdown-item" ).click(function() {
+    $("#namepers1").click({param1: "#ms_persons_engl1", param2: "name_translit"}, select);
+    })
+   })
+}
+else{
+$( vars[0][index][7]+" .dropdown-item" ).click(function() {
+
+  $("#bsd1-container").css("opacity","0.12")
+  $("#bsd2-container").css("opacity","0.12")
+  $("#bsd3-container").css("opacity","0.12")
+  $("#bsd4-container").css("opacity","0.12")
+  $("#pers_engl").css("opacity","0.12")
+  $("#namepers1").css("opacity", "1")
+  $("#moreoptions").css("opacity", "1")
+  $("#namepers1").click({param1: vars[0][index][6], param2: vars[0][index][8]}, select);
+  });
+}
+});
+// SELECT PERSONS
+// FROM LINK
+
+if (parameters.persons == "true") {
+//var values=parameters.english
+//var searchy=[]
+//searchy.push({ field: 'name_translit', value: values, operator: 'is'})
+$( ".container" ).hide();
+w2ui['layout'].show('main', window.instant)
+//w2ui['grid1'].search(searchy, 'OR');
+////w2ui['grid1'].reload();
+//w2ui['grid1'].stateSave();
+
+var values=parameters.id
+$.each(persons[2], function( index, value_pers ) {
+      if (values == value_pers.id_persons){
+        name=value_pers.name
+       }
+      });
+
+w2ui.layout.content('main', '<iframe class="row" id="Content2" style="height: 100%; overflow-y: hidden"></iframe>' )
+w2ui['layout'].show('main', window.instant)
+document.getElementById('Content2').setAttribute('src',"further/singleview_persons.html?ids="+values+"&name="+name)
+};
+
+// FROM MENU
+function select(event) {
+           
+           $("#reset").css("opacity", "0")
+           $("#back").css("opacity", "1")
+           $("#upper").addClass(".mt-2 mb-3")
+           var searchy=[]
+           var values = $(event.data.param1).val();  
+           searchy.push({ field: event.data.param2, value: String(values), operator: 'is'})
+           $( ".container" ).hide();
+           w2ui['layout'].show('main', window.instant)
+           w2ui['grid1'].search(searchy, 'AND');
+
+}
+
+
+
+
+// SELECT OBJECTS
+$('#nameobj1').click(function (event) {
+           $("#reset").css("opacity", "0")
+           $("#back").css("opacity", "1")
+           var values = $('#ms_objects_digi').val();
+           var searchy1=[]
+           searchy1.push({ field: 'digital_resource', value: String(values[0]), operator: 'is'})
+           $( ".container" ).hide();
+           w2ui['layout'].show('main', window.instant)
+           w2ui['grid2'].search(searchy1, 'OR');
+       });
+});
+
+  });
+</script>
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-36251023-1']);
+  _gaq.push(['_setDomainName', 'jqueryscript.net']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+<script>
+$("#reset").click(function(){
+window.location.reload(true);
+})
+</script>
+</body>
+</html>
+
