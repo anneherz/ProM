@@ -55,12 +55,14 @@ multiSearch: true,
      
 	   $("#p1").click(function(){
                count=count+1
-               document.getElementById('Content2').setAttribute('src',"detail/singleview_persons.html?ids="+plp[count].id+"&name="+plp[count].name)
+               //document.getElementById('Content2').setAttribute('src',"detail/singleview_persons.html?ids="+plp[count].id+"&name="+plp[count].name)
+	       document.getElementById('Content2').setAttribute('src',"detail/singleview_persons.html?ids="+plp[count].id
 	   });
 	   
 	   $("#p0").click(function(){
 	       count=count-1
-               document.getElementById('Content2').setAttribute('src',"detail/singleview_persons.html?ids="+plp[count].id+"&name="+plp[count].name)
+               //document.getElementById('Content2').setAttribute('src',"detail/singleview_persons.html?ids="+plp[count].id+"&name="+plp[count].name)
+	       document.getElementById('Content2').setAttribute('src',"detail/singleview_persons.html?ids="+plp[count].id
 	   });
        });
       
@@ -72,7 +74,9 @@ multiSearch: true,
 	    w2ui['layout'].hide('right', window.instant)
 	    w2ui['layout'].show('main', window.instant)
             w2ui['layout'].content('main', '<iframe class="row" id="Content2" style="height: 100%;overflow-y: hidden"></iframe>' )
-            document.getElementById('Content2').setAttribute('src',"detail/singleview_persons.html?ids="+(sel_record.id_persons).toString()+"&name="+(sel_record.name).toString())
+            //document.getElementById('Content2').setAttribute('src',"detail/singleview_persons.html?ids="+(sel_record.id_persons).toString()+"&name="+(sel_record.name).toString()
+		document.getElementById('Content2').setAttribute('src',"detail/singleview_persons.html?ids="+(sel_record.id_persons).toString()
+		)
        
 }
 }}
