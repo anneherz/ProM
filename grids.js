@@ -56,13 +56,13 @@ multiSearch: true,
 	   $("#p1").click(function(){
                count=count+1
                //document.getElementById('Content2').setAttribute('src',"detail/singleview_persons.html?ids="+plp[count].id+"&name="+plp[count].name)
-	       document.getElementById('Content2').setAttribute('src',"detail/singleview_persons.html?ids="+plp[count].id
+	       document.getElementById('Content2').setAttribute('src',"detail/singleview_persons.html?ids="+plp[count].id)
 	   });
 	   
 	   $("#p0").click(function(){
 	       count=count-1
                //document.getElementById('Content2').setAttribute('src',"detail/singleview_persons.html?ids="+plp[count].id+"&name="+plp[count].name)
-	       document.getElementById('Content2').setAttribute('src',"detail/singleview_persons.html?ids="+plp[count].id
+	       document.getElementById('Content2').setAttribute('src',"detail/singleview_persons.html?ids="+plp[count].id)
 	   });
        });
       
