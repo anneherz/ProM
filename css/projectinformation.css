@@ -22,7 +22,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="projectinformation" href="projectinformation.css">
+<link rel="stylesheed" href="../css/projectinformation.css">
+<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro&display=swap" rel="stylesheet">
 </head>
 <body>
 <h1>Dies ist eine Überschrift</h1>
@@ -31,6 +32,7 @@
 </html>
 <figure>Das ist ein Bild</figure>
 <figcaption>Das ist eine Bildunterschrift</figcaption>
+	
 
 figure,
 figcaption {
@@ -52,14 +54,14 @@ figcaption {
 }
 
 figure img {
-	width: 100%;
+	width: 80%;
 	display: block;
 }
 
 #gallery > figure > figcaption {
 	position: absolute;
 	bottom: 0;
-	width: 100%;
+	width: 80%;
 	line-height: 3em;
 	color: white;
 	background: rgba(0, 0, 0, 0.3);
