@@ -22,7 +22,7 @@
   position: relative;
   margin: 80px;
   padding: .5em;
-  width: 100%;
+  width: 40%;
   border: thin solid gainsboro;
   background: white;
   width: 100%;
@@ -41,20 +41,12 @@
   text-align: center;
 }
 
-img {
-  width: 100%;
+  #gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(15em, 1fr));
+  gap: 1em;
 }
 
-@media (min-width: 25em) {
-  img {
-    width: 50%;
-    float: right;
-    margin: 80px 80px 1em 1em;
-  }
-}
-
-@media (min-width: 50em) {
-  img {
-    width: 25%;
-  }
+#gallery > figcaption {
+  grid-column: 1 / -1;
 }
