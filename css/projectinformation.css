@@ -18,5 +18,43 @@
 *div.image {
    content:url(https://repositorytest.ancient-astronomy.org/PROM/ServicePROM/Images/PROM.jpg);
 
+  .figure {
+  position: relative;
+  margin: 0;
+  padding: .5em;
+  width: 100%;
+  border: thin solid gainsboro;
+  background: white;
+  width: 100%;
+}
 
 
+@media (min-width: 25em) {
+  figure {
+    width: 20em;
+    float: right;
+  }
+}
+
+.figcaption {
+  padding: .8em;
+  text-align: center;
+}
+
+img {
+  width: 100%;
+}
+
+@media (min-width: 25em) {
+  img {
+    width: 50%;
+    float: right;
+    margin: 0 0 1em 1em;
+  }
+}
+
+@media (min-width: 50em) {
+  img {
+    width: 25%;
+  }
+}
