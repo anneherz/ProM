@@ -18,7 +18,7 @@
 *div.image {
    content:url(https://repositorytest.ancient-astronomy.org/PROM/ServicePROM/Images/PROM.jpg);
 
-	.figure,
+	.figure;
 figcaption {
 	margin: 0;
 	padding: 0;
