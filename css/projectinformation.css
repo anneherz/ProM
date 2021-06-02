@@ -20,7 +20,7 @@
 
   .figure {
   position: relative;
-  margin: 0;
+  margin: 80px;
   padding: .5em;
   width: 100%;
   border: thin solid gainsboro;
@@ -49,7 +49,7 @@ img {
   img {
     width: 50%;
     float: right;
-    margin: 0 0 1em 1em;
+    margin: 80px 80px 1em 1em;
   }
 }
 
