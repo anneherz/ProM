@@ -18,6 +18,18 @@
 *div.image {
    content:url(https://repositorytest.ancient-astronomy.org/PROM/ServicePROM/Images/PROM.jpg);
 
+
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="projectinformation" href="projectinformation.css">
+</head>
+<body>
+<h1>Dies ist eine Überschrift</h1>
+<p>Dies ist ein Absatz</p>
+</body>
+</html>
+
 figure,
 figcaption {
 	margin: 0;
