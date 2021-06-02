@@ -18,35 +18,39 @@
 *div.image {
    content:url(https://repositorytest.ancient-astronomy.org/PROM/ServicePROM/Images/PROM.jpg);
 
-  .figure {
-  position: relative;
-  margin: 80px;
-  padding: .5em;
-  width: 40%;
-  border: thin solid gainsboro;
-  background: white;
-  width: 40%;
+ figure,
+figcaption {
+	margin: 0;
+	padding: 0;
 }
 
-
-@media (min-width: 25em) {
-  figure {
-    width: 20em;
-    float: right;
-  }
+#gallery {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(15em, 1fr));
+	gap: 1em;
+	text-align: center;
 }
 
-.figcaption {
-  padding: .8em;
-  text-align: center;
+#gallery figure {
+	position: relative;
+	color: black;
+	background: white;
 }
 
-  #gallery {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(15em, 1fr));
-  gap: 1em;
+figure img {
+	width: 100%;
+	display: block;
+}
+
+#gallery > figure > figcaption {
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	line-height: 3em;
+	color: white;
+	background: rgba(0, 0, 0, 0.3);
 }
 
 #gallery > figcaption {
-  grid-column: 1 / -1;
+	grid-column: 1 / -1;
 }
