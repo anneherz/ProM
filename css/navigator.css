@@ -64,6 +64,7 @@ list-style-type:none;
 }
 #toc ul li {
 	margin-bottom:10px;
+	padding-top:5px;
 list-style-type:none;
 }
 #toc ul li a {
