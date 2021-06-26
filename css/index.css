@@ -20,7 +20,7 @@ left::after {
 .row {
   float: left;
   text-align: left;
-  background: #ffffff;
+  background: #f5f5f5;
   //border-style: solid;
   width: 100%;
   overflow: hidden;
@@ -31,7 +31,7 @@ left::after {
 .stylebox {
   float: left;
   text-align: left;
-  background: #ffffff;
+  background: #f5f5f5;
   //border-style: solid;
   width: 100%;
   overflow: hidden;
@@ -58,7 +58,7 @@ td {
 .backbutton {
   top: 5%;
   float: left;
-  background: #ffffff;
+  background: #f5f5f5;
   width: 20%;
   height: 20%;
   padding: 10px;
@@ -94,7 +94,7 @@ li {
 }
   
 li a {
-  color: #fff;
+  color: #f5f5f5;
 }
 
 li:hover {
