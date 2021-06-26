@@ -139,7 +139,7 @@ Original highlight.js style (c) Ivan Sagalaev <maniac@softwaremaniacs.org>
   box-sizing: border-box; }
 
 html {
-  font-family: sans-serif;
+  font-family: Source sans pro;
   line-height: 1.15;
   -webkit-text-size-adjust: 100%;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0); }
