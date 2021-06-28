@@ -39,7 +39,7 @@ function SelectionMenu(var1,par1,par2)
 {
        
     obj=par1;
-    $("#selectionresult,#selectionresulttext").css("opacity", "1")
+    $("#selectionresult,#selectionresulttext, #currentselection").css("opacity", "1")
     $("#selectionresulttext").appendTo("#header")
     $( "<p id='object_types' style='margin-left:10px; opacity:0.3; font-size:18px;'><a id='H5'>Object type:<br></a></p>" ).appendTo("#header")
     $( "<p id='object_subtypes' style='margin-left:10px; opacity:0.3; font-size:18px;'><a id='H5'>Object sub-type:<br></a></p>" ).appendTo("#header")

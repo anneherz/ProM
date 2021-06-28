@@ -64,7 +64,7 @@ function DropdownMenu(var1, var2, par1)
 function SelectionMenu(var1,par1,par2)
     {
 	obj=par1;
-	$("#selectionresulttext,#selectionresult").css("opacity", "1")
+	$("#selectionresulttext,#selectionresult, #currentselection").css("opacity", "1")
 	$("#selectionresulttext").appendTo("#header")
 	
 	$( "<p id='personen' style='margin-left:10px; opacity:0.3; font-size:18px;'><a id='H5'>Persons (english):<br></a></p>" ).appendTo("#header")
