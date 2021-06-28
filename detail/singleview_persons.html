@@ -26,7 +26,7 @@
 
 $("html, body").css({
     
-    height: '800px'
+    height: 'auto'
 });
 
 function getParameters()
@@ -176,15 +176,15 @@ $table.append('<thead>').children('thead')
 var $tbody = $table.append('<tbody />').children('tbody');
 
 $.each(objects_arr, function( index, p ) {
-string="<td class='tdstyle'><a href='singleview_objects.html?ids="+p.object_id+"'>";
+string="<td style='padding-left:40px; font-size:12px; font-family: Arial, Helvetica, sans-serif'><a href='singleview_objects.html?ids="+p.object_id+"'>";
    $tbody.append('<tr align="center" />').children('tr:last')
     .append(string+p.object_id+"</td>")
-    .append("<td class='tdstyle'>"+p.type+"</td>")
-    .append("<td class='tdstyle'>"+p.subtype+"</td>")
-    .append("<td class='tdstyle'>"+p.provenance+"</td>")
+    .append("<td style='padding-left:40px; font-size:12px; font-family: Arial, Helvetica, sans-serif'>"+p.type+"</td>")
+    .append("<td style='padding-left:40px; font-size:12px; font-family: Arial, Helvetica, sans-serif'>"+p.subtype+"</td>")
+    .append("<td style='padding-left:40px; font-size:12px; font-family: Arial, Helvetica, sans-serif'>"+p.provenance+"</td>")
    
-    .append("<td class='tdstyle'>"+p.location+"</td>")
-    .append("<td class='tdstyle'>"+p.inventory+"</td>")
+    .append("<td style='padding-left:40px; font-size:12px; font-family: Arial, Helvetica, sans-serif'>"+p.location+"</td>")
+    .append("<td style='padding-left:40px; font-size:12px; font-family: Arial, Helvetica, sans-serif'>"+p.inventory+"</td>")
 })
 
 $('<li><a href="#relatedobjects" class="tocstyle">Related Object(s)</li>').appendTo('#toc');
@@ -200,13 +200,13 @@ $table.append('<thead>').children('thead')
   .append('<tr  align="center"/>').children('tr').append('<th class="pstyle">ID</th><th class="pstyle">Name</th><th class="pstyle">English</th><th class="pstyle">Gender</th>');
 var $tbody = $table.append('<tbody />').children('tbody');
 $.each(persons_arr, function( index, p ) {
-     string="<td class='tdstyle'><a href='singleview_persons.html?ids="+p.person_id+"&name="+p.name+"'>";
+    string="<td style='padding-left:40px; font-size:12px; font-family: Arial, Helvetica, sans-serif' style='padding-left:40px; font-size:12px; font-family: Arial, Helvetica, sans-serif'><a href='singleview_persons.html?ids="+p.person_id+"&name="+p.name+"'>";
    
  $tbody.append('<tr align="center"/>').children('tr:last')
     .append(string+p.person_id+"</a></td>")
     .append("<td class='aegypt'>"+p.person_name+"</td>")
-    .append("<td class='tdstyle'>"+p.person_name_translit+"</td>")
-    .append("<td class='tdstyle'>"+p.gender+"</td>")
+    .append("<td style='padding-left:40px; font-size:12px; font-family: Arial, Helvetica, sans-serif'>"+p.person_name_translit+"</td>")
+    .append("<td style='padding-left:40px; font-size:12px; font-family: Arial, Helvetica, sans-serif'>"+p.gender+"</td>")
 })
 $('<li><a href="#relatedpersons" class="tocstyle">Related Person(s)</li>').appendTo('#toc');
 $('<h2 id="relatedpersons" class="h2style">RELATED PERSON(S)</h2>').appendTo('#container2');
@@ -220,13 +220,13 @@ $table.append('<thead>').children('thead')
 var $tbody = $table.append('<tbody />').children('tbody');
 
 $.each(titles_arr, function( index, p ) {
-string="<td class='tdstyle'><a href='singleview_titles.html?ids="+p.title_id+"'>";
+string="<td style='padding-left:40px; font-size:12px; font-family: Arial, Helvetica, sans-serif'><a href='singleview_titles.html?ids="+p.title_id+"'>";
 
 $tbody.append('<tr align="center"/>').children('tr:last')
     .append(string+p.title_id+"</td>")
     .append("<td class='aegypt'>"+p.title+"</td>")
-    .append("<td class='tdstyle'>"+p.title_translat+"</td>")
-    .append("<td class='tdstyle'>"+p.gender+"</td>")
+    .append("<td style='padding-left:40px; font-size:12px; font-family: Arial, Helvetica, sans-serif'>"+p.title_translat+"</td>")
+    .append("<td style='padding-left:40px; font-size:12px; font-family: Arial, Helvetica, sans-serif'>"+p.gender+"</td>")
 
 
 })
@@ -242,19 +242,19 @@ $table.append('<thead>').children('thead')
 var $tbody = $table.append('<tbody />').children('tbody');
 
 $.each(samename, function( index, p ) {
-  string="<td class='tdstyle'><a href='singleview_persons.html?ids="+p.ids+"&name="+p.name+"'>";
+  string="<td style='padding-left:40px; font-size:12px; font-family: Arial, Helvetica, sans-serif'><a href='singleview_persons.html?ids="+p.ids+"&name="+p.name+"'>";
   $tbody.append('<tr align="center"/>').children('tr:last')
-    .append(string+p.ids+"</td>")
-    .append("<td class='aegypt'>"+p.name+"</td>")
-    .append("<td class='tdstyle'>"+p.englisch+"</td>")
-  .append("<td class='tdstyle'>"+p.gender+"</td>")
+	.append(string+p.ids+"</td>")
+	.append("<td class='aegypt'>"+p.name+"</td>")
+	.append("<td style='padding-left:40px; font-size:12px; font-family: Arial, Helvetica, sans-serif'>"+p.englisch+"</td>")
+	.append("<td style='padding-left:40px; font-size:12px; font-family: Arial, Helvetica, sans-serif'>"+p.gender+"</td>")
 })
 $('<li><a href="#samepersons" class="tocstyle">Persons with same name</li>').appendTo('#toc');
-$('<h2 id="samepersons" class="h2style">PERSONS WITH SAME NAME</h2>').appendTo('#container2');
-
-$("#ContentSame").css({"height":"70px" })
-$table.appendTo('#ContentSame');
-$('#ContentSame').appendTo('#container2')
+    $('<h2 id="samepersons" class="h2style">PERSONS WITH SAME NAME</h2>').appendTo('#container2');
+    
+    $("#ContentSame").css({"height":"70px" })
+    $table.appendTo('#ContentSame');
+    $('#ContentSame').appendTo('#container2')
 }
 
 

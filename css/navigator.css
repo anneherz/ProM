@@ -35,7 +35,8 @@ table {
 }
 
 td {
-  padding: 10px 10px;
+    
+  /*padding: 10px 10px;*/
 }
 
 #toc{
@@ -104,19 +105,21 @@ font-family: Source Sans Pro;
 }
 }
 
-.tdstyle {
-font-size:12px; 
-font-family: Source sans pro;
-padding-left: 60px;
-}
-
+ .tdstyle {
+     padding-left:40px;
+     font-size:12px;
+     font-family: Arial, Helvetica, sans-serif
+     
+  
+ }
+ 
 .tocstyle {
-color: #f5f5f5;
-width: 100%;
-font-size: 18px;
-text-decoration: none;
-overflow-x: visible;
-padding-top: 10px;
+    color: #f5f5f5;
+    width: 100%;
+    font-size: 18px;
+    text-decoration: none;
+    overflow-x: visible;
+    padding-top: 10px;
 padding-bottom: 10px;
 }
 

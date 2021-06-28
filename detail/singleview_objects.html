@@ -19,8 +19,7 @@
 <script type="text/javascript">
 
 $("html, body").css({
-    
-    height: '100%'
+    height: 'auto'
 });
 function getParameters()
 {
@@ -57,83 +56,82 @@ function getValue(file){
   
   var sel_record = parameters.ids;
   var sel_type = parameters.type;
-   var i;
+  var i;
+
+ 
+ 
   $('<li><a href="#selected" class="tocstyle">General Information</li>').appendTo('#toc');
   $('<h2 id="selected" class="h2style">GENERAL INFORMATION</h2>').appendTo('#Content');
 
-
   $.each(bildverwaltung, function( index, value_image ) {
-    
-
+      
       if (value_image.ID == sel_record.toString())
       {
-
-	   $('#Content').append('<a target="_blank" rel="noopener noreferrer" id="external"><img id="image" class="Image" width="320"/></a>')
-           document.getElementById('image').setAttribute('src',value_image.Link);
-	   if (value_image.Status == "online vorhanden") {
-	   document.getElementById('external').setAttribute('href',value_image.Collection);
-              $('<p style="font-size:12px; font-family: Arial, Helvetica, sans-serif">for gallery view click on the image</p>').appendTo('#Content'); }
 	  
-           $('<p style="font-size:12px; font-family: Arial, Helvetica, sans-serif"><b>Holder: </b> '+(value_image.Holder).toString()+'</p>').appendTo('#Content');
-           $('<p style="font-size:12px; font-family: Arial, Helvetica, sans-serif"><b>Credits: </b> '+(value_image.Credits).toString()+'</p>').appendTo('#Content');
-           return false;
-          }
-         });
-
-
-       //loop 
-       var sametype= [];
-       
-           $('<p class="pstyle"><b>ID: </b> '+(objects_sel[sel_record].id_objects).toString()+'</p>').appendTo('#Content');
-           $('<p class="pstyle"><b>Type: </b> '+(objects_sel[sel_record].object_type).toString()+'</p>').appendTo('#Content');
-           $('<p class="pstyle"><b>Subtype I: </b> '+(objects_sel[sel_record].object_subtype).toString()+'</p>').appendTo('#Content');
-           $('<p class="pstyle"><b>Subtype II: </b> '+(objects_sel[sel_record].object_subtype_other).toString()+'</p>').appendTo('#Content');
-
-           $('<li><a href="#technicaldata" class="tocstyle">Technical Data</li>').appendTo('#toc');
-           $('<h2 id="technicaldata" class="h2style">TECHNICAL DATA</h2>').appendTo('#Content');
-           $('<p class="pstyle"><b>Material: </b> '+(objects_sel[sel_record].object_material).toString()+'</p>').appendTo('#Content');
-           $('<p class="pstyle"><b>Length [cm]: </b> '+(objects_sel[sel_record].object_lenght).toString()+'</p>').appendTo('#Content');
-           $('<p class="pstyle"><b>Width [cm]: </b> '+(objects_sel[sel_record].object_width).toString()+'</p>').appendTo('#Content');
-           $('<p class="pstyle"><b>Height [cm]: </b> '+(objects_sel[sel_record].object_height).toString()+'</p>').appendTo('#Content');
-          
-           $('<li><a href="#dating" class="tocstyle">Dating</li>').appendTo('#toc');
-           $('<h2 id="dating" class="h2style">DATING</h2>').appendTo('#Content');
-           key=relationleft["objects_dating_"+sel_record].right_id;
+	  $('#Content').append('<a target="_blank" rel="noopener noreferrer" id="external"><img id="image" class="Image" height="300" style="margin-left:40px;"/></a>')
+          document.getElementById('image').setAttribute('src',value_image.Link);
+	  if (value_image.Status == "online vorhanden") {
+	      document.getElementById('external').setAttribute('href',value_image.Collection);
+              $('<p style="margin-left:40px; font-size:12px; font-family: Arial, Helvetica, sans-serif">for gallery view click on the image</p>').appendTo('#Content'); }
+	  
+          $('<p style="margin-left:40px; font-size:12px; font-family: Arial, Helvetica, sans-serif"><b>Holder: </b> '+(value_image.Holder).toString()+'</p>').appendTo('#Content');
+          $('<p style="margin-left:40px; font-size:12px; font-family: Arial, Helvetica, sans-serif"><b>Credits: </b> '+(value_image.Credits).toString()+'</p>').appendTo('#Content');
+          return false;
+      }
+  });
+  //loop 
+  var sametype= [];
+  
+  $('<p class="pstyle"><b>ID: </b> '+(objects_sel[sel_record].id_objects).toString()+'</p>').appendTo('#Content');
+  $('<p class="pstyle"><b>Type: </b> '+(objects_sel[sel_record].object_type).toString()+'</p>').appendTo('#Content');
+  $('<p class="pstyle"><b>Subtype I: </b> '+(objects_sel[sel_record].object_subtype).toString()+'</p>').appendTo('#Content');
+  $('<p class="pstyle"><b>Subtype II: </b> '+(objects_sel[sel_record].object_subtype_other).toString()+'</p>').appendTo('#Content');
+  
+  $('<li><a href="#technicaldata" class="tocstyle">Technical Data</li>').appendTo('#toc');
+  $('<h2 id="technicaldata" class="h2style">TECHNICAL DATA</h2>').appendTo('#Content');
+  $('<p class="pstyle"><b>Material: </b> '+(objects_sel[sel_record].object_material).toString()+'</p>').appendTo('#Content');
+  $('<p class="pstyle"><b>Length [cm]: </b> '+(objects_sel[sel_record].object_lenght).toString()+'</p>').appendTo('#Content');
+  $('<p class="pstyle"><b>Width [cm]: </b> '+(objects_sel[sel_record].object_width).toString()+'</p>').appendTo('#Content');
+  $('<p class="pstyle"><b>Height [cm]: </b> '+(objects_sel[sel_record].object_height).toString()+'</p>').appendTo('#Content');
+  
+  $('<li><a href="#dating" class="tocstyle">Dating</li>').appendTo('#toc');
+  $('<h2 id="dating" class="h2style">DATING</h2>').appendTo('#Content');
+  key=relationleft["objects_dating_"+sel_record].right_id;
            
-           $('<p class="pstyle"><b>After Dynasty: </b> '+(datings[key].dating).toString()+'</p>').appendTo('#Content');
-           $('<p class="pstyle"><b>After king: </b> '+(datings[key].kingdom).toString()+'</p>').appendTo('#Content');
-           $('<p class="pstyle"><b>After regnal years: </b> '+(datings[key].period).toString()+'</p>').appendTo('#Content');
+  $('<p class="pstyle"><b>After Dynasty: </b> '+(datings[key].dating).toString()+'</p>').appendTo('#Content');
+  $('<p class="pstyle"><b>After king: </b> '+(datings[key].kingdom).toString()+'</p>').appendTo('#Content');
+  $('<p class="pstyle"><b>After regnal years: </b> '+(datings[key].period).toString()+'</p>').appendTo('#Content');
+  
+  $('<li><a href="#additionalinformation" class="tocstyle">Additional Information</li>').appendTo('#toc');
+  $('<h2 id="additionalinformation" class="h2style">ADDITIONAL INFORMATION</h2>').appendTo('#Content');
+  $('<p class="pstyle"><b>Text: </b> '+(objects_sel[sel_record].object_text_format).toString()+'</p>').appendTo('#Content');
+  $('<p class="pstyle"><b>Image: </b> '+(objects_sel[sel_record].object_image_format).toString()+'</p>').appendTo('#Content');
+  $('<p class="pstyle"><b>Note: </b> '+(objects_sel[sel_record].notes).toString()+'</p>').appendTo('#Content');
 
-           $('<li><a href="#additionalinformation" class="tocstyle">Additional Information</li>').appendTo('#toc');
-           $('<h2 id="additionalinformation" class="h2style">ADDITIONAL INFORMATION</h2>').appendTo('#Content');
-           $('<p class="pstyle"><b>Text: </b> '+(objects_sel[sel_record].object_text_format).toString()+'</p>').appendTo('#Content');
-           $('<p class="pstyle"><b>Image: </b> '+(objects_sel[sel_record].object_image_format).toString()+'</p>').appendTo('#Content');
-           $('<p class="pstyle"><b>Note: </b> '+(objects_sel[sel_record].notes).toString()+'</p>').appendTo('#Content');
 
-
-           $('<li><a href="#provenance" class="tocstyle">Provenance</li>').appendTo('#toc');
-           $('<h2 id="provenance" class="h2style">PROVENANCE</h2>').appendTo('#Content');
-
-           $('<p class="pstyle"><b>Provenance: </b> '+(objects_sel[sel_record].object_provenance).toString()+'</p>').appendTo('#Content');
-           $('<p class="pstyle"><b>Reconstructed provenance: </b> '+(objects_sel[sel_record].object_provenance_reconstructed).toString()+'</p>').appendTo('#Content');
-           $('<p class="pstyle"><b>Excavation: </b> '+(objects_sel[sel_record].object_provenance_detail).toString()+'</p>').appendTo('#Content');
-           
-           
-           $('<li><a href="#location" class="tocstyle">Location</li>').appendTo('#toc');
-           $('<h2 id="location" class="h2style">LOCATION</h2>').appendTo('#Content');
-           $('<p class="pstyle"><b>Location: </b> '+(objects_sel[sel_record].object_location).toString()+'</p>').appendTo('#Content');
-           $('<p class="pstyle"><b>Inv no: </b> '+(objects_sel[sel_record].inventory_no).toString()+'</p>').appendTo('#Content');
-           $('<p class="pstyle"><b>Acquisition: </b> '+(objects_sel[sel_record].object_location_detail).toString()+'</p>').appendTo('#Content');
-
-           $('<li><a href="#literature" class="tocstyle">Literature</li>').appendTo('#toc');
-           $('<h2 id="literature" class="h2style">LITERATURE</h2>').appendTo('#Content');
-           $('<p class="pstyle"><b>Literature: </b> '+(objects_sel[sel_record].literature).toString()+'</p>').appendTo('#Content');
-
-         
-       $.each(objects[2], function( index, value_obj ) {
-       if (sel_type == value_obj.object_type){
-        string="<p style='font-size:12px; font-family: Arial, Helvetica, sans-serif'><nobr><a href='singleview_objects.html?ids="+value_obj.id_objects+"&type="+value_obj.object_type+"'>";
-        sametype.push({"ids":value_obj.id_objects,"type":value_obj.object_type,"subtype": value_obj.object_subtype, "provenance":value_obj.object_provenance, "location":value_obj.object_location, "inventory": value_obj.inventory_no ,"key":value_obj.id_objects.toString()})
+  $('<li><a href="#provenance" class="tocstyle">Provenance</li>').appendTo('#toc');
+  $('<h2 id="provenance" class="h2style">PROVENANCE</h2>').appendTo('#Content');
+  
+  $('<p class="pstyle"><b>Provenance: </b> '+(objects_sel[sel_record].object_provenance).toString()+'</p>').appendTo('#Content');
+  $('<p class="pstyle"><b>Reconstructed provenance: </b> '+(objects_sel[sel_record].object_provenance_reconstructed).toString()+'</p>').appendTo('#Content');
+  $('<p class="pstyle"><b>Excavation: </b> '+(objects_sel[sel_record].object_provenance_detail).toString()+'</p>').appendTo('#Content');
+  
+  
+  $('<li><a href="#location" class="tocstyle">Location</li>').appendTo('#toc');
+  $('<h2 id="location" class="h2style">LOCATION</h2>').appendTo('#Content');
+  $('<p class="pstyle"><b>Location: </b> '+(objects_sel[sel_record].object_location).toString()+'</p>').appendTo('#Content');
+  $('<p class="pstyle"><b>Inv no: </b> '+(objects_sel[sel_record].inventory_no).toString()+'</p>').appendTo('#Content');
+  $('<p class="pstyle"><b>Acquisition: </b> '+(objects_sel[sel_record].object_location_detail).toString()+'</p>').appendTo('#Content');
+  
+  $('<li><a href="#literature" class="tocstyle">Literature</li>').appendTo('#toc');
+  $('<h2 id="literature" class="h2style">LITERATURE</h2>').appendTo('#Content');
+  $('<p class="pstyle"><b>Literature: </b> '+(objects_sel[sel_record].literature).toString()+'</p>').appendTo('#Content');
+  
+  
+  $.each(objects[2], function( index, value_obj ) {
+      if (sel_type == value_obj.object_type){
+          string="<p style='font-size:12px; font-family: Arial, Helvetica, sans-serif'><nobr><a href='singleview_objects.html?ids="+value_obj.id_objects+"&type="+value_obj.object_type+"'>";
+          sametype.push({"ids":value_obj.id_objects,"type":value_obj.object_type,"subtype": value_obj.object_subtype, "provenance":value_obj.object_provenance, "location":value_obj.object_location, "inventory": value_obj.inventory_no ,"key":value_obj.id_objects.toString()})
       
       };
          
@@ -219,18 +217,18 @@ i++;
 if (objects_arr.length > 0) {
 var $table = $('<table>');
 $table.append('<thead>').children('thead')
-  .append('<tr  align="center"/>').children('tr').append('<th class="pstyle">ID</th><th class="pstyle">Type</th><th class="pstyle">Subtype</th><th class="pstyle">Provenance</th><th class="pstyle">Location</th><th class="pstyle">Inventory Number</th>');
+  .append('<tr  align="center"/>').children('tr').append('<th style="padding-left:40px;" class="pstyle">ID</th><th class="pstyle">Type</th><th class="pstyle">Subtype</th><th class="pstyle">Provenance</th><th class="pstyle">Location</th><th class="pstyle">Inventory Number</th>');
 var $tbody = $table.append('<tbody />').children('tbody');
 
 $.each(objects_arr, function( index, p ) {
 string="<td style='font-size:12px; font-family: Arial, Helvetica, sans-serif'><a href='singleview_objects.html?ids="+p.object_id+"'>";
    $tbody.append('<tr align="center" />').children('tr:last')
     .append(string+p.object_id+"</td>")
-    .append("<td style='font-size:12px; font-family: Arial, Helvetica, sans-serif'>"+p.object_type+"</td>")
-    .append("<td style='font-size:12px; font-family: Arial, Helvetica, sans-serif'>"+p.object_subtype+"</td>")
-    .append("<td style='font-size:12px; font-family: Arial, Helvetica, sans-serif'>"+p.object_provenance+"</td>")
-    .append("<td style='font-size:12px; font-family: Arial, Helvetica, sans-serif'>"+p.object_location+"</td>")
-    .append("<td style='font-size:12px; font-family: Arial, Helvetica, sans-serif'>"+p.inventory_no+"</td>")
+    .append("<td style='padding-left:40px; font-size:12px; font-family: Arial, Helvetica, sans-serif'>"+p.object_type+"</td>")
+    .append("<td style='padding-left:40px; font-size:12px; font-family: Arial, Helvetica, sans-serif'>"+p.object_subtype+"</td>")
+    .append("<td style='padding-left:40px; font-size:12px; font-family: Arial, Helvetica, sans-serif'>"+p.object_provenance+"</td>")
+    .append("<td style='padding-left:40px; font-size:12px; font-family: Arial, Helvetica, sans-serif'>"+p.object_location+"</td>")
+    .append("<td style='padding-left:40px; font-size:12px; font-family: Arial, Helvetica, sans-serif'>"+p.inventory_no+"</td>")
 })
 
 $('<li><a href="#relatedobjects" class="tocstyle">Related Object(s)</li>').appendTo('#toc');
@@ -243,16 +241,15 @@ $table.appendTo('#Content');
 if (persons_arr.length > 0) {
 var $table = $('<table>');
 $table.append('<thead>').children('thead')
-  .append('<tr  align="center"/>').children('tr').append('<th class="pstyle">ID</th><th class="pstyle">Name</th><th class="pstyle">English</th><th class="pstyle">Gender</th>');
+  .append('<tr align="center"/>').children('tr').append('<th class="pstyle">ID</th><th class="pstyle">Name</th><th class="pstyle">English</th><th class="pstyle">Gender</th>');
 var $tbody = $table.append('<tbody />').children('tbody');
 $.each(persons_arr, function( index, p ) {
-     string="<td style='font-size:12px; font-family: Arial, Helvetica, sans-serif'><a href='singleview_persons.html?ids="+p.person_id+"&name="+p.name+"'>";
-   
- $tbody.append('<tr align="center"/>').children('tr:last')
+    string="<td style='padding-left:40px; font-size:12px; font-family: Arial, Helvetica, sans-serif'><a href='singleview_persons.html?ids="+p.person_id+"&name="+p.name+"'>";
+    $tbody.append('<tr align="center"/>').children('tr:last')
     .append(string+p.person_id+"</a></td>")
-    .append("<td class='aegypt'>"+p.person_name+"</td>")
-    .append("<td style='font-size:12px; font-family: Arial, Helvetica, sans-serif'>"+p.person_name_translit+"</td>")
-    .append("<td style='font-size:12px; font-family: Arial, Helvetica, sans-serif'>"+p.gender+"</td>")
+    .append("<td style='padding-left:40px;' class='aegypt'>"+p.person_name+"</td>")
+    .append("<td style='padding-left:40px; font-size:12px; font-family: Arial, Helvetica, sans-serif'>"+p.person_name_translit+"</td>")
+    .append("<td style='padding-left:40px; font-size:12px; font-family: Arial, Helvetica, sans-serif'>"+p.gender+"</td>")
 })
 $('<li><a href="#relatedpersons" class="tocstyle">Related Person(s)</li>').appendTo('#toc');
 $('<h2 id="relatedpersons" class="h2style">RELATED PERSON(S)</h2>').appendTo('#Content');
@@ -270,8 +267,8 @@ string="<td style='font-size:12px; font-family: Arial, Helvetica, sans-serif'><a
 
 $tbody.append('<tr align="center"/>').children('tr:last')
     .append(string+p.title_id+"</td>")
-    .append("<td style='font-size:12px; font-family: Arial, Helvetica, sans-serif'>"+p.title_translat+"</td>")
-    .append("<td style='font-size:12px; font-family: Arial, Helvetica, sans-serif'>"+p.title_gott_kult+"</td>")
+    .append("<td style='padding-left:40px; font-size:12px; font-family: Arial, Helvetica, sans-serif'>"+p.title_translat+"</td>")
+    .append("<td style='padding-left:40px; font-size:12px; font-family: Arial, Helvetica, sans-serif'>"+p.title_gott_kult+"</td>")
 
 
 })
@@ -283,22 +280,23 @@ if (sametype.length > 0) {
 
 var $table = $('<table>');
 $table.append('<thead>').children('thead')
-.append('<tr  align="center"/>').children('tr').append('<th class="pstyle">ID</th><th class="pstyle">Type</th><th class="pstyle">Subtype</th><th class="pstyle">Provenance</th><th class="pstyle">Location</th><th class="pstyle">Inventory Number</th>');
+.append('<tr align="center"/>').children('tr').append('<th class="pstyle">ID</th><th class="pstyle">Type</th><th class="pstyle">Subtype</th><th class="pstyle">Provenance</th><th class="pstyle">Location</th><th class="pstyle">Inventory Number</th>');
 var $tbody = $table.append('<tbody />').children('tbody');
 
 $.each(sametype, function( index, p ) {
-  string="<td style='font-size:12px; font-family: Arial, Helvetica, sans-serif'><a href='singleview_objects.html?ids="+p.ids+"&type="+p.type+"'>";
+  string="<td style='padding-left:40px; font-size:12px; font-family: Arial, Helvetica, sans-serif'><a href='singleview_objects.html?ids="+p.ids+"&type="+p.type+"'>";
   $tbody.append('<tr align="center"/>').children('tr:last')
     .append(string+p.ids+"</td>")
-    .append("<td style='font-size:12px; font-family: Arial, Helvetica, sans-serif'>"+p.type+"</td>")
-    .append("<td style='font-size:12px; font-family: Arial, Helvetica, sans-serif'>"+p.subtype+"</td>")
-    .append("<td style='font-size:12px; font-family: Arial, Helvetica, sans-serif'>"+p.provenance+"</td>")
-    .append("<td style='font-size:12px; font-family: Arial, Helvetica, sans-serif'>"+p.location+"</td>")
-    .append("<td style='font-size:12px; font-family: Arial, Helvetica, sans-serif'>"+p.inventory+"</td>")
+    .append("<td style='padding-left:40px; font-size:12px; font-family: Arial, Helvetica, sans-serif'>"+p.type+"</td>")
+    .append("<td style='padding-left:40px; font-size:12px; font-family: Arial, Helvetica, sans-serif'>"+p.subtype+"</td>")
+    .append("<td style='padding-left:40px; font-size:12px; font-family: Arial, Helvetica, sans-serif'>"+p.provenance+"</td>")
+    .append("<td style='padding-left:40px; font-size:12px; font-family: Arial, Helvetica, sans-serif'>"+p.location+"</td>")
+    .append("<td style='padding-left:40px; font-size:12px; font-family: Arial, Helvetica, sans-serif'>"+p.inventory+"</td>")
 })
 $('<li><a href="#sameobjects" class="tocstyle">Objects of same type</li>').appendTo('#toc');
 $('<h2 id="sameobjects" class="h2style">OBJECTS OF SAME TYPE</h2>').appendTo('#Content');
-$("#ContentSame").css({"height":"150px" })
+    $("#ContentSame").css({"height":"150px" })
+    $("#ContentSame").css({"margin-left":"-10px" })
 $table.appendTo('#ContentSame');
 $('#ContentSame').appendTo('#Content')
 }

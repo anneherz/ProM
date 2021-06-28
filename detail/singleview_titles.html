@@ -23,7 +23,7 @@
 <script type="text/javascript">
 $("html, body").css({
     
-    height: '100%'
+    height: 'auto'
 });
 function getParameters()
 {
@@ -142,13 +142,13 @@ $table.append('<thead>').children('thead')
   .append('<tr  align="center"/>').children('tr').append('<th class="pstyle">ID</th><th class="pstyle">Name</th><th class="pstyle">English</th><th class="pstyle">Gender</th>');
 var $tbody = $table.append('<tbody />').children('tbody');
 $.each(persons_arr, function( index, p ) {
-     string="<td style='font-size:12px; font-family: Arial, Helvetica, sans-serif'><a href='singleview_persons.html?ids="+p.person_id+"&name="+p.name_translit+"'>";
+     string="<td style='padding-left:40px;  font-size:12px; font-family: Arial, Helvetica, sans-serif'><a href='singleview_persons.html?ids="+p.person_id+"&name="+p.name_translit+"'>";
    
  $tbody.append('<tr align="center"/>').children('tr:last')
     .append(string+p.person_id+"</a></td>")
     .append("<td class='aegypt'>"+p.person_name+"</td>")
-    .append("<td style='font-size:12px; font-family: Arial, Helvetica, sans-serif'>"+p.person_name_translit+"</td>")
-    .append("<td style='font-size:12px; font-family: Arial, Helvetica, sans-serif'>"+p.gender+"</td>")
+    .append("<td style='padding-left:40px; font-size:12px; font-family: Arial, Helvetica, sans-serif'>"+p.person_name_translit+"</td>")
+    .append("<td style='padding-left:40px; font-size:12px; font-family: Arial, Helvetica, sans-serif'>"+p.gender+"</td>")
 })
 $('<li><a href="#relatedpersons" class="tocstyle">Related Person(s)</li>').appendTo('#toc');
 $('<h2 id="relatedpersons" class="h2style">RELATED PERSON(S)</h2>').appendTo('#Content');
@@ -163,12 +163,12 @@ $table.append('<thead>').children('thead')
 var $tbody = $table.append('<tbody />').children('tbody');
 
 $.each(sametitle, function( index, p ) {
-  string="<td style='font-size:12px; font-family: Arial, Helvetica, sans-serif'><a href='singleview_titles.html?ids="+p.ids+"&title="+p.title+"'>";
+  string="<td style='padding-left:40px; font-size:12px; font-family: Arial, Helvetica, sans-serif'><a href='singleview_titles.html?ids="+p.ids+"&title="+p.title+"'>";
   $tbody.append('<tr align="center"/>').children('tr:last')
     .append(string+p.ids+"</td>")
     .append("<td class='aegypt'>"+p.title+"</td>")
-    .append("<td style='font-size:12px; font-family: Arial, Helvetica, sans-serif'>"+p.english+"</td>")
-    .append("<td style='font-size:12px; font-family: Arial, Helvetica, sans-serif'>"+p.gender+"</td>")
+    .append("<td style='padding-left:40px; font-size:12px; font-family: Arial, Helvetica, sans-serif'>"+p.english+"</td>")
+    .append("<td style='padding-left:40px; font-size:12px; font-family: Arial, Helvetica, sans-serif'>"+p.gender+"</td>")
 
 })
 $('<li><a href="#sametitles" class="tocstyle">Titles with same name</li>').appendTo('#toc');
