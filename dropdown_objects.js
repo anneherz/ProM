@@ -19,8 +19,6 @@ function BasicMenu(var1, par1="", par2="", par3="") {
 	s.appendTo(var1);
     })
 
-    $("#selectionresult").css({"opacity":"1", "position":"absolute", "right":"50%"})
-    $("#selectionresult").appendTo("#container")
 };
     
 function DropdownMenu(var1, var2, par1)
@@ -43,12 +41,15 @@ function SelectionMenu(var1,par1,par2)
     obj=par1;
     $("#selectionresult,#selectionresulttext").css("opacity", "1")
     $("#selectionresulttext").appendTo("#header")
-    $( "<p id='object_types' style='opacity:0.3; font-size:18px;'><a id='H5'>Object type:<br></a></p>" ).appendTo("#header")
-    $( "<p id='object_subtypes' style='opacity:0.3; font-size:18px;'><a id='H5'>Object sub-type:<br></a></p>" ).appendTo("#header")
-    $( "<p id='object_subtype_others' style='opacity:0.3; font-size:18px;'><a id='H5'>Object sub-type II:<br></a></p>" ).appendTo("#header")
-    $( "<p id='object_locations' style='opacity:0.3; font-size:18px;'><a id='H5'>Object location:<br></a></p>" ).appendTo("#header")
-    $( "<p id='object_provenances' style='opacity:0.3; font-size:18px;'><a id='H5'>Object provenance:<br></a></p>" ).appendTo("#header")
-    $( "<p id='object_materials' style='opacity:0.3; font-size:18px;'><a id='H5'>Object material:<br></a></p>" ).appendTo("#header")
+    $( "<p id='object_types' style='margin-left:10px; opacity:0.3; font-size:18px;'><a id='H5'>Object type:<br></a></p>" ).appendTo("#header")
+    $( "<p id='object_subtypes' style='margin-left:10px; opacity:0.3; font-size:18px;'><a id='H5'>Object sub-type:<br></a></p>" ).appendTo("#header")
+    $( "<p id='object_subtype_others' style='margin-left:10px; opacity:0.3; font-size:18px;'><a id='H5'>Object sub-type II:<br></a></p>" ).appendTo("#header")
+    $( "<p id='object_locations' style='margin-left:10px; opacity:0.3; font-size:18px;'><a id='H5'>Object location:<br></a></p>" ).appendTo("#header")
+    $( "<p id='object_provenances' style='margin-left:10px; opacity:0.3; font-size:18px;'><a id='H5'>Object provenance:<br></a></p>" ).appendTo("#header")
+    $( "<p id='object_materials' style='margin-left:10px; opacity:0.3; font-size:18px;'><a id='H5'>Object material:<br></a></p>" ).appendTo("#header")
+    $("#selectionresult").css({"margin-left:10px;opacity":"1", "position":"relative", "left":"2%"})
+    $("#selectionresult").appendTo("#header")
+    
     $("#container" ).on("click", ".dropdown-item", function () {
 
 	var temp=$( ".dropdown-item.active" ).closest(".dropdown.show").attr("id")
@@ -84,7 +85,8 @@ function SelectionMenu(var1,par1,par2)
 function getDropdownObjects()
 {
 
-    $('<span class="radio" style="display:inline; position: absolute;  top:5%; margin-left:10px; font-size:30px;cursor:pointer; opacity:0" id="textfieldsearch"><h4><button id="textfieldsearch" class="btn btn-primary" style="font-size:0.75rem;">Show results</button></h4></span>').appendTo("#searchfield")
+    $('<span class="radio" style="display:inline; position: absolute;  top:5%; margin-left:10px; font-size:30px;cursor:pointer; opacity:0" id="textfieldsearch"></span>').appendTo("#searchfield")
+    $('<h4><button id="textfieldsearch" class="btn btn-primary" style="margin-top:20ox; margin-left: 10px; font-size:0.85rem;">Show results</button></h4>').appendTo("#lastradio")
     $("#objec").css("opacity","1")
     $(".radio").css("opacity","1")
     var myObject = new Object();

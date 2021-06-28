@@ -167,3 +167,9 @@ font-family: aegypt;
 padding-left: 40px;
 }
 
+
+
+
+input[type="radio"]:checked+label {
+  box-shadow: 0 0 0 2px #36648b;
+}

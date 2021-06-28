@@ -31,8 +31,8 @@ $.fn.slideFadeToggle = function(easing, callback) {
 
 function BasicMenu(var1, par1="", par2="", par3="") {
     obj=par1;
-    $("#selectionresult").css({"opacity":"1", "position":"absolute", "right":"50%"})
-    $("#selectionresult").appendTo("#container")
+    
+    
 
     $.each(keys, function(index) {
         
@@ -62,16 +62,19 @@ function SelectionMenu(var1,par1,par2)
     obj=par1;
     $("#selectionresult,#selectionresulttext").css("opacity", "1")
     $("#selectionresulttext").appendTo("#header")
-    $( "<p id='titles_translat_engs' style='opacity:0.3; font-size:18px;'><a id='H5'>Translation:<br></a></p>" ).appendTo("#header")
-    $( "<p id='titles_translits' style='opacity:0.3; font-size:18px;'><a id='H5'>Titles:<br></a></p>" ).appendTo("#header")
-    $( "<p id='gott_kults' style='opacity:0.3; font-size:18px;'><a id='H5'>Gods and other Authorities:<br></a></p>" ).appendTo("#header")
-    $( "<p id='regions' style='opacity:0.3; font-size:18px;'><a id='H5'>Toponyms:<br></a></p>" ).appendTo("#header")
-    $( "<p id='ad_secs' style='opacity:0.3; font-size:18px;'><a id='H5'>Administrative Institution:<br></a></p>" ).appendTo("#header")
-    $( "<p id='field2s' style='opacity:0.3; font-size:18px;'><a id='H5'>Field of Profession:<br></a></p>" ).appendTo("#header")
-    $( "<p id='field3s' style='opacity:0.3; font-size:18px;'><a id='H5'>Field of Specialization:<br></a></p>" ).appendTo("#header")
-    $( "<p id='field5s' style='opacity:0.3; font-size:18px;'><a id='H5'>Profession:<br></a></p>" ).appendTo("#header")
-    $( "<p id='field4s' style='opacity:0.3; font-size:18px;'><a id='H5'>Gender:<br></a></p>" ).appendTo("#header")
-   
+    
+    $( "<p id='titles_translat_engs' style='margin-left:10px; opacity:0.3; font-size:18px;'><a id='H5'>Translation:<br></a></p>" ).appendTo("#header")
+    $( "<p id='titles_translits' style='margin-left:10px; opacity:0.3; font-size:18px;'><a id='H5'>Titles:<br></a></p>" ).appendTo("#header")
+    $( "<p id='gott_kults' style='margin-left:10px; opacity:0.3; font-size:18px;'><a id='H5'>Gods and other Authorities:<br></a></p>" ).appendTo("#header")
+    $( "<p id='regions' style='margin-left:10px;opacity:0.3; font-size:18px;'><a id='H5'>Toponyms:<br></a></p>" ).appendTo("#header")
+    $( "<p id='ad_secs' style='margin-left:10px; opacity:0.3; font-size:18px;'><a id='H5'>Administrative Institution:<br></a></p>" ).appendTo("#header")
+    $( "<p id='field2s' style='margin-left:10px; opacity:0.3; font-size:18px;'><a id='H5'>Field of Profession:<br></a></p>" ).appendTo("#header")
+    $( "<p id='field3s' style='margin-left:10px; opacity:0.3; font-size:18px;'><a id='H5'>Field of Specialization:<br></a></p>" ).appendTo("#header")
+    $( "<p id='field5s' style='margin-left:10px;opacity:0.3; font-size:18px;'><a id='H5'>Profession:<br></a></p>" ).appendTo("#header")
+    $( "<p id='field4s' style='margin-left:10px; opacity:0.3; font-size:18px;'><a id='H5'>Gender:<br></a></p>" ).appendTo("#header")
+    $("#selectionresult").css({"margin-left:10px;opacity":"1", "position":"relative", "left":"2%"})
+    $("#selectionresult").appendTo("#header")
+    
     $("#container" ).on("click", ".dropdown-item", function () {
 	var temp=$( ".dropdown-item.active" ).closest(".dropdown.show").attr("id")
 	
@@ -111,8 +114,8 @@ function SelectionMenu(var1,par1,par2)
 function getDropdownTitles()
 {
 
-    $('<span class="radio" style="display:inline; position: absolute;  top:5%; margin-left:10px; font-size:30px;cursor:pointer; opacity:0" id="textfieldsearch"><h4><button id="textfieldsearch" class="btn btn-primary" style="font-size:0.75rem;">Show results</button></h4></span>').appendTo("#searchfield")
-
+    $('<span class="radio" style="display:inline; position: absolute;  top:5%; margin-left:10px; font-size:30px;cursor:pointer; opacity:0" id="textfieldsearch"></span>').appendTo("#searchfield")
+    $('<h4><button id="textfieldsearch" class="btn btn-primary" style="margin-top:20ox; margin-left: 10px; font-size:0.85rem;">Show results</button></h4>').appendTo("#lastradio")
     english_container=[]
     name_container=[]
     

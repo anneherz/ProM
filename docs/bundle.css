@@ -336,6 +336,7 @@ button::-moz-focus-inner,
 
 input[type="radio"],
 input[type="checkbox"] {
+    border-color:red;
   box-sizing: border-box;
   padding: 0; }
 
@@ -7273,3 +7274,8 @@ p.highlight {
   background-color: #f8f9fa;
   padding: 1rem;
   border: 1px solid #e9ecef; }
+
+
+input[type="radio"]:checked+label {
+  box-shadow: 0 0 0 2px #36648b;
+}

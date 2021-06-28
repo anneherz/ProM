@@ -40,8 +40,7 @@ function BasicMenu(var1, par1="", par2="", par3="") {
     c.appendTo("#container")
     s.appendTo(var1);
 
-    $("#selectionresult").css({"opacity":"1", "position":"absolute", "right":"50%"})
-    $("#selectionresult").appendTo("#container")
+ 
 
 };
     
@@ -68,9 +67,13 @@ function SelectionMenu(var1,par1,par2)
 	$("#selectionresulttext,#selectionresult").css("opacity", "1")
 	$("#selectionresulttext").appendTo("#header")
 	
-	$( "<p id='personen' style='opacity:0.3; font-size:18px;'><a id='H5'>Persons (english):<br></a></p>" ).appendTo("#header")
-	$( "<p id='genders' style='opacity:0.3; font-size:18px;'><a id='H5'>Gender:<br></a></p>" ).appendTo("#header")
-	$( "<p id='originals' style='opacity:0.3; font-size:18px;'><a id='H5'>Persons (original):<br></a></p>" ).appendTo("#header")
+	$( "<p id='personen' style='margin-left:10px; opacity:0.3; font-size:18px;'><a id='H5'>Persons (english):<br></a></p>" ).appendTo("#header")
+	$( "<p id='genders' style='margin-left:10px; opacity:0.3; font-size:18px;'><a id='H5'>Gender:<br></a></p>" ).appendTo("#header")
+	$( "<p id='originals' style='margin-left:10px; opacity:0.3; font-size:18px;'><a id='H5'>Persons (original):<br></a></p>" ).appendTo("#header")
+	$("#selectionresult").css({"margin-left:10px;opacity":"1", "position":"relative", "left":"2%"})
+	$("#selectionresult").appendTo("#header")
+
+	
 	$("#container" ).on("click", ".dropdown-item", function () {
 
 	    var temp=$( ".dropdown-item.active" ).closest(".dropdown.show").attr("id")
@@ -120,8 +123,8 @@ function SelectionMenu(var1,par1,par2)
 function getDropdownPersons()
 {
 
-    $('<span class="radio" style="display:inline; position: absolute;  top:5%; margin-left:10px; font-size:30px;cursor:pointer; opacity:0" id="textfieldsearch"><h4><button id="textfieldsearch" class="btn btn-primary dropdown" style="font-size:0.75rem;">Show results</button></h4></span>').appendTo("#searchfield")
-    
+    $('<span class="radio" style="display:inline; position: absolute;  top:5%; margin-left:10px; font-size:30px;cursor:pointer; opacity:0" id="textfieldsearch"></span>').appendTo("#searchfield")
+    $('<h4><button id="textfieldsearch" class="btn btn-primary" style="margin-top:20ox; margin-left: 10px; font-size:0.85rem;">Show results</button></h4>').appendTo("#lastradio")
     $("#persname").css("opacity","1")
     $(".radio").css("opacity","1")
     var myObject = new Object();
