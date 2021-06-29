@@ -86,7 +86,7 @@ function getDropdownObjects()
 {
 
     $('<span class="radio" style="display:inline; position: absolute;  top:5%; margin-left:10px; font-size:30px;cursor:pointer; opacity:0" id="textfieldsearch"></span>').appendTo("#searchfield")
-    $('<h4><button id="textfieldsearch" class="btn btn-primary" style="margin-top:20ox; margin-left: 10px; font-size:0.85rem;">Show results</button></h4>').appendTo("#lastradio")
+    $('<h4><button id="textfieldsearchobjects" class="btn btn-primary" style="margin-top:20ox; margin-left: 10px; font-size:0.85rem;">Show results</button></h4>').appendTo("#lastradio")
     $("#objec").css("opacity","1")
     $(".radio").css("opacity","1")
     var myObject = new Object();
@@ -147,7 +147,8 @@ function getDropdownObjects()
 	    initlist.push(w2ui['grid2'].get(initdata[index])); 
     })
 
-    $("#textfieldsearch").on("click",  function () {
+    $("#textfieldsearchobjects").on("click",  function () {
+	alert("TEXTSUCHE") 
 	$('#layout').show()
 	w2ui["grid2"].clear();
 	w2ui["grid2"].add(initlist);

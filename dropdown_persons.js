@@ -124,7 +124,7 @@ function getDropdownPersons()
 {
 
     $('<span class="radio" style="display:inline; position: absolute;  top:5%; margin-left:10px; font-size:30px;cursor:pointer; opacity:0" id="textfieldsearch"></span>').appendTo("#searchfield")
-    $('<h4><button id="textfieldsearch" class="btn btn-primary" style="margin-top:20ox; margin-left: 10px; font-size:0.85rem;">Show results</button></h4>').appendTo("#lastradio")
+    $('<h4><button id="textfieldsearchpersons" class="btn btn-primary" style="margin-top:20ox; margin-left: 10px; font-size:0.85rem;">Show results</button></h4>').appendTo("#lastradio")
     $("#persname").css("opacity","1")
     $(".radio").css("opacity","1")
     var myObject = new Object();
@@ -190,7 +190,8 @@ function getDropdownPersons()
 	initlist.push(w2ui['grid1'].get(initdata[index])); 
     })
     
-    $("#textfieldsearch").on("click",  function () {
+    $("#textfieldsearchpersons").on("click",  function () {
+	
 	$('#layout').show()
 	w2ui["grid1"].clear();
 	w2ui["grid1"].add(initlist);

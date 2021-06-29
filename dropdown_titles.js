@@ -115,7 +115,7 @@ function getDropdownTitles()
 {
 
     $('<span class="radio" style="display:inline; position: absolute;  top:5%; margin-left:10px; font-size:30px;cursor:pointer; opacity:0" id="textfieldsearch"></span>').appendTo("#searchfield")
-    $('<h4><button id="textfieldsearch" class="btn btn-primary" style="margin-top:20ox; margin-left: 10px; font-size:0.85rem;">Show results</button></h4>').appendTo("#lastradio")
+    $('<h4><button id="textfieldsearchtitles" class="btn btn-primary" style="margin-top:20ox; margin-left: 10px; font-size:0.85rem;">Show results</button></h4>').appendTo("#lastradio")
     english_container=[]
     name_container=[]
     
@@ -203,7 +203,7 @@ function getDropdownTitles()
 	    initlist.push(w2ui['grid3'].get(initdata[index])); 
     })
     
-    $("#textfieldsearch").on("click",  function () {
+    $("#textfieldsearchtitles").on("click",  function () {
 	$('#layout').show()
 	w2ui["grid3"].clear();
 	w2ui["grid3"].add(initlist);
