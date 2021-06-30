@@ -30,10 +30,9 @@ $.fn.slideFadeToggle = function(easing, callback) {
 };
 
 function BasicMenu(var1, par1="", par2="", par3="") {
-    obj=par1;
-    
-    
 
+    $("<h2 style='margin-top: -385px;'>Titles</h2>").appendTo("#container")
+    obj=par1;
     $.each(keys, function(index) {
         
         c=$("<div class=\"form-group\" id="+obj[keys[index][0]][1]+"><div id="+obj[keys[index][0]][2]+"><h6 id="+obj[keys[index][0]][3]+"></h6></div></div>")
