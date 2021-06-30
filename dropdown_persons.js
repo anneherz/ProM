@@ -7,7 +7,7 @@ function BasicMenu(var1, par1="", par2="", par3="") {
   
     obj=par1;
     
- 
+    $("<h2 style='margin-top: -145px;'>Persons</h2>").appendTo("#container")
     
     // NAME ENGLISH
     c=$("<div class=\"form-group\" id="+obj["english"][1]+"><div id="+obj["english"][2]+"><h6 id="+obj["english"][3]+"></h6></div></div>")
