@@ -148,7 +148,7 @@ function getDropdownObjects()
     })
 
     $("#textfieldsearchobjects").on("click",  function () {
-	alert("TEXTSUCHE") 
+	$("#header").css("right","400px");
 	$('#layout').show()
 	w2ui["grid2"].clear();
 	w2ui["grid2"].add(initlist);

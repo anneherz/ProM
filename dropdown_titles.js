@@ -204,6 +204,8 @@ function getDropdownTitles()
     })
     
     $("#textfieldsearchtitles").on("click",  function () {
+
+	$("#header").css("right","400px");
 	$('#layout').show()
 	w2ui["grid3"].clear();
 	w2ui["grid3"].add(initlist);

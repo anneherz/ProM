@@ -4,6 +4,7 @@ $("#objectsl").hide()
 
 
 function BasicMenu(var1, par1="", par2="", par3="") {
+  
     obj=par1;
     
  
@@ -123,9 +124,10 @@ function SelectionMenu(var1,par1,par2)
 function getDropdownPersons()
 {
 
-    $('<span class="radio" style="display:inline; position: absolute;  top:5%; margin-left:10px; font-size:30px;cursor:pointer; opacity:0" id="textfieldsearch"></span>').appendTo("#searchfield")
+    $('<span class="radio" style="display:inline; position: absolute;  top:5%; margin-left:10px; font-size:30px;cursor:pointer; opacity:0" id="textfieldsearch" title="Erklärung"></span>').appendTo("#searchfield")
     $('<h4><button id="textfieldsearchpersons" class="btn btn-primary" style="margin-top:20ox; margin-left: 10px; font-size:0.85rem;">Show results</button></h4>').appendTo("#lastradio")
     $("#persname").css("opacity","1")
+    
     $(".radio").css("opacity","1")
     var myObject = new Object();
   
@@ -191,7 +193,8 @@ function getDropdownPersons()
     })
     
     $("#textfieldsearchpersons").on("click",  function () {
-	
+
+	$("#header").css("right","400px");
 	$('#layout').show()
 	w2ui["grid1"].clear();
 	w2ui["grid1"].add(initlist);
