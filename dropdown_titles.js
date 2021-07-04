@@ -70,7 +70,7 @@ function SelectionMenu(var1,par1,par2)
     $( "<p id='ad_secs' style='margin-left:10px; opacity:0.3; font-size:18px;'><a id='H5'>Administrative Institution:<br></a></p>" ).appendTo("#header") //5
     $( "<p id='regions' style='margin-left:10px;opacity:0.3; font-size:18px;'><a id='H5'>Toponyms:<br></a></p>" ).appendTo("#header") //4
     $("#selectionresult").css({"margin-left:10px;opacity":"1", "position":"relative", "left":"2%"})
-    $("#selectionresult").appendTo("#header")
+    $("#selectionresult").appendTo("#container")
     
     $("#container" ).on("click", ".dropdown-item", function () {
 	var temp=$( ".dropdown-item.active" ).closest(".dropdown.show").attr("id")

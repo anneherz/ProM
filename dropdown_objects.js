@@ -51,7 +51,7 @@ function SelectionMenu(var1,par1,par2)
     $( "<p id='object_provenances' style='margin-left:10px; opacity:0.3; font-size:18px;'><a id='H5'>Object provenance:<br></a></p>" ).appendTo("#header")
     $( "<p id='object_materials' style='margin-left:10px; opacity:0.3; font-size:18px;'><a id='H5'>Object material:<br></a></p>" ).appendTo("#header")
     $("#selectionresult").css({"margin-left:10px;opacity":"1", "position":"relative", "left":"2%"})
-    $("#selectionresult").appendTo("#header")
+    $("#selectionresult").appendTo("#container")
     
     $("#container" ).on("click", ".dropdown-item", function () {
 
