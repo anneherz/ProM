@@ -6,7 +6,8 @@ keys=[["object_type","Type","#bsd1-container"],["object_subtype","Subtype","#bsd
 
 function BasicMenu(var1, par1="", par2="", par3="") {
 
-    //$("<h2 style='margin-top: -240px;'>Objects</h2>").appendTo("#container")
+    $("<h1 style='font-size:35px; margin-left: 15px; margin-top:30px; font-weight: bold;'>Objects</h1>").appendTo("#upper")
+    
     obj=par1;
 
     $.each(keys, function(index) {
@@ -97,17 +98,20 @@ function getDropdownObjects()
     var myObject = new Object();
     
   
-    myObject["object_type"]=[objects[3].Type, "obj_type", "object", "type", "Select object type", "type", "#type", "#bsd1-container", "type","type"]
-    myObject["object_subtype"]=[objects[3].Subtype, "obj_subtype", "object", "subtype", "Select object sub-type", "subtype", "#subtype", "#bsd2-container", "subtype","subtype"]
-    myObject["object_subtype_other"]=[objects[3]["Subtype II"], "obj_subtype_other", "object", "subtype_other", "Select object sub-type II", "subtype_other", "#subtype_other", "#bsd3-container", "subtype_other","subtype_other"]
-    myObject["object_location"]=[objects[3].Location, "obj_location", "object", "location", "Select object location", "location", "#location", "#bsd4-container", "location","loction"]
-    myObject["object_provenance"]=[objects[3].Provenance, "obj_provenance", "object", "provenance", "Select object provenance", "provenance", "#provenance", "#bsd5-container", "provenance","provenance"]
-    myObject["object_material"]=[objects[3].Material, "obj_material", "object", "location", "Select object material", "material", "#material", "#bsd6-container", "material","material"]
+    myObject["object_type"]=[objects[3].Type, "obj_type", "object", "type", "object type", "type", "#type", "#bsd1-container", "type","type"]
+    myObject["object_subtype"]=[objects[3].Subtype, "obj_subtype", "object", "subtype", "object sub-type", "subtype", "#subtype", "#bsd2-container", "subtype","subtype"]
+    myObject["object_subtype_other"]=[objects[3]["Subtype II"], "obj_subtype_other", "object", "subtype_other", "object sub-type II", "subtype_other", "#subtype_other", "#bsd3-container", "subtype_other","subtype_other"]
+    myObject["object_location"]=[objects[3].Location, "obj_location", "object", "location", "object location", "location", "#location", "#bsd4-container", "location","loction"]
+    myObject["object_provenance"]=[objects[3].Provenance, "obj_provenance", "object", "provenance", "object provenance", "provenance", "#provenance", "#bsd5-container", "provenance","provenance"]
+    myObject["object_material"]=[objects[3].Material, "obj_material", "object", "location", "object material", "material", "#material", "#bsd6-container", "material","material"]
    
     var vars = JSON.stringify(myObject);
     var obj = jQuery.parseJSON( vars );
     console.log("OBJECTS")
     console.log(obj) 
+
+    var helpmenu=["enter object type e.g. tomb’s equipment or stela", "enter object subtype e.g. shabti or round-topped stela", "enter object subtype II e.g. mummiform or pyramidion topped", "enter current location of an artefact or monument within a museum’s collection e.g. EG, Cairo, Egyptian Museum or DE, Berlin, Ägyptisches Museum und Papyrussammlung", "enter original provenance of a artefact or monument e.g. EG, Saqqara-South, Unas-cemetery or EG, Saqqara-North, Teti-cemetery", "enter object’s material e.g. limestone or quartzite"]
+
     
     $.getScript( "dist/bootstrap-select-dropdown.js", function() { 
 
@@ -116,7 +120,8 @@ function getDropdownObjects()
 	$(obj[keys[index_basic][0]][7]+" .input-group .form-control").attr("placeholder", obj[keys[index_basic][0]][4]);
 	    $(obj[keys[index_basic][0]][7]).find('.dropdown-menu').css("z-index","12000")
 	    $(obj[keys[index_basic][0]][7]).find('.dropdown-menu').css("width","400px")
-	    $(obj[keys[index_basic][0]][7]).css("margin-bottom","22px")
+	    $(obj[keys[index_basic][0]][7]).append("<span title='"+helpmenu[index_basic]+"' style='cursor:pointer; position:relative; width:20px; font-size:22px; margin-left:-30px; top:-30px;'>&#9432;</span>")
+	    $(obj[keys[index_basic][0]][7]).css("margin-bottom","-22px")
 	    $(obj[keys[index_basic][0]][7]).find(".dropdown-item:contains('Select all')").css("font-family","italic")
 	    $(obj[keys[index_basic][0]][7]).find(".dropdown-item:contains('Deselect all')").css("font-family","italic")
 	    $(obj[keys[index_basic][0]][7]).find(".dropdown-item:contains('Show selected')").css("font-family","italic")
@@ -317,3 +322,6 @@ function select(values="",par1="") {
     })
 }
     
+$("#container").css("margin-top","-290px")
+$("#filterfield").append("<span title='select one or more items of the same category e.g. object type: stela, statue and architectural element. You can also combine several items of different categories e.g. object type: stela and statue, object location: IT, Turin, Museo Egizio and object material: limestone to refine your search query. ' style='cursor:pointer; position:relative; width:20px; font-size:25px; margin-left:-30px; top:-35px;'>&#9432;</span>")
+$("#searchfield").prepend("<span title='select a specific query e.g. id, inventory number or material and chose between the listed query options ' style='cursor:pointer; position:relative; width:20px; font-size:25px; margin-left:-35px; top:0px;'>&#9432;</span>")

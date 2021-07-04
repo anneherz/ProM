@@ -6,7 +6,17 @@ $("#objectsl").hide()
 function BasicMenu(var1, par1="", par2="", par3="") {
   
     obj=par1;
-    $("<h2 style='margin-top: -145px;'>Persons</h2>").appendTo("#container")
+    $("<h1 style='font-size:35px; margin-left: 15px; margin-top:30px; font-weight: bold;'>Persons</h1>").appendTo("#upper")
+
+    // NAME ORIGINAL
+    var c=$("<div id="+obj["original"][2]+"><h6 id="+obj["original"][3]+"></h6></div>")
+    var data=obj["original"][0];
+    var s = $("<select id="+obj["original"][5]+" class=\"form-control\" multiple/>");
+    for(var val in data) {
+	$("<option/>", {value: data[val], text: data[val]}).appendTo(s);
+    }
+    c.appendTo("#container")
+    s.appendTo(var1);
     
     // NAME ENGLISH
     var c=$("<div id="+obj["english"][2]+"><h6 id="+obj["english"][3]+"></h6></div>")
@@ -29,15 +39,7 @@ function BasicMenu(var1, par1="", par2="", par3="") {
     c.appendTo("#container")
     s.appendTo(var1);
     
-    // NAME ORIGINAL
-    var c=$("<div id="+obj["original"][2]+"><h6 id="+obj["original"][3]+"></h6></div>")
-    var data=obj["original"][0];
-    var s = $("<select id="+obj["original"][5]+" class=\"form-control\" multiple/>");
-    for(var val in data) {
-	$("<option/>", {value: data[val], text: data[val]}).appendTo(s);
-    }
-    c.appendTo("#container")
-    s.appendTo(var1);
+   
 
     
 
@@ -64,12 +66,13 @@ function SelectionMenu(var1,par1,par2)
     {
 	obj=par1;
 	$("#selectionresulttext,#selectionresult, #currentselection").css("opacity", "1")
+	
 	$("#selectionresulttext").appendTo("#header")
 	
 	$( "<p id='personen' style='margin-left:10px; opacity:0.3; font-size:18px;'><a id='H5'>Persons (english):<br></a></p>" ).appendTo("#header")
 	$( "<p id='genders' style='margin-left:10px; opacity:0.3; font-size:18px;'><a id='H5'>Gender:<br></a></p>" ).appendTo("#header")
 	$( "<p id='originals' style='margin-left:10px; opacity:0.3; font-size:18px;'><a id='H5'>Persons (original):<br></a></p>" ).appendTo("#header")
-	$("#selectionresult").css({"margin-left:10px;opacity":"1", "position":"relative", "left":"2%"})
+	$("#selectionresult").css({"margin-top:-150px; margin-left:10px;opacity":"1", "position":"relative", "left":"2%"})
 	$("#selectionresult").appendTo("#header")
 
 	
@@ -134,9 +137,9 @@ function getDropdownPersons()
     $(".radio").css("opacity","1")
     var myObject = new Object();
   
-    myObject["english"] = [persons[3].english, "pers_engl", "pers", "engl_name", "Select English name" , "english", "#english","#bsd1-container", "name_translit","english"];
-    myObject["gender"]=[persons[3].gender, "pers_gender", "pers", "gender", "Select Gender", "gender","#gender", "#bsd2-container", "gender","gender"]
-    myObject["original"]=[persons[3].name, "pers_name", "pers", "orig_name", "Select Egyptian name ", "original", "#original", "#bsd3-container", "name","original"];
+    myObject["english"] = [persons[3].english, "pers_engl", "pers", "engl_name", "English writing" , "english", "#english","#bsd1-container", "name_translit","english"];
+    myObject["gender"]=[persons[3].gender, "pers_gender", "pers", "gender", "Gender", "gender","#gender", "#bsd2-container", "gender","gender"]
+    myObject["original"]=[persons[3].name, "pers_name", "pers", "orig_name", "Egyptian writing", "original", "#original", "#bsd3-container", "name","original"];
     
     var vars = JSON.stringify(myObject);
     var obj = jQuery.parseJSON( vars );
@@ -150,8 +153,8 @@ function getDropdownPersons()
 	$(obj["english"][7]).find('.dropdown-menu').css("width","400px")
 	$(obj["english"][7]).find('.dropdown-menu.show').css("position","absolute")
 	$(obj["english"][7]).find('.dropdown-menu.show').css("left","-75px")
-	$(obj["english"][7]).append("<span title='english name' style='cursor:pointer; position:relative; width:20px; font-size=25px; margin-left:-30px; top:-30px;'>&#9432;</span>")
-	$(obj["english"][7]).css("margin-bottom","22px")
+	$(obj["english"][7]).append("<span title='enter Egyptian name in English writing, e.g. Ptahmose or Ptahmay' style='cursor:pointer; position:relative; width:20px; font-size:25px; margin-left:-30px; top:-30px;'>&#9432;</span>")
+	$(obj["english"][7]).css("margin-bottom","-22px")
 	$(obj["english"][7]).find(".dropdown-item:contains('Select all')").css("font-family","italic")
 	$(obj["english"][7]).find(".dropdown-item:contains('Deselect all')").css("font-family","italic")
 	$(obj["english"][7]).find(".dropdown-item:contains('Show selected')").css("font-family","italic")
@@ -162,8 +165,8 @@ function getDropdownPersons()
 	$(obj["gender"][7]).find('.dropdown-menu').css("z-index","12000")
 	$(obj["gender"][7]).find('.dropdown-menu').css("width","300px")
 	$(obj["gender"][7]).find('.dropdown-menu').css("left","-75px")
-	$(obj["gender"][7]).append("<span  title='gender' style='cursor:pointer; position:relative; width:20px; font-size=25px; margin-left:-30px; top:-30px;'>&#9432;</span>")
-	$(obj["gender"][7]).css("margin-bottom","22px")
+	$(obj["gender"][7]).append("<span  title='enter person’s gender, choose between male and female' style='cursor:pointer; position:relative; width:20px; font-size:25px; margin-left:-30px; top:-30px;'>&#9432;</span>")
+	$(obj["gender"][7]).css("margin-bottom","-22px")
 	$(obj["gender"][7]).find(".dropdown-item:contains('Select all')").css("font-family","italic")
 	$(obj["gender"][7]).find(".dropdown-item:contains('Deselect all')").css("font-family","italic")
 	$(obj["gender"][7]).find(".dropdown-item:contains('Show selected')").css("font-family","italic")
@@ -174,8 +177,8 @@ function getDropdownPersons()
 	$(obj["original"][7]).find('.dropdown-menu').css("z-index","12000")
 	$(obj["original"][7]).find('.dropdown-menu').css("width","300px")
 	$(obj["original"][7]).find('.dropdown-menu').css("left","-75px")
-	$(obj["original"][7]).append("<span  title='aegyptian name' style='cursor:pointer; position:relative; width:20px; font-size=25px; margin-left:-30px; top:-30px;'>&#9432;</span>")
-	$(obj["original"][7]).css("margin-bottom","22px")
+	$(obj["original"][7]).append("<span  title='enter Egyptian name in Egyptian writing e.g. PtH-ms or PtH-mo.jj' style='cursor:pointer; position:relative; width:20px; font-size:25px; margin-left:-30px; top:-30px;'>&#9432;</span>")
+	$(obj["original"][7]).css("margin-bottom","-22px")
 	$(obj["original"][7]).find(".dropdown-item").css("font-family","aegypt")
 	$(obj["original"][7]).find(".dropdown-item:contains('Select all')").css("font-family","italic")
 	$(obj["original"][7]).find(".dropdown-item:contains('Deselect all')").css("font-family","italic")
@@ -325,3 +328,6 @@ function getDropdownPersons()
     
 }
    
+$("#container").css("margin-top","-210px")
+$("#filterfield").append("<span title='select one or more items of the same category e.g. English writing: Amenemope, Ptahmay and Hatiay. You can also combine several items of different categories e.g. Amenemope, Ptahmay and Hatiay and gender: female to refine your search query.' style='cursor:pointer; position:relative; width:20px; font-size:25px; margin-left:-30px; top:-35px;'>&#9432;</span>")
+$("#searchfield").prepend("<span title='select a specific query e.g. id or name of person and chose between the listed query options ' style='cursor:pointer; position:relative; width:20px; font-size:25px; margin-left:-35px; top:0px;'>&#9432;</span>")

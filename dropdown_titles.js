@@ -30,8 +30,7 @@ $.fn.slideFadeToggle = function(easing, callback) {
 };
 
 function BasicMenu(var1, par1="", par2="", par3="") {
-
-    $("<h2 style='margin-top: -385px;'>Titles</h2>").appendTo("#container")
+    $("<h1 style='font-size:35px; margin-left: 15px; margin-top:30px; font-weight: bold;'>Titles</h1>").appendTo("#upper")
     obj=par1;
     $.each(keys, function(index) {
         
@@ -61,16 +60,15 @@ function SelectionMenu(var1,par1,par2)
     obj=par1;
     $("#selectionresult,#selectionresulttext, #currentselection").css("opacity", "1")
     $("#selectionresulttext").appendTo("#header")
-    
-    $( "<p id='titles_translat_engs' style='margin-left:10px; opacity:0.3; font-size:18px;'><a id='H5'>Translation:<br></a></p>" ).appendTo("#header")
-    $( "<p id='titles_translits' style='margin-left:10px; opacity:0.3; font-size:18px;'><a id='H5'>Titles:<br></a></p>" ).appendTo("#header")
-    $( "<p id='gott_kults' style='margin-left:10px; opacity:0.3; font-size:18px;'><a id='H5'>Gods and other Authorities:<br></a></p>" ).appendTo("#header")
-    $( "<p id='regions' style='margin-left:10px;opacity:0.3; font-size:18px;'><a id='H5'>Toponyms:<br></a></p>" ).appendTo("#header")
-    $( "<p id='ad_secs' style='margin-left:10px; opacity:0.3; font-size:18px;'><a id='H5'>Administrative Institution:<br></a></p>" ).appendTo("#header")
-    $( "<p id='field2s' style='margin-left:10px; opacity:0.3; font-size:18px;'><a id='H5'>Field of Profession:<br></a></p>" ).appendTo("#header")
-    $( "<p id='field3s' style='margin-left:10px; opacity:0.3; font-size:18px;'><a id='H5'>Field of Specialization:<br></a></p>" ).appendTo("#header")
-    $( "<p id='field5s' style='margin-left:10px;opacity:0.3; font-size:18px;'><a id='H5'>Profession:<br></a></p>" ).appendTo("#header")
-    $( "<p id='field4s' style='margin-left:10px; opacity:0.3; font-size:18px;'><a id='H5'>Gender:<br></a></p>" ).appendTo("#header")
+    $( "<p id='titles_translits' style='margin-left:10px; opacity:0.3; font-size:18px;'><a id='H5'>Titles:<br></a></p>" ).appendTo("#header") //2
+    $( "<p id='titles_translat_engs' style='margin-left:10px; opacity:0.3; font-size:18px;'><a id='H5'>Translation:<br></a></p>" ).appendTo("#header") //1
+    $( "<p id='field2s' style='margin-left:10px; opacity:0.3; font-size:18px;'><a id='H5'>Field of Profession:<br></a></p>" ).appendTo("#header") //6
+    $( "<p id='field3s' style='margin-left:10px; opacity:0.3; font-size:18px;'><a id='H5'>Field of Specialization:<br></a></p>" ).appendTo("#header") //7
+    $( "<p id='field5s' style='margin-left:10px;opacity:0.3; font-size:18px;'><a id='H5'>Profession:<br></a></p>" ).appendTo("#header") //8
+    $( "<p id='field4s' style='margin-left:10px; opacity:0.3; font-size:18px;'><a id='H5'>Gender:<br></a></p>" ).appendTo("#header") //9
+    $( "<p id='gott_kults' style='margin-left:10px; opacity:0.3; font-size:18px;'><a id='H5'>Gods and other Authorities:<br></a></p>" ).appendTo("#header") //3
+    $( "<p id='ad_secs' style='margin-left:10px; opacity:0.3; font-size:18px;'><a id='H5'>Administrative Institution:<br></a></p>" ).appendTo("#header") //5
+    $( "<p id='regions' style='margin-left:10px;opacity:0.3; font-size:18px;'><a id='H5'>Toponyms:<br></a></p>" ).appendTo("#header") //4
     $("#selectionresult").css({"margin-left:10px;opacity":"1", "position":"relative", "left":"2%"})
     $("#selectionresult").appendTo("#header")
     
@@ -122,20 +120,20 @@ function getDropdownTitles()
     $(".radio").css("opacity","1")
     var myObject = new Object();
     
-    myObject["titles_translat_eng"]=[titles[3]["Translation"], "titles_translat_eng", "title", "titles_translat_eng", "Select Translation" , "trans","#trans","#bsd1-container", "titles_translat_eng","titles_translat_eng"];
-    myObject["titles_translit"]=[titles[3]["Title"], "titles_translit", "title", "titles_translit", "Select Title" ,"titles" , "#titles","#bsd2-container", "titles_translit","titles_translit"];
-    myObject["gott_kult"]=[titles[3]["Gods and other Authorities"], "gott_kult", "title", "gott_kult", "Select Gods and other Autorities", "gott_kult", "#gott_kult", "#bsd3-container", "gott_kult","gott_kult"]
-    myObject["region"]=[titles[3]["Toponyms"], "region", "title", "region", "Select Toponyms", "region", "#region", "#bsd4-container", "region","region"]
-    myObject["ad_sec"]=[titles[3]["Administrative Institution"], "ad_sec", "title", "ad_sec", "Select Administrative Institution", "ad_sec", "#ad_sec", "#bsd5-container", "ad_sec","ad_sec"]
-    myObject["field2"]=[titles[3]["Field of Profession"], "field2", "title", "field2", "Select Field of Profession", "field2", "#field2", "#bsd6-container", "field2","field2"]
-    myObject["field3"]=[titles[3]["Field of Specialization"], "field3", "title", "field3", "Select Field of Specialization", "field3", "#field3", "#bsd7-container", "field3","field3"]
-    myObject["field5"]=[titles[3]["Profession"], "field5", "title", "field5", "Select Profession", "field5", "#field5", "#bsd8-container", "field5","field44"]
-    myObject["field4"]=[titles[3]["Gender"], "field4", "title", "field4", "Select Gender", "field4", "#field4", "#bsd9-container", "field4","field45"]
+    myObject["titles_translat_eng"]=[titles[3]["Translation"], "titles_translat_eng", "title", "titles_translat_eng", "English writing" , "trans","#trans","#bsd1-container", "titles_translat_eng","titles_translat_eng"];
+    myObject["titles_translit"]=[titles[3]["Title"], "titles_translit", "title", "titles_translit", "Egyptian writing" ,"titles" , "#titles","#bsd2-container", "titles_translit","titles_translit"];
+    myObject["gott_kult"]=[titles[3]["Gods and other Authorities"], "gott_kult", "title", "gott_kult", "Gods and other Autorities", "gott_kult", "#gott_kult", "#bsd3-container", "gott_kult","gott_kult"]
+    myObject["region"]=[titles[3]["Toponyms"], "region", "title", "region", "Toponyms", "region", "#region", "#bsd4-container", "region","region"]
+    myObject["ad_sec"]=[titles[3]["Administrative Institution"], "ad_sec", "title", "ad_sec", "Administrative Institution", "ad_sec", "#ad_sec", "#bsd5-container", "ad_sec","ad_sec"]
+    myObject["field2"]=[titles[3]["Field of Profession"], "field2", "title", "field2", "Field of Profession", "field2", "#field2", "#bsd6-container", "field2","field2"]
+    myObject["field3"]=[titles[3]["Field of Specialization"], "field3", "title", "field3", "Field of Specialization", "field3", "#field3", "#bsd7-container", "field3","field3"]
+    myObject["field5"]=[titles[3]["Profession"], "field5", "title", "field5", "Profession", "field5", "#field5", "#bsd8-container", "field5","field44"]
+    myObject["field4"]=[titles[3]["Gender"], "field4", "title", "field4", "Gender", "field4", "#field4", "#bsd9-container", "field4","field45"]
     
     var vars = JSON.stringify(myObject);
     var obj = jQuery.parseJSON( vars );
-    
-    
+    var helpmenu=["enter Egyptian title in English writing e.g. mayor of Memphis", "enter Egyptian title in Egyptian writing e.g. H#.tj-o n.j Mn-nfr","enter gender, choose between male and female","enter god or other administrative authority as documented in Egyptian titles e.g. Ptah or king","enter administrative institution as documented in Egyptian titles e.g. temple of Ptah or temple of Ramesses II in the house of Ptah","enter toponym as documented in Egyptian titles e.g. Mennefer or Hutkaptah]","enter field of profession as documented in Egyptian titles e.g. cultic personnel or administration","enter profession as documented in Egyptian titles e.g. god’s servant or overseer of the cattle","enter professional specialization as documented in Egyptian titles e.g. priests or administration of the cattle"]
+
     $.getScript( "dist/bootstrap-select-dropdown.js", function() { 
 
 	$.each(keys, function(index_basic) {
@@ -143,7 +141,8 @@ function getDropdownTitles()
 	$(obj[keys[index_basic][0]][7]+" .input-group .form-control").attr("placeholder", obj[keys[index_basic][0]][4]);
 	    $(obj[keys[index_basic][0]][7]).find('.dropdown-menu').css("z-index","12000")
 	    $(obj[keys[index_basic][0]][7]).find('.dropdown-menu').css("width","400px")
-	    $(obj[keys[index_basic][0]][7]).css("margin-bottom","22px")
+	    $(obj[keys[index_basic][0]][7]).append("<span title='"+helpmenu[index_basic]+"' style='cursor:pointer; position:relative; width:20px; font-size:22px; margin-left:-30px; top:-30px;'>&#9432;</span>")
+	    $(obj[keys[index_basic][0]][7]).css("margin-bottom","-22px")
 	    $(obj[keys[index_basic][0]][7]).find(".dropdown-item:contains('Select all')").css("font-family","italic")
 	    $(obj[keys[index_basic][0]][7]).find(".dropdown-item:contains('Deselect all')").css("font-family","italic")
 	    $(obj[keys[index_basic][0]][7]).find(".dropdown-item:contains('Show selected')").css("font-family","italic")
@@ -411,4 +410,6 @@ function getDropdownTitles()
     select(values=selvalues,par1="grid3")
     })
 }
-    
+$("#container").css("margin-top","-420px")    
+$("#filterfield").append("<span title='select one or more items of the same category e.g. English writing: overseer of the cattle, herdsman and scribe of the cattle. You can also combine several items of different categories e.g. English writing: overseer of the cattle, god or other administrative authority: Ptah and toponym: Hutkaptah to refine your search query. ' style='cursor:pointer; position:relative; width:20px; font-size:25px; margin-left:-30px; top:-35px;'>&#9432;</span>")
+$("#searchfield").prepend("<span title='select a specific query e.g. id, god or toponym as documented in Egyptian titles and chose between the listed query options' style='cursor:pointer; position:relative; width:20px; font-size:25px; margin-left:-35px; top:0px;'>&#9432;</span>")
