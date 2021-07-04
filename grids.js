@@ -15,37 +15,36 @@ function allTables(var1="")
 	w2ui['grid1'].reset();
 	w2ui['grid1'].destroy();
     }
-   
     
-$('#grid1').w2grid({
-    name    : 'grid1',
-    recordHeight: 30,
-    style: 'font-size:32px;',
-    show: { 
+    
+    $('#grid1').w2grid({
+	name    : 'grid1',
+	recordHeight: 30,
+	style: 'font-size:32px;',
+	show: { 
             toolbar: true,
             footer: true
         },
-
-multiSearch: true,
-    searches: persons[0],
-    columns: persons[1],
-    records: persons[2],
-    
-    onSearch: function(event) {
-        var grid = this;
-    },
-    
-    onClick: function(event) {
 	
-        $("#upper").css({"height":"40px", "z-index": "10000"})
-        $("#bgroup").css("opacity", "1");
-        var grid = this;
-        //Anmerkung: das sind die Ids aus der onSearch Funktion davor!
-        //Beim nächsten Aufruf, werden die Search IDs ausgegeben
-        //Daher hier bei onClick die Methode '.last'
+	multiSearch: true,
+	searches: persons[0],
+	columns: persons[1],
+	records: persons[2],
 	
+	onSearch: function(event) {
+            var grid = this;
+	},
 	
-        $.each(currentIds, function( index, value ) {
+	onClick: function(event) {
+	    
+            $("#upper").css({"height":"40px", "z-index": "10000"})
+            $("#bgroup").css("opacity", "1");
+            var grid = this;
+            //Anmerkung: das sind die Ids aus der onSearch Funktion davor!
+            //Beim nächsten Aufruf, werden die Search IDs ausgegeben
+            //Daher hier bei onClick die Methode '.last'
+	    
+	    $.each(currentIds, function( index, value ) {
 	    plp.push({"id":grid.get(value).id_persons,"name":grid.get(value).name_translit})
         })
        
@@ -200,52 +199,38 @@ $('#grid2').w2grid({
      });
  });
 	    
-       event.onComplete = function() {
-        var sel_rec_ids = grid.getSelection();
-      if (sel_rec_ids.length) {
-        //w2ui['layout'].show('right', window.instant)
-          var sel_record = grid.get(sel_rec_ids[0]);
-	  w2ui['layout'].hide('right', window.instant)
-	  w2ui['layout'].show('main', window.instant)
-          w2ui['layout'].content('main', '<iframe class="row" id="Content2" style="height: 100%; overflow-y: hidden"></iframe>' )
-          document.getElementById('Content2').setAttribute('src',"detail/singleview_titles.html?ids="+(sel_record.id).toString()+"&title="+(sel_record.titles_translat_eng).toString());
-      
-      }
-       }}
+	event.onComplete = function() {
+            var sel_rec_ids = grid.getSelection();
+	    if (sel_rec_ids.length) {
+		//w2ui['layout'].show('right', window.instant)
+		var sel_record = grid.get(sel_rec_ids[0]);
+		w2ui['layout'].hide('right', window.instant)
+		w2ui['layout'].show('main', window.instant)
+		w2ui['layout'].content('main', '<iframe class="row" id="Content2" style="height: 100%; overflow-y: hidden"></iframe>' )
+		document.getElementById('Content2').setAttribute('src',"detail/singleview_titles.html?ids="+(sel_record.id).toString()+"&title="+(sel_record.titles_translat_eng).toString());
+		
+	    }
+	}}
     });
-    
 
     if(w2ui.hasOwnProperty('layout')){
 	$().w2destroy('layout');
-        }
+    }
 
-
-var pstyle = 'border: 1px solid #dfdfdf; padding: 5px;';
+    var pstyle = 'border: 1px solid #dfdfdf; padding: 5px;';
     $('#layout').w2layout({
         name: 'layout',
         panels: [
             
             { type: 'main', style: pstyle, content: 'main' },
-            { type: 'right', size: "100%", resizable: true, style: pstyle, content: 'right' }
+            { type: 'right', size: "100%", resizable: true, style: pstyle, content: 'right text' }
             
         ]
     });
-
- 
-/*
-var config = {
- layout:{
-        name: "layout",
-        padding: 0,
-        panels: [
-            { type: 'main', resizable: true, overflow: 'hidden', style: pstyle },
-	    { type: 'right', size: '75%',resizable: true,  overflow: 'hidden',style: pstyle }
-         ]
-    }
-};
-*/
-
-$(function () {
+    
+    $('#layout').hide()
+    
+ $(function () {
     // initialization
     //$('').w2layout(config.layout);
    

@@ -6,7 +6,7 @@ keys=[["object_type","Type","#bsd1-container"],["object_subtype","Subtype","#bsd
 
 function BasicMenu(var1, par1="", par2="", par3="") {
 
-    $("<h2 style='margin-top: -240px;'>Objects</h2>").appendTo("#container")
+    //$("<h2 style='margin-top: -240px;'>Objects</h2>").appendTo("#container")
     obj=par1;
 
     $.each(keys, function(index) {
@@ -69,6 +69,7 @@ function SelectionMenu(var1,par1,par2)
 	$("#object_materials").find('strong').remove()
 	
 	$.each(f, function(index) {
+	    console.log(f)
 	    $.each(keys, function(index_basic) {
 		if($.inArray($.trim(f[index]), objects[3][keys[index_basic][1]]) != -1 /*&& "#"+temp ==  keys[index_basic][2]*/)
 		{
@@ -81,6 +82,8 @@ function SelectionMenu(var1,par1,par2)
 		}
 	    })
 	})
+	console.log("selValues")
+	console.log(selvalues) 
     });
 };
 
@@ -103,7 +106,8 @@ function getDropdownObjects()
    
     var vars = JSON.stringify(myObject);
     var obj = jQuery.parseJSON( vars );
-    
+    console.log("OBJECTS")
+    console.log(obj) 
     
     $.getScript( "dist/bootstrap-select-dropdown.js", function() { 
 
@@ -150,7 +154,7 @@ function getDropdownObjects()
     })
 
     $("#textfieldsearchobjects").on("click",  function () {
-	$("#header").css("right","400px");
+
 	$('#layout').show()
 	w2ui["grid2"].clear();
 	w2ui["grid2"].add(initlist);
@@ -206,8 +210,6 @@ function select(values="",par1="") {
 	   });
     
     $( ".container" ).hide();
-    
-    
     var currentIds1=[]
     var currentIds2=[]
     var currentIds3=[]

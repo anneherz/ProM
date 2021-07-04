@@ -6,11 +6,10 @@ $("#objectsl").hide()
 function BasicMenu(var1, par1="", par2="", par3="") {
   
     obj=par1;
-    
     $("<h2 style='margin-top: -145px;'>Persons</h2>").appendTo("#container")
     
     // NAME ENGLISH
-    c=$("<div class=\"form-group\" id="+obj["english"][1]+"><div id="+obj["english"][2]+"><h6 id="+obj["english"][3]+"></h6></div></div>")
+    var c=$("<div id="+obj["english"][2]+"><h6 id="+obj["english"][3]+"></h6></div>")
     var data=obj["english"][0];
     var s = $("<select id="+obj["english"][5]+" class=\"form-control\" multiple/>");
     for(var val in data) {
@@ -19,8 +18,9 @@ function BasicMenu(var1, par1="", par2="", par3="") {
     c.appendTo("#container")
     s.appendTo(var1);
     
+    
     // GENDER
-    c=$("<div class=\"form-group\" id="+obj["gender"][1]+"><div id="+obj["gender"][2]+"><h6 id="+obj["gender"][3]+"></h6></div></div>")
+    var c=$("<div id="+obj["gender"][2]+"><h6 id="+obj["gender"][3]+"></h6></div>")
     var data=obj["gender"][0];
     var s = $("<select id="+obj["gender"][5]+" class=\"form-control\" multiple/>");
     for(var val in data) {
@@ -30,28 +30,26 @@ function BasicMenu(var1, par1="", par2="", par3="") {
     s.appendTo(var1);
     
     // NAME ORIGINAL
-    c=$("<div class=\"form-group\" id="+obj["original"][1]+"><div id="+obj["original"][2]+"><h6 id="+obj["original"][3]+"></h6></div></div>")
+    var c=$("<div id="+obj["original"][2]+"><h6 id="+obj["original"][3]+"></h6></div>")
     var data=obj["original"][0];
     var s = $("<select id="+obj["original"][5]+" class=\"form-control\" multiple/>");
     for(var val in data) {
 	$("<option/>", {value: data[val], text: data[val]}).appendTo(s);
-
     }
-    
     c.appendTo("#container")
     s.appendTo(var1);
 
- 
+    
 
 };
     
 function DropdownMenu(var1, var2, par1)
 	{
             obj=par1;
+	   
 	    
-	    $("div.dropdown-menu.dropdown-menu-right.show" ).appendTo("#main_container") 
-	  
-	    
+	    $("div.dropdown-menu.dropdown-menu-right.show" ).appendTo("#main_container")
+	   
 	    $("#msall").hide()
 	    $(var1).css("opacity", "1")
 	    
@@ -76,7 +74,7 @@ function SelectionMenu(var1,par1,par2)
 
 	
 	$("#container" ).on("click", ".dropdown-item", function () {
-
+	    
 	    var temp=$( ".dropdown-item.active" ).closest(".dropdown.show").attr("id")
 	    $("#selectedvalues").css("opacity","1")
 	    
@@ -121,11 +119,16 @@ function SelectionMenu(var1,par1,par2)
 	});
     };
 
+function changeDesign()
+{
+   
+    $("#layout").css("opacity","1")
+}
 function getDropdownPersons()
 {
-
+   
     $('<span class="radio" style="display:inline; position: absolute;  top:5%; margin-left:10px; font-size:30px;cursor:pointer; opacity:0" id="textfieldsearch" title="Erklärung"></span>').appendTo("#searchfield")
-    $('<h4><button id="textfieldsearchpersons" class="btn btn-primary" style="margin-top:20ox; margin-left: 10px; font-size:0.85rem;">Show results</button></h4>').appendTo("#lastradio")
+    $('<h4><button id="textfieldsearchpersons" class="btn btn-primary" style="margin-top:20px; margin-left: 10px; font-size:0.85rem;" onclick="changeDesign()">Show results</button></h4>').appendTo("#lastradio")
     $("#persname").css("opacity","1")
     
     $(".radio").css("opacity","1")
@@ -142,8 +145,12 @@ function getDropdownPersons()
 	
     	$(obj["english"][6]).selectDropdown();
 	$(obj["english"][7]+" .input-group .form-control").attr("placeholder", obj["english"][4]);
+	
 	$(obj["english"][7]).find('.dropdown-menu').css("z-index","12000")
 	$(obj["english"][7]).find('.dropdown-menu').css("width","400px")
+	$(obj["english"][7]).find('.dropdown-menu.show').css("position","absolute")
+	$(obj["english"][7]).find('.dropdown-menu.show').css("left","-75px")
+	$(obj["english"][7]).append("<span title='english name' style='cursor:pointer; position:relative; width:20px; font-size=25px; margin-left:-30px; top:-30px;'>&#9432;</span>")
 	$(obj["english"][7]).css("margin-bottom","22px")
 	$(obj["english"][7]).find(".dropdown-item:contains('Select all')").css("font-family","italic")
 	$(obj["english"][7]).find(".dropdown-item:contains('Deselect all')").css("font-family","italic")
@@ -154,6 +161,8 @@ function getDropdownPersons()
 	$(obj["gender"][7]+" .input-group .form-control").attr("placeholder", obj["gender"][4]);
 	$(obj["gender"][7]).find('.dropdown-menu').css("z-index","12000")
 	$(obj["gender"][7]).find('.dropdown-menu').css("width","300px")
+	$(obj["gender"][7]).find('.dropdown-menu').css("left","-75px")
+	$(obj["gender"][7]).append("<span  title='gender' style='cursor:pointer; position:relative; width:20px; font-size=25px; margin-left:-30px; top:-30px;'>&#9432;</span>")
 	$(obj["gender"][7]).css("margin-bottom","22px")
 	$(obj["gender"][7]).find(".dropdown-item:contains('Select all')").css("font-family","italic")
 	$(obj["gender"][7]).find(".dropdown-item:contains('Deselect all')").css("font-family","italic")
@@ -164,6 +173,8 @@ function getDropdownPersons()
 	$(obj["original"][7]+" .input-group .form-control").attr("placeholder", obj["original"][4]);
 	$(obj["original"][7]).find('.dropdown-menu').css("z-index","12000")
 	$(obj["original"][7]).find('.dropdown-menu').css("width","300px")
+	$(obj["original"][7]).find('.dropdown-menu').css("left","-75px")
+	$(obj["original"][7]).append("<span  title='aegyptian name' style='cursor:pointer; position:relative; width:20px; font-size=25px; margin-left:-30px; top:-30px;'>&#9432;</span>")
 	$(obj["original"][7]).css("margin-bottom","22px")
 	$(obj["original"][7]).find(".dropdown-item").css("font-family","aegypt")
 	$(obj["original"][7]).find(".dropdown-item:contains('Select all')").css("font-family","italic")
@@ -194,7 +205,6 @@ function getDropdownPersons()
     
     $("#textfieldsearchpersons").on("click",  function () {
 
-	$("#header").css("right","400px");
 	$('#layout').show()
 	w2ui["grid1"].clear();
 	w2ui["grid1"].add(initlist);
@@ -314,4 +324,4 @@ function getDropdownPersons()
 })
     
 }
-    
+   
