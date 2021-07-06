@@ -7,11 +7,11 @@ function BasicMenu(var1, par1="", par2="", par3="") {
     
     obj=par1;
     $("<h1 style='font-size:35px; margin-left: 15px; margin-top:30px; font-weight: bold;'>Persons</h1>").appendTo("#upper")
-    $("#sel_obj").css({"opacity":"0.7","font-size":"14px"})
+    /*$("#sel_obj").css({"opacity":"0.7","font-size":"14px"})
     $("#sel_obj").appendTo("#upper")
     $("<br/>").appendTo("#upper")
     $("#sel_title").css({"opacity":"0.7","font-size":"14px"})
-    $("#sel_title").appendTo("#upper")
+    $("#sel_title").appendTo("#upper")*/
     
 
     // NAME ORIGINAL
