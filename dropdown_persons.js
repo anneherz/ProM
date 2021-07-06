@@ -4,9 +4,15 @@ $("#objectsl").hide()
 
 
 function BasicMenu(var1, par1="", par2="", par3="") {
-  
+    
     obj=par1;
     $("<h1 style='font-size:35px; margin-left: 15px; margin-top:30px; font-weight: bold;'>Persons</h1>").appendTo("#upper")
+    $("#sel_obj").css({"opacity":"0.7","font-size":"14px"})
+    $("#sel_obj").appendTo("#upper")
+    $("<br/>").appendTo("#upper")
+    $("#sel_title").css({"opacity":"0.7","font-size":"14px"})
+    $("#sel_title").appendTo("#upper")
+    
 
     // NAME ORIGINAL
     var c=$("<div id="+obj["original"][2]+"><h6 id="+obj["original"][3]+"></h6></div>")
@@ -38,7 +44,7 @@ function BasicMenu(var1, par1="", par2="", par3="") {
     }
     c.appendTo("#container")
     s.appendTo(var1);
-    
+   
    
 
     
@@ -48,7 +54,7 @@ function BasicMenu(var1, par1="", par2="", par3="") {
 function DropdownMenu(var1, var2, par1)
 	{
             obj=par1;
-	   
+	    
 	    
 	    $("div.dropdown-menu.dropdown-menu-right.show" ).appendTo("#main_container")
 	   
@@ -69,11 +75,11 @@ function SelectionMenu(var1,par1,par2)
 	
 	$("#selectionresulttext").appendTo("#header")
 	
-	$( "<p id='personen' style='margin-left:10px; opacity:0.3; font-size:18px;'><a id='H5'>Persons (english):<br></a></p>" ).appendTo("#header")
+	/*$( "<p id='personen' style='margin-left:10px; opacity:0.3; font-size:18px;'><a id='H5'>Persons (english):<br></a></p>" ).appendTo("#header")
 	$( "<p id='genders' style='margin-left:10px; opacity:0.3; font-size:18px;'><a id='H5'>Gender:<br></a></p>" ).appendTo("#header")
 	$( "<p id='originals' style='margin-left:10px; opacity:0.3; font-size:18px;'><a id='H5'>Persons (original):<br></a></p>" ).appendTo("#header")
 	$("#selectionresult").css({"margin-top:-150px; margin-left:10px;opacity":"1", "position":"relative", "left":"2%"})
-	$("#selectionresult").appendTo("#container")
+	$("#selectionresult").appendTo("#container")*/
 
 	
 	$("#container" ).on("click", ".dropdown-item", function () {
@@ -331,3 +337,5 @@ function getDropdownPersons()
 $("#container").css("margin-top","-210px")
 $("#filterfield").append("<span title='select one or more items of the same category e.g. English writing: Amenemope, Ptahmay and Hatiay. You can also combine several items of different categories e.g. Amenemope, Ptahmay and Hatiay and gender: female to refine your search query.' style='cursor:pointer; position:relative; width:20px; font-size:25px; margin-left:-30px; top:-35px;'>&#9432;</span>")
 $("#searchfield").prepend("<span title='select a specific query e.g. id or name of person and chose between the listed query options ' style='cursor:pointer; position:relative; width:20px; font-size:25px; margin-left:-35px; top:0px;'>&#9432;</span>")
+
+ 
