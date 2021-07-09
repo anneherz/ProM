@@ -165,9 +165,9 @@ border: 1px solid #fff;
 
 .aegypt {
    color: #303030;
-font-size: 15px;
-font-family: aegypt;
-padding-left: 40px;
+   font-size: 15px;
+   font-family: aegypt;
+   padding-left: 40px;
 }
 
 
@@ -175,4 +175,11 @@ padding-left: 40px;
 
 input[type="radio"]:checked+label {
   box-shadow: 0 0 0 2px #36648b;
+}
+
+td {
+  text-align: left;
+}
+tr {
+  text-align: left;
 }

@@ -88,11 +88,18 @@ function SelectionMenu(var1,par1,par2)
     });
 };
 
+function changeDesign()
+{
+   $("#layout").css("opacity","1")
+   $("#layout").css("top","110px") 
+   $("#child3").hide()
+}
+
 function getDropdownObjects()
 {
 
     $('<span class="radio" style="display:inline; position: absolute;  top:5%; margin-left:10px; font-size:30px;cursor:pointer; opacity:0" id="textfieldsearch"></span>').appendTo("#searchfield")
-    $('<h4><button id="textfieldsearchobjects" class="btn btn-primary" style="margin-top:20ox; margin-left: 10px; font-size:0.85rem;">Show results</button></h4>').appendTo("#lastradio")
+    $('<h4><button id="textfieldsearchobjects" class="btn btn-primary" style="margin-top:20ox; margin-left: 10px; font-size:0.85rem;"  onclick="changeDesign()">Show results</button></h4>').appendTo("#lastradio")
     $("#objec").css("opacity","1")
     $(".radio").css("opacity","1")
     var myObject = new Object();
@@ -314,10 +321,11 @@ function select(values="",par1="") {
     file=($( ".mt-2.mb-3" ).find( "span" ).ignore("a").text());
     collection = file.split(' ');
     
-    $("#w2ui-grid-box").css("height","70%")
-    $("#layout_layout_panel_main").css("height","100%")
-    $(".w2ui-scroll-wrapper").css("width","95%")
-
+	$("#w2ui-grid-box").css("height","70%")
+	$("#layout_layout_panel_main").css("height","100%")
+	$(".w2ui-scroll-wrapper").css("width","95%")
+	$("#layout").css("top","110px")
+	$("#child3").hide()
 	select(values=selvalues,par1="grid2")
     })
 }

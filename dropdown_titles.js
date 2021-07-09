@@ -60,6 +60,7 @@ function SelectionMenu(var1,par1,par2)
     obj=par1;
     $("#selectionresult,#selectionresulttext, #currentselection").css("opacity", "1")
     $("#selectionresulttext").appendTo("#header")
+    
     $( "<p id='titles_translits' style='margin-left:10px; opacity:0.3; font-size:18px;'><a id='H5'>Titles:<br></a></p>" ).appendTo("#header") //2
     $( "<p id='titles_translat_engs' style='margin-left:10px; opacity:0.3; font-size:18px;'><a id='H5'>Translation:<br></a></p>" ).appendTo("#header") //1
     $( "<p id='field2s' style='margin-left:10px; opacity:0.3; font-size:18px;'><a id='H5'>Field of Profession:<br></a></p>" ).appendTo("#header") //6
@@ -68,7 +69,7 @@ function SelectionMenu(var1,par1,par2)
     $( "<p id='field4s' style='margin-left:10px; opacity:0.3; font-size:18px;'><a id='H5'>Gender:<br></a></p>" ).appendTo("#header") //9
     $( "<p id='gott_kults' style='margin-left:10px; opacity:0.3; font-size:18px;'><a id='H5'>Gods and other Authorities:<br></a></p>" ).appendTo("#header") //3
     $( "<p id='ad_secs' style='margin-left:10px; opacity:0.3; font-size:18px;'><a id='H5'>Administrative Institution:<br></a></p>" ).appendTo("#header") //5
-    $( "<p id='regions' style='margin-left:10px;opacity:0.3; font-size:18px;'><a id='H5'>Toponyms:<br></a></p>" ).appendTo("#header") //4
+    $( "<p id='regions' style='margin-left:10px;opacity:0.3; font-size:18px;'><a id='H5'>Toponyms:<br></a></p>" ).appendTo("#header") //4 
     $("#selectionresult").css({"margin-left:10px;opacity":"1", "position":"relative", "left":"2%"})
     $("#selectionresult").appendTo("#container")
     
@@ -83,8 +84,9 @@ function SelectionMenu(var1,par1,par2)
 	$( ".mt-2.mb-3" ).hide()  
 	
         selvalues = new Object()
-	$("#titles_translat_engs").find('strong').remove()
 	$("#titles_translits").find('strong').remove()
+	$("#titles_translat_engs").find('strong').remove()
+	
         $("#gott_kults").find('strong').remove()
 	$("#regions").find('strong').remove()
 	$("#ad_secs").find('strong').remove()
@@ -108,20 +110,28 @@ function SelectionMenu(var1,par1,par2)
     });
 };
 
+
+function changeDesign()
+{
+   $("#layout").css("opacity","1")
+   $("#layout").css("top","110px") 
+   $("#child3").hide()
+}
+
 function getDropdownTitles()
 {
 
     $('<span class="radio" style="display:inline; position: absolute;  top:5%; margin-left:10px; font-size:30px;cursor:pointer; opacity:0" id="textfieldsearch"></span>').appendTo("#searchfield")
-    $('<h4><button id="textfieldsearchtitles" class="btn btn-primary" style="margin-top:20ox; margin-left: 10px; font-size:0.85rem;">Show results</button></h4>').appendTo("#lastradio")
+    $('<h4><button id="textfieldsearchtitles" class="btn btn-primary" style="margin-top:20ox; margin-left: 10px; font-size:0.85rem;" onclick="changeDesign()">Show results</button></h4>').appendTo("#lastradio")
     english_container=[]
     name_container=[]
     
     $("#objec").css("opacity","1")
     $(".radio").css("opacity","1")
     var myObject = new Object();
-    
-    myObject["titles_translat_eng"]=[titles[3]["Translation"], "titles_translat_eng", "title", "titles_translat_eng", "English writing" , "trans","#trans","#bsd1-container", "titles_translat_eng","titles_translat_eng"];
     myObject["titles_translit"]=[titles[3]["Title"], "titles_translit", "title", "titles_translit", "Egyptian writing" ,"titles" , "#titles","#bsd2-container", "titles_translit","titles_translit"];
+    myObject["titles_translat_eng"]=[titles[3]["Translation"], "titles_translat_eng", "title", "titles_translat_eng", "English writing" , "trans","#trans","#bsd1-container", "titles_translat_eng","titles_translat_eng"];
+    
     myObject["gott_kult"]=[titles[3]["Gods and other Authorities"], "gott_kult", "title", "gott_kult", "Gods and other Autorities", "gott_kult", "#gott_kult", "#bsd3-container", "gott_kult","gott_kult"]
     myObject["region"]=[titles[3]["Toponyms"], "region", "title", "region", "Toponyms", "region", "#region", "#bsd4-container", "region","region"]
     myObject["ad_sec"]=[titles[3]["Administrative Institution"], "ad_sec", "title", "ad_sec", "Administrative Institution", "ad_sec", "#ad_sec", "#bsd5-container", "ad_sec","ad_sec"]
@@ -397,17 +407,18 @@ function getDropdownTitles()
     //########################
     
     $("#selectionresult").on("click",  function () {
-
-    $.fn.ignore = function(sel){
-	return this.clone().find(sel||">*").remove().end();
-    };
-    file=($( ".mt-2.mb-3" ).find( "span" ).ignore("a").text());
-    collection = file.split(' ');
 	
-    $("#w2ui-grid-box").css("height","70%")
-    $("#layout_layout_panel_main").css("height","100%")
-    $(".w2ui-scroll-wrapper").css("width","95%")
-    select(values=selvalues,par1="grid3")
+	$.fn.ignore = function(sel){
+	    return this.clone().find(sel||">*").remove().end();
+	};
+	file=($( ".mt-2.mb-3" ).find( "span" ).ignore("a").text());
+	collection = file.split(' ');
+	$("#w2ui-grid-box").css("height","70%")
+	$("#layout_layout_panel_main").css("height","100%")
+	$(".w2ui-scroll-wrapper").css("width","95%")
+	$("#layout").css("top","110px")
+	$("#child3").hide()
+	select(values=selvalues,par1="grid3")
     })
 }
 $("#container").css("margin-top","-420px")    

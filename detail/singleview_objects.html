@@ -285,7 +285,7 @@ var $tbody = $table.append('<tbody />').children('tbody');
 
 $.each(sametype, function( index, p ) {
   string="<td style='padding-left:40px; font-size:12px; font-family: Arial, Helvetica, sans-serif'><a href='singleview_objects.html?ids="+p.ids+"&type="+p.type+"'>";
-  $tbody.append('<tr align="center"/>').children('tr:last')
+  $tbody.append('<tr align="left"/>').children('tr:last')
     .append(string+p.ids+"</td>")
     .append("<td style='padding-left:40px; font-size:12px; font-family: Arial, Helvetica, sans-serif'>"+p.type+"</td>")
     .append("<td style='padding-left:40px; font-size:12px; font-family: Arial, Helvetica, sans-serif'>"+p.subtype+"</td>")

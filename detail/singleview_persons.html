@@ -74,7 +74,7 @@ datings=$.parseJSON(getValue('../data/dating_selection.json'))
        var samename= [];
        
            $('<p class="pstyle"><b>ID: </b> '+(persons_sel[sel_record].id_persons).toString()+'</p>').appendTo('#container2');
-           $('<p class="pstyle"><b>Name: </b><a class="aegypt">'+(persons_sel[sel_record].name).toString()+'</a></p>').appendTo('#container2');
+           $('<p class="pstyle"><b>Name: </b><a class="aegypt" style="padding-left:0px;">'+(persons_sel[sel_record].name).toString()+'</a></p>').appendTo('#container2');
            $('<p class="pstyle"><b>English: </b> '+(persons_sel[sel_record].name_translit).toString()+'</p>').appendTo('#container2');
            $('<p class="pstyle"><b>Additional name: </b> '+(persons_sel[sel_record].other_name).toString()+'</p>').appendTo('#container2');
            $('<p class="pstyle"><b>Gender: </b> '+(persons_sel[sel_record].gender).toString()+'</p>').appendTo('#container2');

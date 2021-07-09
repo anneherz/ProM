@@ -128,11 +128,11 @@ input[type="radio"]:checked {
   </div>
   <div class="child" style="width:33%; ">
     <div id="selectedvalues" style="position: relative; width:100%; margin-right:120px;" >
-      <div id="header" style="position: relative; width:100%; right:99%; top:20px; margin-left:15px; line-break: auto;" >
+      <div id="header" style="position: relative; width:60%; right:99%; top:20px; margin-left:15px; line-break: auto;" >
       </div>
     </div>
   </div>
-  <div class="child" style="width:33%; padding-left: 120px;">
+  <div id="child3" class="child" style="width:33%; padding-left: 120px;">
    
     <p class="radio" id="searchfield" style="margin-left:35px; display:inline; font-size:25px; cursor:pointer; left:100%; opacity:0;">Text Search<br><input style="font-size:15px; width:170px;" type="text" id="searchfields" value=""></p>
     <br>
@@ -275,6 +275,7 @@ $(document).ready(function(){
 	w2ui['layout'].hide('main', window.instant)
 	w2ui['layout'].show('right', window.instant)
 	$( ".container" ).show();
+	$("#child3").show()
     })
 })
 
@@ -348,7 +349,7 @@ $("#reset").click(function(){
 window.location.reload(true);
 })
 
-
+ 
   
 </script>
 

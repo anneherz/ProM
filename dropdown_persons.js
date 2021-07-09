@@ -15,15 +15,7 @@ function BasicMenu(var1, par1="", par2="", par3="") {
     $("#sel_title").appendTo("#upper")*/
     
 
-    // NAME ORIGINAL
-    var c=$("<div id="+obj["original"][2]+"><h6 id="+obj["original"][3]+"></h6></div>")
-    var data=obj["original"][0];
-    var s = $("<select id="+obj["original"][5]+" class=\"form-control\" multiple/>");
-    for(var val in data) {
-	$("<option/>", {value: data[val], text: data[val]}).appendTo(s);
-    }
-    c.appendTo("#container")
-    s.appendTo(var1);
+   
     
     // NAME ENGLISH
     var c=$("<div id="+obj["english"][2]+"><h6 id="+obj["english"][3]+"></h6></div>")
@@ -34,7 +26,16 @@ function BasicMenu(var1, par1="", par2="", par3="") {
     }
     c.appendTo("#container")
     s.appendTo(var1);
-    
+
+     // NAME ORIGINAL
+    var c=$("<div id="+obj["original"][2]+"><h6 id="+obj["original"][3]+"></h6></div>")
+    var data=obj["original"][0];
+    var s = $("<select id="+obj["original"][5]+" class=\"form-control\" multiple/>");
+    for(var val in data) {
+	$("<option/>", {value: data[val], text: data[val]}).appendTo(s);
+    }
+    c.appendTo("#container")
+    s.appendTo(var1);
     
     // GENDER
     var c=$("<div id="+obj["gender"][2]+"><h6 id="+obj["gender"][3]+"></h6></div>")
@@ -131,8 +132,9 @@ function SelectionMenu(var1,par1,par2)
 
 function changeDesign()
 {
-   
     $("#layout").css("opacity","1")
+    $("#layout").css("top","110px") 
+    $("#child3").hide()
 }
 function getDropdownPersons()
 {
@@ -326,12 +328,14 @@ function getDropdownPersons()
     file=($( ".mt-2.mb-3" ).find( "span" ).ignore("a").text());
     collection = file.split(' ');
     
-    $("#w2ui-grid-box").css("height","70%")
-    $("#layout_layout_panel_main").css("height","100%")
-    $(".w2ui-scroll-wrapper").css("width","95%")
-    select(values=selvalues,par1="grid1")
+	$("#w2ui-grid-box").css("height","70%")
+	$("#layout").css("top","110px") 
+	$("#layout_layout_panel_main").css("height","100%")
+	$(".w2ui-scroll-wrapper").css("width","95%")
+	$("#child3").hide()
+	select(values=selvalues,par1="grid1")
 	
-})
+    })
     
 }
    

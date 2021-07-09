@@ -69,7 +69,7 @@ datings=$.parseJSON(getValue('../data/dating_selection.json'))
        
          $('<p class="pstyle"><b>ID: </b> '+(titles_sel[sel_record].id).toString()+'</p>').appendTo('#Content');
   //$('<p class="pstyle"><b>Title: </b> '+(titles_sel[sel_record].titles_translit).toString()+'</p>').appendTo('#Content');
-         $('<p class="pstyle"><b>Title: </b><a class="aegypt">'+(titles_sel[sel_record].titles_translit).toString()+'</a></p>').appendTo('#Content');
+         $('<p class="pstyle"><b>Title: </b><a class="aegypt" style="margin-left:-40px;">'+(titles_sel[sel_record].titles_translit).toString()+'</a></p>').appendTo('#Content');
          $('<p class="pstyle"><b>Translation: </b> '+(titles_sel[sel_record].titles_translat_eng).toString()+'</p>').appendTo('#Content');
          $('<p class="pstyle"><b>Gender: </b> '+(titles_sel[sel_record].field4).toString()+'</p>').appendTo('#Content');
          $('<p class="pstyle"><b>Reference: </b> '+(titles_sel[sel_record].titles_index).toString()+'</p>').appendTo('#Content');
