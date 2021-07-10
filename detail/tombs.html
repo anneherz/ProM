@@ -3,7 +3,7 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>PivotTable.js</title>
+        <title>ProM-Tombs</title>
 
         <!-- external libs from cdnjs -->
         <link rel="stylesheet" type="text/css" href="libs/c3.min.css">
@@ -23,7 +23,19 @@
 
 
         <style>
-            body {font-family: Verdana;}
+             body {font-family: sans-serif;}
+	    /*body::after {
+		content: "";
+		background: url("https://static.akpool.de/images/cards/208/2081970.jpg");
+		opacity: 0.23;
+		top: 0;
+		left: 0;
+		bottom: 0;
+		right: 0;
+		background-size: 100% 100%;
+		position: absolute;
+		z-index: -1;
+	    }*/
             .node {
               border: solid 1px white;
               font: 10px sans-serif;
@@ -34,14 +46,29 @@
             }
             .c3-line, .c3-focused {stroke-width: 3px !important;}
             .c3-bar {stroke: white !important; stroke-width: 1;}
-            .c3 text { font-size: 12px; color: grey;}
+            .c3 text { font-size: 12px; color: white;}
             .tick line {stroke: white;}
-            .c3-axis path {stroke: grey;}
+            .c3-axis path {stroke: white;}
             .c3-circle { opacity: 1 !important; }
             .c3-xgrid-focus {visibility: hidden !important;}
+
+	    	.pvtRenderer{
+    background:white;
+}
+.pvtAggregator{
+    background:white;
+}
+.pvtAttr{
+    font-family: sans-serif;
+    background:white;
+}
+
+.pvtUi{color:#333}table.pvtTable{font-size:8pt;text-align:left;border-collapse:collapse}table.pvtTable tbody tr th,table.pvtTable thead tr th{background-color:white;border:1px solid #CDCDCD;font-size:8pt;padding:5px}table.pvtTable .pvtColLabel{text-align:center}table.pvtTable .pvtTotalLabel{text-align:right}table.pvtTable tbody tr td{color:#3D3D3D;padding:5px;background-color:#FFF;border:1px solid #CDCDCD;vertical-align:top;text-align:right}.pvtGrandTotal,.pvtTotal{font-weight:700}.pvtVals{text-align:center;white-space:nowrap}.pvtColOrder,.pvtRowOrder{cursor:pointer;width:15px;margin-left:5px;display:inline-block}.pvtAggregator{margin-bottom:5px}.pvtAxisContainer,.pvtVals{border:1px solid gray;background:white;padding:5px;min-width:20px;min-height:20px;user-select:none;-webkit-user-select:none;-moz-user-select:none;-khtml-user-select:none;-ms-user-select:none}.pvtAxisContainer li{padding:8px 6px;list-style-type:none;cursor:move}.pvtAxisContainer li.pvtPlaceholder{-webkit-border-radius:5px;padding:3px 15px;-moz-border-radius:5px;border-radius:5px;border:1px dashed #aaa}.pvtAxisContainer li span.pvtAttr{-webkit-text-size-adjust:100%;background:white;border:1px solid #DEDEDE;padding:2px 5px;white-space:nowrap;-webkit-border-radius:5px;-moz-border-radius:5px;border-radius:5px}.pvtTriangle{cursor:pointer;color:grey}.pvtHorizList li{display:inline}.pvtVertList{vertical-align:top}.pvtFilteredAttribute{font-style:'Trebuchet MS'}.pvtFilterBox{z-index:100;width:300px;border:1px solid gray;background-color:white;position:absolute;text-align:center}.pvtFilterBox h4{margin:15px}.pvtFilterBox p{margin:10px auto}.pvtFilterBox label{font-weight:400}.pvtFilterBox input[type=checkbox]{margin-right:10px;margin-left:10px}.pvtFilterBox input[type=text]{width:230px}.pvtFilterBox .count{color:white;font-weight:400;margin-left:3px}.pvtCheckContainer{text-align:left;font-size:14px;white-space:nowrap;overflow-y:scroll;width:100%;max-height:250px;border-top:1px solid #d3d3d3;border-bottom:1px solid #d3d3d3}.pvtCheckContainer p{margin:5px}.pvtRendererArea{padding:5px}
+           
         </style>
     </head>
     <body>
+       <h4><a href="https://anneherz.github.io/ProM/#" target="_blank">Prosopographia Memphitica</a> - Statistics - Tombs</h4>
         <script type="text/javascript">
             $(function(){
                 if(window.location != window.parent.location)
