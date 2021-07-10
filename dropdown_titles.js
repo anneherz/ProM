@@ -421,6 +421,6 @@ function getDropdownTitles()
 	select(values=selvalues,par1="grid3")
     })
 }
-$("#container").css("margin-top","-420px")    
+$("#container").css("margin-top","-530px")    
 $("#filterfield").append("<span title='select one or more items of the same category e.g. English writing: overseer of the cattle, herdsman and scribe of the cattle. You can also combine several items of different categories e.g. English writing: overseer of the cattle, god or other administrative authority: Ptah and toponym: Hutkaptah to refine your search query. ' style='cursor:pointer; position:relative; width:20px; font-size:25px; margin-left:-30px; top:-35px;'>&#9432;</span>")
 $("#searchfield").prepend("<span title='select a specific query e.g. id, god or toponym as documented in Egyptian titles and chose between the listed query options' style='cursor:pointer; position:relative; width:20px; font-size:25px; margin-left:-35px; top:0px;'>&#9432;</span>")
