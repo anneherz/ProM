@@ -330,6 +330,6 @@ function select(values="",par1="") {
     })
 }
     
-$("#container").css("margin-top","-285px")
+$("#container").css("margin-top","-290px")
 $("#filterfield").append("<span title='select one or more items of the same category e.g. object type: stela, statue and architectural element. You can also combine several items of different categories e.g. object type: stela and statue, object location: IT, Turin, Museo Egizio and object material: limestone to refine your search query. ' style='cursor:pointer; position:relative; width:20px; font-size:25px; margin-left:-30px; top:-35px;'>&#9432;</span>")
 $("#searchfield").prepend("<span title='select a specific query e.g. id, inventory number or material and chose between the listed query options ' style='cursor:pointer; position:relative; width:20px; font-size:25px; margin-left:-35px; top:0px;'>&#9432;</span>")
