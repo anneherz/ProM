@@ -1,30 +1,97 @@
 <!DOCTYPE html>
-<html>
-<head>
-    <title>Titles</title>
-    <script src="../js/jquery.js"></script>
-    <script type="text/javascript" src="../js/w2ui.js"></script>
-    
-    <link rel="stylesheet" type="text/css" href="../css/w2ui.css" />
-    <link rel="stylesheet" type="text/css" href="../css/navigator.css" />
-</head>
-<body>
-<div class="Content" id="Content" style="overflow-y: hidden; top:0; left:10px width:95%; height: 200%"></div>
-<div style="width:90%; margin-left:2px" id="myDiv2"></div>
-<div style="width:90%; margin-left:2px" id="myDiv3"></div>
-<div style="width:90%; margin-left:2px" id="myDiv4"></div>
-<div style="width:90%; margin-left:2px" id="myDiv5"></div>
-<div id="toc">
-    <ul class="jump">
-   
-</ul>
- </div>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Prosopographia Memphitica</title>
 
-<script type="text/javascript">
-$("html, body").css({
-    
-    height: 'auto'
-});
+		<link rel="icon" type="image/png" sizes="32x32" href="../assets/images/favicon_io/favicon-32x32.png">
+		<link rel="icon" type="image/png" sizes="16x16" href="../assets/images/favicon_io/favicon-16x16.png">
+		<link rel="apple-touch-icon" sizes="180x180" href="../assets/images/favicon_io/apple-touch-icon.png">
+		<link href="../assets/fonts/red-hat-text-v13-latin-300.woff2" as="font" type="font/woff2" crossorigin>
+		<link rel="stylesheet" href="../assets/styles/styles.css">
+
+		<script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+	</head>
+	<body>
+		<header class="header layout__container">
+			<a href="https://anneherz.github.io/ProM/" class="header__logo-container" aria-label="To the homepage">
+				<div class="header__logo">
+					<img src="../assets/images/20230105_prom-icon_color.svg" alt="ProM Logo" />
+				</div>
+				<div class="header__title">
+					<span>Prosopographia</span>
+					<span>Memphitica</span>
+				</div>
+			</a>
+		</header>
+		<div class="layout__content single-view__content" id="sv__content">
+			<div class="single-view__image-container single-view__metadata" id="sv_imageContainer">
+				<a target="_blank" rel="noopener noreferrer" id="sv_imageLink" class="single-view__image-link"></a>
+				<div class="single-view__image-credits" id="sv_imageCredits"></div>
+			</div>
+			<div class="single-view__metadata-container">
+				<div class="single-view__metadata">
+					<h5 class="single-view__title">General Information</h5>
+					<div class="single-view__metadata-items" id="singleViewMeta_General"></div>
+				</div>
+				<div class="single-view__metadata">
+					<h5 class="single-view__title">Technical Data</h5>
+					<div class="single-view__metadata-items" id="singleViewMeta_Technical"></div>
+				</div>
+				<div class="single-view__metadata">
+					<h5 class="single-view__title">Additional Information</h5>
+					<div class="single-view__metadata-items" id="singleViewMeta_Add"></div>
+				</div>
+			</div>
+
+			<div class="single-view__related-container">
+				<div class="single-view__metadata" id="sv__relatedPersons">
+					<h5 class="single-view__title">Related Persons</h5>
+					<div id="sv__relatedPersonsMeta" class="single-view__table-container">
+						<table id="sv__table_RP" class="single-view__table">
+							<thead class="single-view__table-head">
+							<tr>
+								<th>ID</th>
+								<th>Name</th>
+								<th>English</th>
+								<th>Gender</th>
+							</tr>
+							</thead>
+						</table>
+						<div id="sv__toggle_RP" class="single-view__table-toggle">Show more</div>
+					</div>
+				</div>
+
+				<div class="single-view__metadata" id="sv__sameTypes">
+					<h5 class="single-view__title">Titles with same name</h5>
+					<div id="sv__sameTypeMeta" class="single-view__table-container">
+						<table id="sv__table_ST" class="single-view__table">
+							<thead class="single-view__table-head">
+							<tr>
+								<th>ID</th>
+								<th>Title</th>
+								<th>English</th>
+								<th>Gender</th>
+							</tr>
+							</thead>
+						</table>
+						<div id="sv__toggle_ST" class="single-view__table-toggle">Show more</div>
+					</div>
+				</div>
+				<div class="single-view__metadata single-view__citation-container">
+					<h5 class="single-view__title">Citation</h5>
+					<div class="single-view__metadata-items" id="singleViewMeta_citation"></div>
+				</div>
+			</div>
+		</div>
+		<script src="/assets/scripts/singleview_titles.js"></script>
+	</body>
+</html>
+
+<!--<script type="text/javascript">
+
 function getParameters()
 {
     var parameterFragments = location.search.substr(1).split("&");
@@ -40,8 +107,8 @@ function getParameters()
 var parameters = getParameters();
 
 function getValue(file){
-   var value= $.ajax({ 
-      url: file, 
+   var value= $.ajax({
+      url: file,
       async: false
    }).responseText;
    return value;
@@ -52,30 +119,28 @@ objects=$.parseJSON(getValue('../data/objects.json'))
 objects_sel=objects[4]
 titles=$.parseJSON(getValue('../data/titles.json'))
 titles_sel=titles[4]
-relationright=$.parseJSON(getValue('../data/relation_rightleftid.json'))  
-relationleft=$.parseJSON(getValue('../data/relation_leftrightid.json'))  
-datings=$.parseJSON(getValue('../data/dating_selection.json'))  
+relationright=$.parseJSON(getValue('../data/relation_rightleftid.json'))
+relationleft=$.parseJSON(getValue('../data/relation_leftrightid.json'))
+datings=$.parseJSON(getValue('../data/dating_selection.json'))
 
- 
+
        var sel_record = parameters.ids;
        var sel_title = parameters.title;
-        
-        //loop 
-         var i;
-         $('<li><a href="#selected" class="tocstyle">General Information</li>').appendTo('#toc');
-	 $('<h2 id="selected" class="h2style">GENERAL INFORMATION</h2>').appendTo('#Content');
 
+        //loop
+         var i;
          var sametitle= [];
-       
+
          $('<p class="pstyle"><b>ID: </b> '+(titles_sel[sel_record].id).toString()+'</p>').appendTo('#Content');
-  //$('<p class="pstyle"><b>Title: </b> '+(titles_sel[sel_record].titles_translit).toString()+'</p>').appendTo('#Content');
+          $('<p class="pstyle"><b>Title: </b> '+(titles_sel[sel_record].titles_translit).toString()+'</p>').appendTo('#Content');
          $('<p class="pstyle"><b>Title: </b><a class="aegypt" style="margin-left:-40px;">'+(titles_sel[sel_record].titles_translit).toString()+'</a></p>').appendTo('#Content');
          $('<p class="pstyle"><b>Translation: </b> '+(titles_sel[sel_record].titles_translat_eng).toString()+'</p>').appendTo('#Content');
          $('<p class="pstyle"><b>Gender: </b> '+(titles_sel[sel_record].field4).toString()+'</p>').appendTo('#Content');
          $('<p class="pstyle"><b>Reference: </b> '+(titles_sel[sel_record].titles_index).toString()+'</p>').appendTo('#Content');
-         $('<li><a href="#technicaldata" class="tocstyle">Technical Data</li>').appendTo('#toc');
+
+				 $('<li><a href="#technicaldata" class="tocstyle">Technical Data</li>').appendTo('#toc');
          $('<h2 id="technicaldata" class="h2style">TECHNICAL DATA</h2>').appendTo('#Content');
-         $('<p class="pstyle"><b>Core: </b> '+(titles_sel[sel_record].titel_kern).toString()+'</p>').appendTo('#Content');
+         //$('<p class="pstyle"><b>Core: </b> '+(titles_sel[sel_record].titel_kern).toString()+'</p>').appendTo('#singleViewMeta_Technical');
          $('<p class="pstyle"><b>Hierarchical Position: </b> '+(titles_sel[sel_record].titel_hierach).toString()+'</p>').appendTo('#Content');
          $('<p class="pstyle"><b>Specification (after profession): </b> '+(titles_sel[sel_record].titel_spez_taetigkeit).toString()+'</p>').appendTo('#Content');
          $('<p class="pstyle"><b>Specification (after institution): </b> '+(titles_sel[sel_record].titel_spez_institution).toString()+'</p>').appendTo('#Content');
@@ -97,16 +162,16 @@ $('<p class="pstyle"><b>Administrative Institution: </b> '+(titles_sel[sel_recor
          if (sel_title == value_title.titles_translit){
         string="<p style='font-size:12px; font-family: Arial, Helvetica, sans-serif'><nobr><a href='singleview_titles.html?ids="+value_title.id+"&title="+value_title.title_translat_eng+"'>";
         sametitle.push({"ids":value_title.id,"title":value_title.titles_translit,"english":value_title.titles_translat_eng,"gender":value_title.field4,"key":value_title.id.toString()})
-      
+
       };
-         
+
  });
 
-         
+
 //########################################################################
-//                           Create JSON    
+//                           Create JSON
 //########################################################################
-       
+
 var myObject = new Object();
 var persons_arr = []
 
@@ -130,7 +195,7 @@ i++;
 
 
 //################################################
-//--------  Create JSON Visualize ----------------
+//&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;  Create JSON Visualize &#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;
 //################################################
 
 
@@ -143,7 +208,7 @@ $table.append('<thead>').children('thead')
 var $tbody = $table.append('<tbody />').children('tbody');
 $.each(persons_arr, function( index, p ) {
      string="<td style='padding-left:40px;  font-size:12px; font-family: Arial, Helvetica, sans-serif'><a href='singleview_persons.html?ids="+p.person_id+"&name="+p.name_translit+"'>";
-   
+
  $tbody.append('<tr align="center"/>').children('tr:last')
     .append(string+p.person_id+"</a></td>")
     .append("<td class='aegypt'>"+p.person_name+"</td>")
@@ -237,12 +302,12 @@ var layout = {
     l: 300
   },
   width: 1000,
-  bargap: 0.05, 
-  bargroupgap: 0.2, 
-  barmode: "overlay", 
-  title: label[index]+" distribution for "+persons_sel[sel_record].name_translit, 
-  xaxis: {title: "Count"}, 
-  yaxis: {title: ""} 
+  bargap: 0.05,
+  bargroupgap: 0.2,
+  barmode: "overlay",
+  title: label[index]+" distribution for "+persons_sel[sel_record].name_translit,
+  xaxis: {title: "Count"},
+  yaxis: {title: ""}
  };
 
 
@@ -253,7 +318,7 @@ $('<h3 id='+index2[index]+' class="h3style"></h3>').appendTo('#Content');
 $(divelements2[index]).appendTo('#Content')
 })
 }
- 
+
 });
 	    */
 
@@ -261,20 +326,19 @@ $(divelements2[index]).appendTo('#Content')
 	    $('<h2 id="metadata" class="h2style" >CITATION</h2>').appendTo('#Content');
 	    $("<p class='pstyle'><a style='font-size:15px'>Permalink:</a> <a href='"+document.URL+"'>"+document.URL+"</a></p>").appendTo('#Content');
 	    $("<p class='pstyle'><a style='font-size:15px'>Citation:</a>  Anne Herzberg-Beiersdorf, Prosopographia Memphitica, <a href='"+document.URL+"'>"+document.URL+"</a> Access Date: 28.02.2020</p>").appendTo('#Content');
-	
+
   $('a[href*="#"]').on('click',function(e) {
-                
+
 		e.preventDefault();
               	var target = this.hash;
                 var $target = $(target);
-                
+
 		$('html, body, Content').stop().animate({
-                        
+
 			'scrollTop': $target.offset().top
 		}, 400, 'swing', function () {
 			window.location.hash = target;
 		});
 	});
-</script>
-</body>
-</html>
+</script>-->
+
