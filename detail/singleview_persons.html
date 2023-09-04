@@ -1,289 +1,131 @@
 <!DOCTYPE html>
-<html>
-<head>
-    <title>Memphis Navigator</title>
-    <script src="../js/jquery.js"></script>
-    <script type="text/javascript" src="../js/w2ui.js"></script>
-    <link rel="stylesheet" type="text/css" href="../css/w2ui.css" />
-    <link rel="stylesheet" type="text/css" href="../css/navigator.css" />
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Prosopographia Memphitica</title>
 
-</head>
-<body>
+		<link rel="icon" type="image/png" sizes="32x32" href="../assets/images/favicon_io/favicon-32x32.png">
+		<link rel="icon" type="image/png" sizes="16x16" href="../assets/images/favicon_io/favicon-16x16.png">
+		<link rel="apple-touch-icon" sizes="180x180" href="../assets/images/favicon_io/apple-touch-icon.png">
+		<link href="../assets/fonts/red-hat-text-v13-latin-300.woff2" as="font" type="font/woff2" crossorigin>
+		<link rel="stylesheet" href="../assets/styles/styles.css">
 
-<div id="container1"></div>
-<div id="container2"></div>
+		<script src="https://code.jquery.com/jquery-3.6.1.min.js"
+		        integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+	</head>
+	<body>
+		<header class="header layout__container">
+			<a href="https://anneherz.github.io/ProM/" class="header__logo-container" aria-label="To the homepage">
+				<div class="header__logo">
+					<img src="../assets/images/20230105_prom-icon_color.svg" alt="ProM Logo" />
+				</div>
+				<div class="header__title">
+					<span>Prosopographia</span>
+					<span>Memphitica</span>
+				</div>
+			</a>
+		</header>
+		<div class="layout__content single-view__content" id="sv__content">
+			<div class="single-view__image-container single-view__metadata" id="sv_imageContainer">
+				<a target="_blank" rel="noopener noreferrer" id="sv_imageLink" class="single-view__image-link"></a>
+				<div class="single-view__image-credits" id="sv_imageCredits"></div>
+			</div>
+			<div class="single-view__metadata-container">
+				<div class="single-view__metadata">
+					<h5 class="single-view__title">General Information</h5>
+					<div class="single-view__metadata-items" id="singleViewMeta_General"></div>
+				</div>
+				<div class="single-view__metadata">
+					<h5 class="single-view__title">Additional Information</h5>
+					<div class="single-view__metadata-items" id="singleViewMeta_add"></div>
+				</div>
+				<div class="single-view__metadata">
+					<h5 class="single-view__title">Dating</h5>
+					<div class="single-view__metadata-items" id="singleViewMeta_dating"></div>
+				</div>
+			</div>
 
+			<div class="single-view__related-container">
+				<div class="single-view__metadata" id="sv__relatedObjects">
+					<h5 class="single-view__title">Related Objects</h5>
+					<div id="sv__relatedObjectsMeta" class="single-view__table-container">
+						<table id="sv__table_RO" class="single-view__table">
+							<thead class="single-view__table-head">
+							<tr>
+								<th>ID</th>
+								<th>Type</th>
+								<th>Subtype</th>
+								<th>Provenance</th>
+								<th>Location</th>
+								<th>Inventory Number</th>
+							</tr>
+							</thead>
+						</table>
+						<div id="svP__toggle_RO" class="single-view__table-toggle">Show more</div>
+					</div>
+				</div>
 
-<div class="Content" id="Content" style="overflow-y:hidden; top:0; left:10px;"></div>
-</div>
-<div class="ContentSame" id="ContentSame" style="height:0px;"></div>
-<div id="toc" style="top:0; float:right">
-    <ul class="jump" style="width:95%">
-    </ul>
-</div>
+				<div class="single-view__metadata" id="sv__relatedPersons">
+					<h5 class="single-view__title">Related Persons</h5>
+					<div id="sv__relatedPersonsMeta" class="single-view__table-container">
+						<table id="sv__table_RP" class="single-view__table">
+							<thead class="single-view__table-head">
+							<tr>
+								<th>ID</th>
+								<th>Name</th>
+								<th>English</th>
+								<th>Gender</th>
+							</tr>
+							</thead>
+						</table>
+						<div id="sv__toggle_RP" class="single-view__table-toggle">Show more</div>
+					</div>
+				</div>
 
-<script type="text/javascript">
+				<div class="single-view__metadata" id="sv__relatedTitles">
+					<h5 class="single-view__title">Related Titles</h5>
+					<div id="sv__relatedTitlesMeta" class="single-view__table-container">
+						<table id="sv__table_RT" class="single-view__table">
+							<thead class="single-view__table-head">
+							<tr>
+								<th>ID</th>
+								<th>Title</th>
+								<th>English</th>
+								<th>Gender</th>
+							</tr>
+							</thead>
+						</table>
+						<div id="sv__toggle_RT" class="single-view__table-toggle">Show more</div>
+					</div>
+				</div>
+			</div>
 
-$("html, body").css({
-    
-    height: 'auto'
-});
+			<div class="single-view__metadata" id="sv__sameTypes">
+				<h5 class="single-view__title">Persons with same name</h5>
+				<div id="sv__sameTypeMeta" class="single-view__table-container">
+					<table id="sv__table_ST" class="single-view__table">
+						<thead class="single-view__table-head">
+						<tr>
+							<th>ID</th>
+							<th>Type</th>
+							<th>Subtype</th>
+							<th>Provenance</th>
+							<th>Location</th>
+							<th>Inventory Number</th>
+						</tr>
+						</thead>
+					</table>
+					<div id="sv__toggle_ST" class="single-view__table-toggle">Show more</div>
+				</div>
+			</div>
+			<div class="single-view__metadata single-view__citation-container">
+				<h5 class="single-view__title">Citation</h5>
+				<div class="single-view__metadata-items" id="singleViewMeta_citation"></div>
+			</div>
+		</div>
 
-function getParameters()
- {
-    var parameterFragments = location.search.substr(1).split("&");
-    var parameters = {}
-    for(var i = 0; i < parameterFragments.length; i++)
-    {
-        var splittedParameter = parameterFragments[i].split("=");
-        parameters[splittedParameter[0]] = decodeURIComponent(splittedParameter[1]);
-    }
-    return parameters;
-}
-
-var parameters = getParameters();
-function getValue(file){
-   var value= $.ajax({ 
-       url: file,
-       dataType: 'json',
-      async: false
-   }).responseText;
-   return value;
-}
-
-persons=$.parseJSON(getValue('../data/persons.json'))
-persons_sel=persons[4]
-objects=$.parseJSON(getValue('../data/objects.json'))
-objects_sel=objects[4]
-titles=$.parseJSON(getValue('../data/titles.json'))
-titles_sel=titles[4]
-relationright=$.parseJSON(getValue('../data/relation_rightleftid.json'))  
-relationleft=$.parseJSON(getValue('../data/relation_leftrightid.json'))  
-datings=$.parseJSON(getValue('../data/dating_selection.json'))  
-
-       var sel_record = parameters.ids;
-       var sel_name = parameters.name;
-      
-        //loop 
-         var i;
-  
-  
-         $('<li><a href="#selected" class="tocstyle">General Information</li>').appendTo('#toc');
-	 $('<h2 id="selected" class="h2style">GENERAL INFORMATION</h2>').appendTo('#container2');
-
-       var samename= [];
-       
-           $('<p class="pstyle"><b>ID: </b> '+(persons_sel[sel_record].id_persons).toString()+'</p>').appendTo('#container2');
-           $('<p class="pstyle"><b>Name: </b><a class="aegypt" style="padding-left:0px;">'+(persons_sel[sel_record].name).toString()+'</a></p>').appendTo('#container2');
-           $('<p class="pstyle"><b>English: </b> '+(persons_sel[sel_record].name_translit).toString()+'</p>').appendTo('#container2');
-           $('<p class="pstyle"><b>Additional name: </b> '+(persons_sel[sel_record].other_name).toString()+'</p>').appendTo('#container2');
-           $('<p class="pstyle"><b>Gender: </b> '+(persons_sel[sel_record].gender).toString()+'</p>').appendTo('#container2');
-
-           $('<li><a href="#additionalinformation" class="tocstyle">Additional Information</li>').appendTo('#toc');
-	   $('<h2 id="additionalinformation" class="h2style">ADDITIONAL INFORMATION</h2>').appendTo('#container2');
-           $('<p class="pstyle"><b>Reference: </b> '+(persons_sel[sel_record].person_no_ranke).toString()+'</p>').appendTo('#container2');
-          
-           $('<li><a href="#dating" class="tocstyle">Dating</li>').appendTo('#toc');
-	   $('<h2 id="dating" class="h2style">DATING</h2>').appendTo('#container2');
-           key=relationleft["persons_dating_"+sel_record].right_id;
-	   $('<p class="pstyle"><b>After Dynasty: </b> '+(datings[key].dating).toString()+'</p>').appendTo('#container2');
-           $('<p class="pstyle"><b>After king: </b> '+(datings[key].kingdom).toString()+'</p>').appendTo('#container2');
-           $('<p class="pstyle"><b>After regnal years: </b> '+(datings[key].period).toString()+'</p>').appendTo('#container2');
-
-       $.each(persons[2], function( index, value_pers ) {
-       if (sel_name == value_pers.name){
-        string="<p style='font-size:12px; font-family: Arial, Helvetica, sans-serif'><nobr><a href='singleview_persons.html?ids="+value_pers.id_persons+"&name="+value_pers.name+"'>";
-        samename.push({"ids":value_pers.id_persons,"name":value_pers.name,"englisch":value_pers.name_translit, "gender":value_pers.gender,"key":value_pers.id_persons.toString()})
-      
-      };
-         
- });
-
-//########################################################################
-//                           Create JSON    
-//########################################################################
-       
-var myObject = new Object();
-var objects_arr =[]
-var persons_arr = []
-var titles_arr = []
-
-key="persons_objects_"+sel_record;
-try {
-arr=relationleft[key].right_id
-objecttype=[]
-
-$.each(objects[2], function( index, value_obj ) {
-var i = 0;
-objecttype.push(value_obj.object_type)
-while(arr[i]) {
-
-if (value_obj.id_objects == arr[i] )
-{
-objects_arr.push({"object_id":value_obj.id_objects,"type":value_obj.object_type,"provenance":value_obj.object_provenance,"subtype":value_obj.object_subtype,"location":value_obj.object_location,"inventory":value_obj.inventory_no});
-}
-i++;
-}
-
-}
-);} catch(e)
-{console.log(e)}
-
-
-key="persons_persons_"+sel_record;
-try{
-arr1=relationright[key].left_id
-nametranslit=[]
-$.each(persons[2], function( index, value_pers ) {
-var i = 0;
-nametranslit.push(value_pers.name_translit)
-while(arr1[i]) {
-if (value_pers.id_persons == arr1[i] )
-{
-persons_arr.push({"person_id":value_pers.id_persons,"person_name":value_pers.name,"person_name_translit":value_pers.name_translit, "gender": value_pers.gender});}
-i++;
-}});
-}catch(e)
-{console.log(e)}
-key="persons_titles_"+sel_record;
-$.each(titles[2], function( index, value_title ) {
-
-try{
-arr=relationleft[key].right_id
-var i = 0;
-while(arr[i]) {
-if (value_title.id == arr[i] )
-{
-titles_arr.push({"title_id":value_title.id,"title": value_title.titles_translit ,"title_translat":value_title.titles_translat_eng,"gender":value_title.field4});
-}
-i++;
-}
-} catch(e)
-{}
-
-});
-
-//################################################
-//--------  Create JSON Visualize ----------------
-//################################################
-
-
-//###########################################################################################################
-if (objects_arr.length > 0) {
-var $table = $('<table>');
-$table.append('<thead>').children('thead')
-  .append('<tr  align="center"/>').children('tr').append('<th class="pstyle">ID</th><th class="pstyle">Type</th><th class="pstyle">Subtype</th><th class="pstyle">Provenance</th><th class="pstyle">Location</th><th class="pstyle">Inventory Number</th>');
-var $tbody = $table.append('<tbody />').children('tbody');
-
-$.each(objects_arr, function( index, p ) {
-string="<td style='padding-left:40px; font-size:12px; font-family: Arial, Helvetica, sans-serif'><a href='singleview_objects.html?ids="+p.object_id+"'>";
-   $tbody.append('<tr align="center" />').children('tr:last')
-    .append(string+p.object_id+"</td>")
-    .append("<td style='padding-left:40px; font-size:12px; font-family: Arial, Helvetica, sans-serif'>"+p.type+"</td>")
-    .append("<td style='padding-left:40px; font-size:12px; font-family: Arial, Helvetica, sans-serif'>"+p.subtype+"</td>")
-    .append("<td style='padding-left:40px; font-size:12px; font-family: Arial, Helvetica, sans-serif'>"+p.provenance+"</td>")
-   
-    .append("<td style='padding-left:40px; font-size:12px; font-family: Arial, Helvetica, sans-serif'>"+p.location+"</td>")
-    .append("<td style='padding-left:40px; font-size:12px; font-family: Arial, Helvetica, sans-serif'>"+p.inventory+"</td>")
-})
-
-$('<li><a href="#relatedobjects" class="tocstyle">Related Object(s)</li>').appendTo('#toc');
-$('<h2 id="relatedobjects" class="h2style">RELATED OBJECT(S)</h2>').appendTo('#container2');
-$table.appendTo('#container2');
-}
-
-//###########################################################################################################
-
-if (persons_arr.length > 0) {
-var $table = $('<table>');
-$table.append('<thead>').children('thead')
-  .append('<tr  align="center"/>').children('tr').append('<th class="pstyle">ID</th><th class="pstyle">Name</th><th class="pstyle">English</th><th class="pstyle">Gender</th>');
-var $tbody = $table.append('<tbody />').children('tbody');
-$.each(persons_arr, function( index, p ) {
-    string="<td style='padding-left:40px; font-size:12px; font-family: Arial, Helvetica, sans-serif' style='padding-left:40px; font-size:12px; font-family: Arial, Helvetica, sans-serif'><a href='singleview_persons.html?ids="+p.person_id+"&name="+p.name+"'>";
-   
- $tbody.append('<tr align="center"/>').children('tr:last')
-    .append(string+p.person_id+"</a></td>")
-    .append("<td class='aegypt'>"+p.person_name+"</td>")
-    .append("<td style='padding-left:40px; font-size:12px; font-family: Arial, Helvetica, sans-serif'>"+p.person_name_translit+"</td>")
-    .append("<td style='padding-left:40px; font-size:12px; font-family: Arial, Helvetica, sans-serif'>"+p.gender+"</td>")
-})
-$('<li><a href="#relatedpersons" class="tocstyle">Related Person(s)</li>').appendTo('#toc');
-$('<h2 id="relatedpersons" class="h2style">RELATED PERSON(S)</h2>').appendTo('#container2');
-$table.appendTo('#container2');
-}
-//###########################################################################################################
-if (titles_arr.length > 0) {
-var $table = $('<table>');
-$table.append('<thead>').children('thead')
-  .append('<tr align="center"/>').children('tr').append('<th class="pstyle">ID</th><th class="pstyle">Title</th><th class="pstyle">English</th><th class="pstyle">Gender</th>');
-var $tbody = $table.append('<tbody />').children('tbody');
-
-$.each(titles_arr, function( index, p ) {
-string="<td style='padding-left:40px; font-size:12px; font-family: Arial, Helvetica, sans-serif'><a href='singleview_titles.html?ids="+p.title_id+"'>";
-
-$tbody.append('<tr align="center"/>').children('tr:last')
-    .append(string+p.title_id+"</td>")
-    .append("<td class='aegypt'>"+p.title+"</td>")
-    .append("<td style='padding-left:40px; font-size:12px; font-family: Arial, Helvetica, sans-serif'>"+p.title_translat+"</td>")
-    .append("<td style='padding-left:40px; font-size:12px; font-family: Arial, Helvetica, sans-serif'>"+p.gender+"</td>")
-
-
-})
-$('<li><a href="#relatedtitles" style="color:#fff; font-size:20px; text-decoration: none">Related Title(s)</li>').appendTo('#toc');
-$('<h2 id="relatedtitles" class="h2style">RELATED TITLE(S)</h2>').appendTo('#container2');
-$table.appendTo('#container2');
-}
-if (samename.length > 0) {
-
-var $table = $('<table>');
-$table.append('<thead>').children('thead')
-  .append('<tr  align="center"/>').children('tr').append('<th class="pstyle">ID</th><th class="pstyle">Name</th><th class="pstyle">English</th><th class="pstyle">Gender</th>');
-var $tbody = $table.append('<tbody />').children('tbody');
-
-$.each(samename, function( index, p ) {
-  string="<td style='padding-left:40px; font-size:12px; font-family: Arial, Helvetica, sans-serif'><a href='singleview_persons.html?ids="+p.ids+"&name="+p.name+"'>";
-  $tbody.append('<tr align="center"/>').children('tr:last')
-	.append(string+p.ids+"</td>")
-	.append("<td class='aegypt'>"+p.name+"</td>")
-	.append("<td style='padding-left:40px; font-size:12px; font-family: Arial, Helvetica, sans-serif'>"+p.englisch+"</td>")
-	.append("<td style='padding-left:40px; font-size:12px; font-family: Arial, Helvetica, sans-serif'>"+p.gender+"</td>")
-})
-$('<li><a href="#samepersons" class="tocstyle">Persons with same name</li>').appendTo('#toc');
-    $('<h2 id="samepersons" class="h2style">PERSONS WITH SAME NAME</h2>').appendTo('#container2');
-    
-    $("#ContentSame").css({"height":"70px" })
-    $table.appendTo('#ContentSame');
-    $('#ContentSame').appendTo('#container2')
-}
-
-
-$('<li><a href="#metadata" class="tocstyle">Citation</li>').appendTo('#toc');
-$('<h2 id="metadata" class="h2style" >CITATION</h2>').appendTo('#container2');
-$("<p class='pstyle'><a style='font-size:15px'>Permalink:</a> <a href='"+document.URL+"'>"+document.URL+"</a></p>").appendTo('#container2');
-$("<p class='pstyle'><a style='font-size:15px'>Citation:</a>  Anne Herzberg-Beiersdorf, Prosopographia Memphitica, <a href='"+document.URL+"'>"+document.URL+"</a> ,Access Date: 28.02.2020</p>").appendTo('#container2');
-		    
-
-$("#container2").appendTo("#container1"); 
-$('a[href*="#"]').on('click',function(e) {
-                
-		e.preventDefault();
-              	var target = this.hash;
-                var $target = $(target);
-                
-		$('html, body, Content').stop().animate({
-                        
-			'scrollTop': $target.offset().top
-		}, 400, 'swing', function () {
-			window.location.hash = target;
-		});
-});
-
-  
-
-  
-</script>
-
-
-</body>
+		<script src="/assets/scripts/singleview_persons.js"></script>
+	</body>
 </html>

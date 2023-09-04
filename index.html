@@ -1,365 +1,211 @@
 <!DOCTYPE html>
-<html>
-<head>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="description" content="A Prosopographical Database with persons, their titles and the inscribed objects
+		on which they are attested for the royal residence Memphis during the New Kingdom." />
+		<meta property="og:title" content="Prosopographia Memphitica – A Prosopographical Database" />
+		<meta property="og:site_name" content="Prosopographia Memphitica" />
+		<meta name="twitter:title" content="Prosopographia Memphitica – A Prosopographical Database" />
+		<title>Prosopographia Memphitica</title>
 
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link href="https://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
-<title>Prosopographia Memphitica</title>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/4.0.0/flatly/bootstrap.min.css">
-<link href="docs/bundle.css" rel="stylesheet" type="text/css">
-<script src="grids.js"></script>
-<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-<link rel="stylesheet" href="/resources/demos/style.css">
+		<link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicon_io/favicon-32x32.png">
+		<link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon_io/favicon-16x16.png">
+		<link rel="manifest" href="assets/images/favicon_io/site.webmanifest">
+		<link rel="apple-touch-icon" sizes="180x180" href="assets/images/favicon_io/apple-touch-icon.png">
+		<link rel="preload" href="/assets/fonts/red-hat-text-v13-latin-300.woff2" as="font" type="font/woff2" crossorigin>
+		<link rel="stylesheet" href="assets/styles/styles.css">
 
+		<script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+	</head>
 
-<style>
-body { background-color: #FFFFFF; overflow-y: scroll;  }
-.container { margin-top:-20px; max-width: 400px; }
-.limenu {background-color:white; margin-left: 3px; margin-top: 1px; margin-bottom: 10px;width:12px; height:12px; font-size:15px; font-color:black; opacity:1;}
-.form-control{border:2;font-size:16px}
-.btn.btn-primary.dropdown-toggle {border-radius:0.65rem; }
-a {display: block;}
-.text-white {background-color: black; display:inline;}
-.badge.badge-dark.mr-1.mb-1{background-color:white; color:black;font-size:15px; display:inline;}
+	<body>
+		<header id="includedHeader" class="header layout__container"></header>
 
-.dropdown-menu.dropdown-menu-right.show{
-     position:absolute;
-     top: -330px;
-     right: -400px;
-     opacity: 0.8;
-     width: 120px;
-}
+		<main class="layout__container home">
+		  <section class="hero_home">
+			  <h6 class="headline_sub">A Prosopographical Database</h6>
+		    <h1>Prosopographia Memphitica</h1>
+			  <div class="hero__text">
+				  <p>The database includes all identified persons attested for the royal residence and national centre Memphis
+					  during the New Kingdom (1539–1077 BC) as well as their documented official titles and the inscribed objects
+					  and monuments on which they are attested.
+				  </p>
+			  </div>
+			  <div class="hero-nav">
+				  <div class="hero-nav__intro">Explore the database and filter by</div>
+			    <div class="hero-nav__items">
+				    <a href="persons.html" class="hero-nav__item" aria-label="Filter by persons">
+				      <div class="hero__icon hero__icon_persons">
+					      <img src="assets/images/icons/prom_persons-icon.svg" alt="Hieroglyph for 'Objects'" />
+				      </div>
+				      <div class="hero-nav__titles">Persons</div>
+			      </a>
+				    <a href="objects.html" class="hero-nav__item" aria-label="Filter by objects">
+					    <div class="hero__icon">
+						    <img src="assets/images/icons/prom_objects-icon.svg" alt="Hieroglyph for 'Objects'" />
+					    </div>
+					    <div class="hero-nav__titles">Objects</div>
+				    </a>
+				    <a href="titles.html" class="hero-nav__item" aria-label="Filter by titles">
+					    <div class="hero__icon">
+						    <img src="assets/images/icons/prom_titles-icon.svg" alt="Hieroglyph for 'Objects'" />
+					    </div>
+					    <div class="hero-nav__titles">Titles</div>
+				    </a>
+			    </div>
+			  </div>
+		  </section>
+			<section id="about" class="layout__content_text about">
+				<h2 class="layout__content_text-title">About the project</h2>
+				<p>The searchable web-database is a result of the author’s dissertational project: <a> Prosopographia Memphitica.
+					Individuelle Identitäten und Kollektive Biographien einer königlichen Residenzstadt des Neuen Reiches</a> at
+					the Freie Universität Berlin, supervised by Univ.-Prof. Dr. Jochem Kahl (Freie Universität) and PD Dr. Dietrich
+					Raue (Universität Leipzig) and funded by a Doctoral Fellowship at Excellence cluster TOPOI 264 (Research Group
+					<a href="http://www.topoi.org/group/c-1/">C-1: Deixies and Frames of References: Strategies of Perspectivation
+						in Language, Text, and Image</a>. The primary aim of the Prosopographia Memphitica Project is to attain a
+					regional prosopography for the Memphite region of the second millennium BC, which shall shed new light not
+					only on the identity of individuals, but on the reconstruction of personal connections within a historical
+					network of people.
+				</p>
+				<h2 class="layout__content_text-title">The Sources</h2>
+				<p>The archaeological remains of the city of Memphis and its related necropoleis are located 18 km south of
+					modern Cairo on today's west bank of the Nile. Although the scientific discussion about the site and its
+					monuments forms an independent research focus, the archaeological legacy of the New Kingdom burial sites
+					(1539–1077 BC) remained uninvestigated for a very long time. It was not until 1975 that the systematic
+					documentation of tombs of the Memphite elite necropolis at Saqqara has been initiated by the Egypt
+					Exploration Society in cooperation with the Rijksmuseum van Oudheden, Leiden. Since then several other
+					fieldwork missions were able to unearth further New Kingdom burial sites. As a result, the region known as
+					Memphite necropolis covers an area of about 40 sqm and reaches from Giza in the North to Dahschur in the South.
+				</p>
+				<figure>
+					<img src="assets/images/nekropolen-nr1_small.jpg" alt="Map of the Memphite region with notification of New Kingdom burial sites." />
+					<figcaption>fig. 1: Map of the Memphite region with notification of New Kingdom burial sites. © Anne Herzberg-Beiersdorf.
+						<a href="assets/images/nekropolen-nr1_large.jpg">
+							Click to enlarge
+						</a>
+					</figcaption>
+				</figure>
+				<p>Altogether 84 monumental tomb structures, whose physical existence is known or has been recorded in the past,
+					have been identified so far. They eventually revealed numerous prosopographic data. Relevant texts and
+					inscriptions are to be found not only on the walls of the tombs, but also on different types of objects that
+					were part of the tomb’s original decoration or equipment.
+				</p>
+				<h2 class="layout__content_text-title"> First Steps</h2>
+				<p>As a first step towards the aim the compilation of prosopographical data has begun at the outset of the project
+					by incorporating all data entries of a so far unpublished card box collection that has been compiled by
+					Dietrich Raue since the 1990s; it comprised 1,121 individuals: 878 male and 243 female persons. In the course
+					of this first phase the data has been supplemented within formation from preliminary reports and final
+					publications as well as additional relevant studies and collection catalogues. Monuments and artefacts from
+					altogether 114 museums and collections all over the world have been included to the data collection.
+				</p>
+				<div class="figures__container">
+					<figure class="about__figure">
+						<img src="assets/images/verteilung-objekte.jpg" alt="Verteilung der Objekte" />
+						<figcaption>
+							fig. 3: The inscribed monuments of Memphite officials are distributed among more than 100 museum collections around the world. © Anne Herzberg-Beiersdorf.
+						</figcaption>
+					</figure>
+					<figure class="about__figure">
+						<img src="assets/images/cardbox.jpg" alt="Cardbox" />
+						<figcaption>
+							fig. 2: The unpublished card box collection that has been compiled by Dietrich Raue since the 1990s © Anne Herzberg-Beiersdorf.
+						</figcaption>
+					</figure>
+					<figure class="about__figure">
+						<figcaption>
+							fig. 4: Documentation and collation of inscribed monuments of Memphite officials in museum's collections. © Anne Herzberg-Beiersdorf.
+						</figcaption>
+						<img src="assets/images/arbeitsfoto3.jpg" alt="Arbeitsfotos" />
+					</figure>
+				</div>
+				<h2 class="layout__content_text-title">The Database</h2>
+				<p>
+					Due to the increasing amount of relational data a complex relational database model has been created using
+					PostgreSQL. The relational model of the database management is m:n and 1:n. A n:m relation is used to denote a
+					many-to-many relationship, where m-objects on the one side are related to n-objects on the other side.
+					In addition, 1:n relations refer to a one-to-many relationship, that means 1-object on the one side can be
+					related to n-objects on the other side. The high standardisation of the data form and structure enables an
+					easy access as well as the application of external analysis software and visualisation tools, such as the network
+					analysis software Gephi or Jupyter notebook, which is an OpenSource interactive computational environment (IPython)
+					for creating analyses and visualisations from existing data libraries.
+				</p>
+				<p>
+					The data collection currently comprises 2,350 persons, 1,662 objects, and 980 titles, which are connected by
+					25,324 relations. This data set forms an amount of prosopographical data that has not yet been processed for
+					New Kingdom Egypt. To ensure the scientific transparency of the research argumentation, but also continuity of
+					data editing respectively recording of new data, data storage and long-term provision of research results in a
+					structured file format (JSON), the database has been published as a citable web publication.<br>
+					All data records are subject to revision due to ongoing research. If you have additional information regarding
+					individual data entries, or have noticed an error, please
+					<a href="https://anneherz.github.io/ProM/detail/contact.html">
+						contact me.
+					</a>
+				</p>
+				<h2 class="layout__content_text-title">Publications</h2>
+				<ul>
+					<li>
+						<a href="https://www.degruyter.com/document/doi/10.1515/9783110783650/html?lang=de" target="_blank">
+							Herzberg, A. 'Prosopographia Memphitica. Individuelle Identitäten und Kollektive Biographien einer Residenzstadt
+						des Neuen Reiches', in: Zeitschrift für Ägyptische Sprache und Altertumskunde, Beihefte 15, Berlin 2022.
+						</a>
+					</li>
+					<li>
+						<a href="https://www.academia.edu/69365547/Prosopographia_Memphitica_ProM_A_web_database_of_New_Kingdom_prosopographic_data_from_Memphis" target="_blank">
+							Herzberg, A. 'Prosopographia Memphitica (ProM) – A Web-Database of New Kingdom Prosopographic Data
+						from Memphis', in: BÁRTA, M.; COPPENS, F. and KREJČÍ, J. (eds), Abusir and Saqqara in the Year 2020, Prague 2021, 231–244.
+						</a>
+					</li>
+					<li>
+						<a href="https://www.academia.edu/44581442/Towards_a_Memphite_Prosopography_of_the_New_Kingdom_Promises_and_Pitfalls_of_Historical_Network_Analysis">
+							Herzberg, A. 'Towards a Memphite Prosopography of the New Kingdom – Promises and Pitfalls of Historical
+							Network Analysis', BÁRTA, M. and DULÍKOVÁ, V. (eds), Addressing the Dynamics of Change: Complex Network
+							Analysis in Ancient Egypt, Prague 2020, 105–136.
+						</a>
+					</li>
+					<li>
+						<a href="https://www.academia.edu/42156067/Prosopographia_Memphitica_Analyzing_Prosopographical_Data_and_Personal_Networks_from_the_Memphite_Necropolis">
+							Herzberg, A. 'Prosopographia Memphitica – Analyzing Prosopographical Data and Personal Networks from the
+							Memphite Necropolis', STARING, N., TWISTON DAVIES, H. and WEISS, L. (eds), Perspectives on Lived Religion:
+							Practices – Transmission – Landscape, Papers on Archaeology of the Leiden Museum of Antiquities 21, Leiden 2019, 39–58.
+						</a>
+					</li>
+					<li>
+						Herzberg, A. 'Das Uschebti H 219 im Badischen Landesmuseum und die Chronologie der memphitischen Bürgermeister
+						der 19. Dynastie‘, in: ZÄS 146.2 (2019), 34–59.
+					</li>
+					<li>
+						<a href="https://www.academia.edu/39394657/Prosopographische_Netzwerkanalyse_Promises_and_Pitfalls">
+							Herzberg, A. 'Prosopographische Netzwerkanalyse – Promises and Pitfalls', Posterpräsentation im Rahmen der
+							51. Ständigen Ägyptologenkonferenz (SÄK) in Basel – Ägyptologie und Methodik: Potenzial und Prioritäten (5.-7.7.2019).
+						</a>
+					</li>
+					<li>
+						Herzberg, A. 'Relief aus dem Grab eines Hohepriesters des Ptah in Memphis', in: SEYFRIED, F. and JUNG, M.
+						(eds), China und Ägypten – Wiegen der Welt, München 2017, 160–161.
+					</li>
+					<li>
+						Herzberg, A. 'Grabstele des Ry und seiner Frau Maja', in: SEYFRIED, F. and JUNG, M. (eds), China und
+						Ägypten – Wiegen der Welt, München 2017, 198–199.
+					</li>
+					<li>
+						<a href="https://nbn-resolving.org/urn:nbn:de:bsz:15-qucosa-201630">
+							Herzberg, A. 'Prosopographia Memphitica. Individual Identitites and Collective Biographies from a Royal
+							Residence', BERTI, M. and NAETHER, F. (eds), Altertumswissenschaften in a Digital Age: Egyptology,
+							Papyrology, and Beyond. Proceedings of a conference and workshop in Leipzig, November 4–6, 2015, Leipzig 2016.
+						</a>
+					</li>
+					<li>
+						Herzberg, A. 'Zu vier memphitischen Grabreliefs in der Sammlung des Ägyptischen Museums Georg Steindorff
+						der Universität Leipzig', ZÄS 143.1 (2016), 34–59.
+					</li>
+				</ul>
+			</section>
+		</main>
 
-a.selected {
-  background-color:#1F75CC;
-  color:white;
-  z-index:100;
-}
-
-.main_letter {
-    background-color:white;
-    margin-bottom:2px;
-    width:430px;
-    height: 30px;
-    z-index: 100000;
-    position:absolute;
-}
-
-input[type="radio"]:checked {
-    opacity:0.4;
-        border: 12px solid red;
-    } 
-
-.mom {
-    width: 100%; /* Try setting this to 400px or something */
-    display: table;
-    position:relative;
-}
-
-.dad {
-    width: 2000px; /* Try setting this to 400px or something */
-    display: table;
-    left: -700px;
-    position:relative;
-    
-}
-.child {
-    display: table-cell;
-}
-.childinner {
-    margin-left: 5px;
-    min-height: w0px;
-    }
-.child:first-child .childinner {
-    margin-left: 0;
-}
-
-.panel {
-    background: white;
-    opacity: 0.7;
-}
-
-
-.container{
-
-    margin-top:-120px;
-
-}
-</style>
-
-</head>
-
-<body>
-<!-- MAIN MENU -->
-<div id="mySidenav" class="sidenav">
-  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-  <a href="#" onclick="window.open('detail/projectinformation.html')">Project </a>
-  <a href="#" onclick="window.open('detail/howtouse.html')">How to use</a>
-  <a href="#" onclick="show_networks()">Networks</a>
-  <a href="#" id="subm0" style="font-size:15px" onclick="window.open('detail/network.html')">About Network Studies</a>
-  <a href="#" id="subm1" style="font-size:15px" onclick="window.open('https://anneherz.github.io/Memphite-Tombs-I/')">Memphite Tombs I</a>
-  <a href="#" id="subm2" style="font-size:15px" onclick="window.open('https://anneherz.github.io/Memphite-Tombs-II/')">Memphite Tombs II</a>
-  <a href="#" id="subm3" style="font-size:15px" onclick="window.open('https://anneherz.github.io/Maya/')">Overseer of Treasury Maya</a>
-  <a href="#" id="subm4" style="font-size:15px" onclick="window.open('https://anneherz.github.io/Treasury/')">Treasury</a>
-  <a href="#" onclick="show_statistics()">Statistics</a>
-  <a href="#" id="subn0" style="font-size:15px" onclick="window.open('detail/tombs.html')">Tombs</a>
-  <a href="#" id="subn1" style="font-size:15px" onclick="window.open('detail/objects.html')">Objects</a>
-  
-  <a href="#" onclick="window.open('detail/contact.html')">Contact</a>
-  <a href="#" onclick="window.open('detail/conditions.html')">Terms & Conditions</a>
-</div>
-
-<div id="upper" style="top:30px; height: 120px;">
-  <span style="font-size:30px;cursor:pointer;" onclick="openNav()"><h4 style="padding-top:10px;">&#9776; Menu</h4></span>
- <div id="dialog" title="Note">
-</div>
-<!--<span style="position: absolute; font-size:30px;cursor:pointer; top:0px; right:20px; opacity:0" id="reset"><h3>Home</h3></span>-->
-<input type="image" id="reset" style="position: absolute; font-size:10px;cursor:pointer; top:5px; right:20px; opacity:0; width:35px; height:35px" alt="Login"
-       src="detail/images/HomeButton.png">
-
-<div id="abc" style="position: absolute; font-size:30px;cursor:pointer; top:30px; left:40%; opacity:1"></div>
-<span style="position: absolute; font-size:30px;cursor:pointer; top:40px; right:20px; opacity:0;" id="back"><h4>&#8617; Back to search</h4></span>
-<div style="opacity:0; top:0; right:48%; position:absolute" id="bgroup" >
-  <span style="font-size:30px;cursor:pointer;"  id="p0"> << </span>
-  <span style="font-size:30px;cursor:pointer;"  id="p1"> >> </span>
-</div>
-</div>
-
-<div class="mom" style="top:50px;">
-  <div class="child" style="width:33%;">
-    <span style="font-size:30px; cursor:pointer; opacity:0;" id="selectionresulttext" ><span id="currentselection" style="opacity:0; font-size:25px; top:30px;">Current Selection</span></span>
-    <button id="selectionresult" class="btn btn-primary" style="font-size:0.85rem; opacity:0;">Show results</button>
-  </div>
-  <div class="child" style="width:33%; ">
-    <div id="selectedvalues" style="position: relative; width:100%; margin-right:120px;" >
-      <div id="header" style="position: relative; width:40%; right:99%; top:20px; margin-left:15px; line-break: auto;" >
-      </div>
-    </div>
-  </div>
-  <div id="child3" class="child" style="width:33%; padding-left: 120px;">
-   
-    <p class="radio" id="searchfield" style="margin-left:35px; display:inline; font-size:25px; cursor:pointer; left:100%; opacity:0;">Text Search<br><input style="font-size:15px; width:170px;" type="text" id="searchfields" value=""></p>
-    <br>
-    <br>
-    <a class="radio" style="display:inline; top:7%; margin-left:15px; opacity:0"><input type="radio" name="query" value="is" checked="checked" >is  </input></a>
-    <br>
-    <a class="radio" style="display:inline; top:7%; margin-left:15px; opacity:0"><input type="radio" name="query" value="begins"> begins  </input></a>
-    <br>
-    <a class="radio" style="display:inline; top:7%; margin-left:15px;  opacity:0"><input type="radio" name="query" value="contains"> contains  </input></a>
-    <br>
-    <a id="lastradio" class="radio" style="display:inline; top:7%; margin-left:15px;  opacity:0"><input type="radio" name="query" value="ends"> ends  </input></a>
-    
-  </div>
-</div>
-<div id="layout" style="opacity:1; width: 75%; position: absolute; top:10%; right:12px; bottom:10%; margin-right:10px; padding:0px"></div>
-
-<script>
-
-  
-  function show_networks()  {
-      if($("#subm0,#subm1,#subm2,#subm3,#subm4").is(":hidden")){
-	  $("#subm0,#subm1,#subm2,#subm3,#subm4").show()}
-      else if($("#subm0,#subm1,#subm2,#subm3,#subm4").is(":visible")){
-	  $("#subm0,#subm1,#subm2,#subm3,#subm4").hide()}
-  }
-  //new 
-  function show_statistics()  {
-      if($("#subn0,#subn1").is(":hidden")){
-	  $("#subn0,#subn1").show()}
-      else if($("#subn0,#subn1").is(":visible")){
-	  $("#subn0,#subn1").hide()}
-  }
-
-  
-  function openNav() {
-  document.getElementById("mySidenav").style.width = "300px";
-  }
-  function closeNav() {
-      document.getElementById("mySidenav").style.width = "0";
-  }
-</script>
-
-<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-<script src="dist/fuse.js"></script>
-<script src="dist/bootstrap-select-dropdown.js"></script>
-
-<title>Prosopographia Memphitica</title>
-
-<script type="text/javascript" src="js/w2ui.js"></script>
-<link rel="stylesheet" type="text/css" href="css/w2ui.css" />
-<link rel="stylesheet" type="text/css" href="css/index.css" />
-<link rel="stylesheet" type="text/css" href="css/navigator.css" />
-<div id="but" class="center" style="width: 20%; height: 2px;"></div>
-
-<div class="container" id="container">
-  <div class="form-group" id="msall" style="top:-200px;">
-    <h1>Prosopographia Memphitica</h1>
-    <h5>A Prosopographical Database</h5>
-    <br>
-    <br>
-    <span style="font-size:30px; cursor:pointer;" id="sel_pers">&#9776; Persons</span>
-    <br>
-    <span style="font-size:30px;cursor:pointer;" id="sel_obj">&#9776; Objects</span>
-    <br>
-    <span style="font-size:30px;cursor:pointer;" id="sel_title">&#9776; Titles</span>
-  </div>
-  
-  <p class="radio" id="filterfield" style="display:inline; font-size:25px; cursor:pointer; left:100%; opacity:0;">Filter search<br></p>
-  <h2 id="objectsl" style="opacity:0"></h2>
- 
-  
-  
-</div>
-</div>
-<div id="main_content_engl" class="main_letter" ><ul style="background-color:white; margin-bottom:40px"></ul></div>
-<div id="main_content_orig" class="main_letter" ><ul style="background-color:white; margin-bottom:40px"></ul></div>
-
-<script>
-
-  $("#Content2").css("border-style","none") 
-  
-function getParameters()
-{
-    var parameterFragments = location.search.substr(1).split("&");
-    var parameters = {}
-    for(var i = 0; i < parameterFragments.length; i++)
-    {
-        var splittedParameter = parameterFragments[i].split("=");
-        parameters[splittedParameter[0]] = decodeURIComponent(splittedParameter[1]);
-    }
-    return parameters;
-}
-var parameters = getParameters();
-
-  //data import
-   function getValue(file){
-   var value= $.ajax({ 
-      url: file, 
-      async: false
-   }).responseText;
-   return value;
-}
-  var pstyle = 'background: #ffffff;  overflow-y: hidden;';
-  persons=$.parseJSON(getValue('data/persons.json')) 
-  objects=$.parseJSON(getValue('data/objects.json'))
-  titles=$.parseJSON(getValue('data/titles.json'))
-		       console.log("records")
-		       console.log(persons[2])
-		       
-  $("html, body").css({
-      
-      "overflow-y": 'scroll',
-      height: '100%'
-  });
-  
-//##########################################
-//Call function allTables defined in grids.js
-
-  currentIds=(1,2,3,4,5,6)
-  allTables()
-
-//#############################################
-
-$(document).ready(function(){
-    $("#subm0,#subm1,#subm2,#subm3,#subm4,#subn0, #subn1,#layout, #main_content_orig, #main_content_engl").hide()
-    
-    $.getScript( "dist/bootstrap-select-dropdown.js", function() {
-
-    
-    $(".dropdown-menu.dropdown-menu-right.show").appendTo("#container")
-    $("#back").click(function() {
-	$("#searchfield").show()
-	$("#textfieldsearch").show()
-	$(".radio").show()
-	$("#back").css("opacity", "1");
-	$("#bgroup").css("opacity", "0");
-	$("#layout").hide()
-	w2ui['layout'].hide('main', window.instant)
-	w2ui['layout'].show('right', window.instant)
-	$( ".container" ).show();
-	$("#child3").show()
-    })
-})
-
-var collection=[]
-   
-//#####################
-//      PERSONS       #
-//#####################
-
-    
-    $( "#sel_pers" ).on("click", function () {
-	$("#reset").css("opacity","1")
-	$.getScript( "dropdown_persons.js", function() {
-	    getDropdownPersons();
-    });
-
-    });
-
-//#####################
-//      OBJECTS       #
-//#####################
-
-    $( "#sel_obj" ).click(function() {
-	$("#reset").css("opacity","1")
-		       $.getScript( "dropdown_objects.js", function() {
-		       getDropdownObjects();
-		       });
-		       });
-    
-//#################
-// TITLES         #
-//#################
-
-    $( "#sel_title" ).click(function() {
-	$("#reset").css("opacity","1")
-	$.getScript( "dropdown_titles.js", function() {
-	    getDropdownTitles();
-	});
-    });
-});
-
-
-$(".w2ui-panel-content").css("background","white")
-</script>
-<!-- Start Bravenet.com Service Code -->
-<script type="text/javascript" src="https://pub49.bravenet.com/counter/code.php?id=409341&usernum=4204262245&cpv=3"></script>
-<!-- End Bravenet.com Service Code -->  
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<!--<script type="text/javascript">
-  var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', 'UA-36251023-1']);
-  _gaq.push(['_setDomainName', 'jqueryscript.net']);
-  _gaq.push(['_trackPageview']);
-
-  (function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-  })();
-</script>-->
-<script>
-$("#reset").click(function(){
-window.location.reload(true);
-})
-
- 
-  
-</script>
-
-<!--<script src="https://code.jquery.com/jquery-1.12.4.js"></script>-->
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-
-
-</body>
+		<footer id="includedFooter" class="footer"></footer>
+		<script src="assets/scripts/App.js"></script>
+	</body>
 </html>
