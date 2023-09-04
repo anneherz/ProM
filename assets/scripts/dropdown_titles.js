@@ -1,6 +1,6 @@
 $("#persname").hide();
 $("#objectsl").hide();
-
+console.log("TEST GORDON Sep 2023")
 keys = [["titles_translat_eng", "Translation", "#bsd1-container"], ["titles_translit", "Title", "#bsd2-container"], ["gott_kult", "Gods and other Authorities", "#bsd3-container"], ["region", "Toponyms", "#bsd4-container"], ["ad_sec", "Administrative Institution", "#bsd5-container"], ["field2", "Field of Profession", "#bsd6-container"], ["field3", "Field of Specialization", "#bsd7-container"], ["field5", "Profession", "#bsd8-container"], ["field4", "Gender", "#bsd9-container"]]
 
 function BasicMenu(var1, par1 = "", par2 = "", par3 = "") {
