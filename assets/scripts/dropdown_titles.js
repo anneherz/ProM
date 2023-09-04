@@ -202,6 +202,7 @@ function getDropdownTitles() {
 			}
 			if (values[index] == "field5") {
 				f = (String(index).replace(' (prof.)', ''))
+				f="Gordon"
 				console.log("TEST: ", f) 
 				search_title_field5.push({field: values[index], value: f, operator: "is"})
 			}
