@@ -19,7 +19,6 @@ function getValue(file) {
 	return value;
 }
 
-var pstyle = 'background: #ffffff;  overflow-y: hidden;';
 persons = $.parseJSON(getValue('data/persons.json'))
 objects = $.parseJSON(getValue('data/objects.json'))
 titles = $.parseJSON(getValue('data/titles.json'))

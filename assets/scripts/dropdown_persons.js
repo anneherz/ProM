@@ -99,7 +99,7 @@ function getDropdownPersons() {
 	var vars = JSON.stringify(myObject);
 	var obj = jQuery.parseJSON(vars);
 
-	$.getScript("/libraries/bootstrap-select-dropdown.js", function () {
+	$.getScript("libraries/bootstrap-select-dropdown.js", function () {
 		$(obj["english"][6]).selectDropdown(
 			{
 				'badges': true,
