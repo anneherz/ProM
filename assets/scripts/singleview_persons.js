@@ -146,8 +146,12 @@ $.each(titles[2], function (index, value_title) {
 //--------  Create JSON Visualize ----------------
 //################################################
 //######## Citation ##########
-$("<div class=\"single-view__metadata-item\"><span>Permalink:</span> <a href='" + document.URL + "'>" + document.URL + "</a></div>").appendTo('#singleViewMeta_citation');
-$("<div class=\"single-view__metadata-item\"><span>Citation: Anne Herzberg-Beiersdorf, Prosopographia Memphitica, </span><a href='" + document.URL + "'>" + document.URL + "</a>, Access Date: 28.02.2020</div>").appendTo('#singleViewMeta_citation');
+let permURLPersons = window.location.protocol + "//" + window.location.host + window.location.pathname + "?ids=" + sel_record
+
+$("<div class=\"single-view__metadata-item\"><span>Permalink:</span> <a href='" + document.URL + "'>" + permURLPersons + "</a></div>").appendTo('#singleViewMeta_citation');
+$("<div class=\"single-view__metadata-item\"><span>Citation: Anne Herzberg-Beiersdorf, Prosopographia Memphitica," +
+	" </span><a href='" + document.URL + "'>" + permURLPersons + "</a>, Access Date: 28.02.2020</div>").appendTo('#singleViewMeta_citation');
+
 
 //##################### Show related objects ######################################################################################
 if (objects_arr.length > 0) {
