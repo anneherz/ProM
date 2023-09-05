@@ -94,7 +94,6 @@ function getDropdownTitles() {
 
 	var vars = JSON.stringify(myObject);
 	var obj = jQuery.parseJSON(vars);
-	//console.log(obj);
 
 	$.getScript("libraries/bootstrap-select-dropdown.js", function () {
 		$.each(keys, function (index_basic) {
@@ -202,7 +201,6 @@ function getDropdownTitles() {
 			}
 			if (values[index] == "field5") {
 				f = (String(index).replace(' (prof.)', ''))
-				console.log("TEST1: ", f)  
 				search_title_field5.push({field: values[index], value: f, operator: "is"})
 			}
 			if (values[index] == "field4") {

@@ -58,7 +58,6 @@ function SelectionMenu(var1, par1, par2) {
       $("#object_materials").find('.current-selection__selected-value').remove();
 
       $.each(f, function (index) {
-        //console.log(f);
         $.each(keys, function (index_basic) {
           if ($.inArray($.trim(f[index]), objects[3][keys[index_basic][1]]) != -1) {
             $("#" + keys[index_basic][0] + "s").css("opacity", "1");
@@ -68,8 +67,6 @@ function SelectionMenu(var1, par1, par2) {
           }
         });
       });
-      //console.log("selValues");
-      //console.log(selvalues);
     });
 }
 
@@ -86,8 +83,6 @@ function getDropdownObjects() {
 
   var vars = JSON.stringify(myObject);
   var obj = jQuery.parseJSON(vars);
-  //console.log("OBJECTS")
-  //console.log(obj)
 
   $.getScript("libraries/bootstrap-select-dropdown.js", function () {
     $.each(keys, function (index_basic) {
@@ -136,7 +131,7 @@ function getDropdownObjects() {
         field: g[index], value: v, operator: $('input:radio[name=query]:checked').val()
       });
     });
-    //console.log(fieldsearch)
+
     w2ui["grid2"].search(fieldsearch, 'OR');
     currentIds = w2ui["grid2"].last.searchIds;
     $("#filter-container").hide();

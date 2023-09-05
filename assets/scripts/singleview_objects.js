@@ -1,4 +1,3 @@
-console.log("Hello singleview_objects.js")
 function getParameters() {
   var parameterFragments = location.search.substr(1).split("&");
   var parameters = {}
@@ -96,8 +95,6 @@ $.each(objects[2], function (index, value_obj) {
     })
   }
 });
-
-//console.log(sametype)
 
 //########################################################################
 //                           Create JSON
