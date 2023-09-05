@@ -190,7 +190,6 @@ if (objects_arr.length > 0) {
     .append("<td>" + p.object_subtype + "</td>")
     .append("<td>" + p.object_provenance + "</td>")
     .append("<td>" + p.object_location + "</td>")
-    //.append("<td>"+p.inventory_no+"</td>")
   })
 
   $('#sv__relatedObjects').show();
