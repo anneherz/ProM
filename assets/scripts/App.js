@@ -22,11 +22,23 @@ $(function() {
     });
 });
 
-// Change text of button element
+/*// Change text of button element
 $(document).ready(function(){
     if ($( "#bsd1-container" ).hasClass("show")) {
         $(".filter__categories .dropdown-toggle").html("-");
     } else {
         $(".filter__categories .dropdown-toggle").html("+");
     }
+});*/
+
+$(document).ready(function(){
+    $('a:contains("baker (prof.)")').css('color', 'red');
+});
+
+
+$(document).ready(function() {
+    $(".dropdown-item")
+    .text(function (index, text) {
+        return text.replace('baker (prof.)', 'am not');
+    });
 });
