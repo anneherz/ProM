@@ -129,7 +129,7 @@ function allTables(var1 = "") {
 					document.getElementById('singleView').setAttribute('src', "detail/singleview_objects.html?ids=" + plo[count].id + "&type=" + plo[count].type)
 				});
 
-				$("#scroll-next_prev").click(function () {
+				$("#scroll-prev_objects").click(function () {
 					count = count - 1
 					document.getElementById('singleView').setAttribute('src', "detail/singleview_objects.html?ids=" + plo[count].id + "&type=" + plo[count].type)
 				});
