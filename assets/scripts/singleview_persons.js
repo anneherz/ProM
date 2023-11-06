@@ -44,7 +44,10 @@ $('<div class="single-view__metadata-item"><span class="single-view__metadata-ti
 	' class="font-aegypt">' + (persons_sel[sel_record].other_name).toString() + '</span></div>').appendTo('#singleViewMeta_General');
 $('<div class="single-view__metadata-item"><span class="single-view__metadata-title">Gender: </span>' + (persons_sel[sel_record].gender).toString() + '</div>').appendTo('#singleViewMeta_General');
 
-$('<div class="single-view__metadata-item"><span class="single-view__metadata-title">Reference: </span>' + (persons_sel[sel_record].person_no_ranke).toString() + '</div>').appendTo('#singleViewMeta_add');
+$('<div class="single-view__metadata-item"><span class="single-view__metadata-title">RPN: </span>' + (persons_sel[sel_record].person_no_ranke).toString() + '</div>').appendTo('#singleViewMeta_add');
+$('<div class="single-view__metadata-item"><span class="single-view__metadata-title">PNM: </span>' + (persons_sel[sel_record].pnm_link).toString() + '</div>').appendTo(#singleViewMeta_add');
+$('<div class="single-view__metadata-item"><span class="single-view__metadata-title">TLA: </span>' + (persons_sel[sel_record].link_tla).toString() + '</div>').appendTo(#singleViewMeta_add');
+
 
 key = relationleft["persons_dating_" + sel_record].right_id;
 $('<div class="single-view__metadata-item"><span class="single-view__metadata-title">After Dynasty: </span>' + (datings[key].dating).toString() + '</div>').appendTo('#singleViewMeta_dating');
