@@ -146,7 +146,7 @@ $.each(titles[2], function (index, value_title) {
 //--------  Create JSON Visualize ----------------
 //################################################
 //######## Citation ##########
-let permURLPersons = window.location.protocol + "//" + window.location.host + window.location.pathname + "?ids=" + sel_record
+let permURLPersons = window.location.protocol + "//" + "www.prosopographia-memphitica.com" + window.location.pathname + "?ids=" + sel_record
 
 $("<div class=\"single-view__metadata-item\"><span>Permalink:</span> <a href='" + document.URL + "'>" + permURLPersons + "</a></div>").appendTo('#singleViewMeta_citation');
 $("<div class=\"single-view__metadata-item\"><span>Citation: Anne Herzberg-Beiersdorf, Prosopographia Memphitica," +
