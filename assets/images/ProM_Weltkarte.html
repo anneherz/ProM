@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prosopographia Memphitica – Museumsstandorte</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { width: 100%; height: 100%; }
+#map { width: 100%; height: 100vh; }
+</style>
+</head>
+<body>
+<div id="map"></div>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+const map = L.map('map', {
+  center: [30, 15],
+  zoom: 2,
+  minZoom: 2,
+  maxZoom: 10,
+  zoomControl: true
+});
+
+L.tileLayer('https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png', {
+  attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/">CARTO</a>',
+  subdomains: 'abcd',
+  maxZoom: 20
+}).addTo(map);
+
+const dotStyle = {
+  radius: 6,
+  fillColor: '#e66a1a',
+  color: '#ffffff',
+  weight: 1.5,
+  opacity: 1,
+  fillOpacity: 0.85
+};
+
+const locations = [
+  {lat: 47.066667, lng: 15.450000, name: 'Universalmuseum Joanneum – Graz, Austria'},
+  {lat: 48.200000, lng: 16.369167, name: 'Kunsthistorisches Museum – Vienna, Austria'},
+  {lat: -33.866667, lng: 151.201667, name: 'Nicholson Museum – Sydney, Australia'},
+  {lat: 50.850000, lng: 4.335000, name: 'Art & History Museum – Brussels, Belgium'},
+  {lat: 50.633333, lng: 5.567500, name: 'Musée Le Grand Curtius – Liège, Belgium'},
+  {lat: -22.900000, lng: -43.168333, name: 'Museu Nacional – Rio de Janeiro, Brazil'},
+  {lat: 43.700000, lng: -79.384722, name: 'Royal Ontario Museum – Toronto, Canada'},
+  {lat: 47.550000, lng: 7.567778, name: 'Antikenmuseum Basel – Basel, Switzerland'},
+  {lat: 23.116667, lng: -82.369167, name: 'Museo Nacional Palacio de Bellas Artes – Havana, Cuba'},
+  {lat: 52.516667, lng: 13.402222, name: 'Ägyptisches Museum und Papyrussammlung – Berlin, Germany'},
+  {lat: 50.733333, lng: 7.084444, name: 'Ägyptisches Museum – Bonn, Germany'},
+  {lat: 49.866667, lng: 8.650278, name: 'Hessisches Landesmuseum – Darmstadt, Germany'},
+  {lat: 50.100000, lng: 8.684167, name: 'Liebieghaus – Frankfurt, Germany'},
+  {lat: 53.550000, lng: 9.984722, name: 'Museum für Kunst und Gewerbe – Hamburg, Germany'},
+  {lat: 52.366667, lng: 9.733333, name: 'Museum August Kestner – Hannover, Germany'},
+  {lat: 49.400000, lng: 8.685278, name: 'Ägyptologisches Institut – Heidelberg, Germany'},
+  {lat: 48.666667, lng: 10.151667, name: 'Schloss Hellenstein – Heidenheim, Germany'},
+  {lat: 52.150000, lng: 9.951111, name: 'Roemer- und Pelizaeus-Museum – Hildesheim, Germany'},
+  {lat: 49.000000, lng: 8.401667, name: 'Badisches Landesmuseum – Karlsruhe, Germany'},
+  {lat: 51.333333, lng: 12.368611, name: 'Ägyptisches Museum Georg Steindorff – Leipzig, Germany'},
+  {lat: 48.133333, lng: 11.567222, name: 'Staatliche Sammlung Ägyptischer Kunst – Munich, Germany'},
+  {lat: 48.516667, lng: 9.052222, name: 'Museum der Universität Tübingen – Tübingen, Germany'},
+  {lat: 50.066667, lng: 8.235556, name: 'Museum Wiesbaden – Wiesbaden, Germany'},
+  {lat: 51.533333, lng: 9.918333, name: 'Galerie Eberwein – Göttingen, Germany'},
+  {lat: 51.000000, lng: 14.000000, name: 'Schloss Branitz – Branitz, Germany'},
+  {lat: 55.666667, lng: 12.551667, name: 'National Museum of Denmark – Copenhagen, Denmark'},
+  {lat: 55.666667, lng: 12.551667, name: 'Ny Carlsberg Glyptotek – Copenhagen, Denmark'},
+  {lat: 55.666667, lng: 12.551667, name: 'Thorvaldsens Museum – Copenhagen, Denmark'},
+  {lat: 30.050000, lng: 31.235833, name: 'Egyptian Museum – Cairo, Egypt'},
+  {lat: 30.050000, lng: 31.235833, name: 'The Grand Egyptian Museum – Cairo, Egypt'},
+  {lat: 29.850000, lng: 31.000000, name: 'Main Magazine – Saqqara, Egypt'},
+  {lat: 30.000000, lng: 31.200278, name: 'Main Magazine – Giza, Egypt'},
+  {lat: 29.866667, lng: 31.250000, name: 'Mit Rahina Open Air Museum – Mit Rahina, Egypt'},
+  {lat: 31.333333, lng: 27.233333, name: 'Marsa Matruh Archaeological Museum – Marsa Matruh, Egypt'},
+  {lat: 26.000000, lng: 31.000000, name: 'Sohag Museum – Sohag, Egypt'},
+  {lat: 40.400000, lng: -3.702500, name: 'Museo Nacional del Prado – Madrid, Spain'},
+  {lat: 43.516667, lng: 5.435833, name: 'Musée Granet – Aix-en-Provence, France'},
+  {lat: 49.900000, lng: 2.300000, name: 'Musée de Picardie – Amiens, France'},
+  {lat: 43.933333, lng: 4.800556, name: 'Musée Calvet – Avignon, France'},
+  {lat: 49.633333, lng: -1.602500, name: 'Muséum Emmanuel Liais – Cherbourg-Octeville, France'},
+  {lat: 49.416667, lng: 2.817778, name: 'Musée Municipal Antoine Vivenel – Compiègne, France'},
+  {lat: 45.166667, lng: 5.700833, name: 'Musée de Peinture et de Sculpture – Grenoble, France'},
+  {lat: 45.733333, lng: 4.835556, name: 'Musée des Beaux-Arts – Lyon, France'},
+  {lat: 48.850000, lng: 2.335000, name: 'Bibliothèque Nationale – Paris, France'},
+  {lat: 48.850000, lng: 2.335000, name: 'Musée Auguste Rodin – Paris, France'},
+  {lat: 48.850000, lng: 2.335000, name: 'Musée du Louvre – Paris, France'},
+  {lat: 48.850000, lng: 2.335000, name: 'Musée Guimet – Paris, France'},
+  {lat: 48.850000, lng: 2.335000, name: 'Private Collection (FR) – Paris, France'},
+  {lat: 49.433333, lng: 1.085556, name: 'Musée Départemental des Antiquités – Rouen, France'},
+  {lat: 48.583333, lng: 7.734444, name: 'Palais Rohan, Musée Archéologique – Strasbourg, France'},
+  {lat: 48.583333, lng: 7.734444, name: "Université de Strasbourg, Institut d'égyptologie – Strasbourg, France"},
+  {lat: 43.600000, lng: 1.435278, name: 'Musée Georges Labit – Toulouse, France'},
+  {lat: 47.350000, lng: 3.383333, name: 'Musée municipal Auguste Grasset – Varzy, France'},
+  {lat: 45.733333, lng: 4.835556, name: "Musée des Beaux-Arts et d'Archéologie – Lyon, France"},
+  {lat: 43.283333, lng: 5.367222, name: "Musée d'Archéologie Méditerranéenne – Marseille, France"},
+  {lat: 45.800000, lng: 15.966944, name: 'Archaeological Museum Zagreb – Zagreb, Croatia'},
+  {lat: 47.483333, lng: 19.035000, name: 'Museum of Fine Arts – Budapest, Hungary'},
+  {lat: 53.316667, lng: -6.235000, name: 'National Museum of Ireland – Dublin, Ireland'},
+  {lat: 31.766667, lng: 35.202500, name: 'Israel Museum – Jerusalem, Israel'},
+  {lat: 31.766667, lng: 35.202500, name: 'Flagellation Museum – Jerusalem, Israel'},
+  {lat: 45.983333, lng: 9.250833, name: 'Villa Melzi – Bellagio, Italy'},
+  {lat: 44.483333, lng: 11.333333, name: 'Museo Civico Archeologico – Bologna, Italy'},
+  {lat: 45.800000, lng: 9.083333, name: 'Museo Civico Archeologico P. Giovio – Como, Italy'},
+  {lat: 45.066667, lng: 7.684167, name: 'Museo Egizio – Turin, Italy'},
+  {lat: 45.066667, lng: 7.684167, name: 'Museo Egizio (2) – Turin, Italy'},
+  {lat: 43.766667, lng: 11.235278, name: 'Museo Archeologico Nazionale – Florence, Italy'},
+  {lat: 41.883333, lng: 12.500278, name: 'Università La Sapienza – Rome, Italy'},
+  {lat: 41.883333, lng: 12.500278, name: 'Museo Gregoriano Egizio – Rome, Italy'},
+  {lat: 38.116667, lng: 13.363611, name: "Museo del Papiro 'Corrado Basile' – Palermo, Italy"},
+  {lat: 45.633333, lng: 13.768333, name: 'Civico Museo di Storia ed Arte – Trieste, Italy'},
+  {lat: 35.683333, lng: 139.683333, name: 'Matsuoka Museum of Art – Tokyo, Japan'},
+  {lat: 56.000000, lng: 24.000000, name: 'Art Museum Riga Bourse – Riga, Latvia'},
+  {lat: 52.150000, lng: 4.484722, name: 'Rijksmuseum van Oudheden – Leiden, Netherlands'},
+  {lat: 52.366667, lng: 4.884167, name: 'Allard Pierson Museum – Amsterdam, Netherlands'},
+  {lat: 59.900000, lng: 10.735000, name: 'University of Oslo, Historisk Museum – Oslo, Norway'},
+  {lat: 50.050000, lng: 19.933889, name: 'Archaeological Museum of Kraków – Kraków, Poland'},
+  {lat: 52.216667, lng: 21.000556, name: 'National Museum in Warsaw – Warsaw, Poland'},
+  {lat: 38.716667, lng: -9.133333, name: 'Calouste Gulbenkian Museum – Lisbon, Portugal'},
+  {lat: 55.750000, lng: 37.601667, name: 'State Pushkin Museum of Fine Arts – Moscow, Russia'},
+  {lat: 59.933333, lng: 30.300278, name: 'State Hermitage Museum – St. Petersburg, Russia'},
+  {lat: 1.283333, lng: 103.850000, name: 'Karamat Art Museum – Singapore'},
+  {lat: 59.850000, lng: 17.633333, name: 'Stifts- och Landsbibliotek – Uppsala, Sweden'},
+  {lat: 59.316667, lng: 18.068611, name: 'Victoriamuseet – Stockholm, Sweden'},
+  {lat: 59.316667, lng: 18.068611, name: 'Medelhavsmuseet – Stockholm, Sweden'},
+  {lat: 46.200000, lng: 6.134444, name: 'Private Collection – Geneva, Switzerland'},
+  {lat: 41.000000, lng: 28.935833, name: 'Ancient Oriental Museum – Istanbul, Turkey'},
+  {lat: 57.133333, lng: -2.084167, name: 'Marischal Museum – Aberdeen, Great Britain'},
+  {lat: 52.466667, lng: -1.885833, name: 'City Museum and Art Gallery – Birmingham, Great Britain'},
+  {lat: 52.466667, lng: -1.885833, name: 'Dept. of Classics, Univ. of Birmingham – Birmingham, Great Britain'},
+  {lat: 51.450000, lng: -2.585556, name: 'City of Bristol Museum – Bristol, Great Britain'},
+  {lat: 52.000000, lng: 0.000000, name: 'Fitzwilliam Museum – Cambridge, Great Britain'},
+  {lat: 54.766667, lng: -1.567222, name: 'Durham University Oriental Museum – Durham, Great Britain'},
+  {lat: 55.950000, lng: -3.185278, name: 'National Museums of Scotland – Edinburgh, Great Britain'},
+  {lat: 51.083333, lng: -0.702222, name: 'Haslemere Educational Museum – Haslemere, Great Britain'},
+  {lat: 53.400000, lng: -2.966944, name: 'World Museum – Liverpool, Great Britain'},
+  {lat: 53.400000, lng: -2.966944, name: 'Garstang Museum – Liverpool, Great Britain'},
+  {lat: 51.500000, lng: -0.117500, name: 'British Museum – London, Great Britain'},
+  {lat: 51.500000, lng: -0.117500, name: 'Petrie Museum – London, Great Britain'},
+  {lat: 53.466667, lng: -2.233333, name: 'Manchester Museum – Manchester, Great Britain'},
+  {lat: 53.250000, lng: -2.117222, name: 'West Park Museum – Macclesfield, Great Britain'},
+  {lat: 51.750000, lng: -1.250278, name: 'Ashmolean Museum – Oxford, Great Britain'},
+  {lat: 51.000000, lng: 0.000000, name: 'Collection of Gottlieb Wilhelm Leitner – Woking, Great Britain'},
+  {lat: 39.283333, lng: -76.601111, name: 'Walters Art Gallery – Baltimore, USA'},
+  {lat: 42.350000, lng: -71.051389, name: 'Museum of Fine Arts – Boston, USA'},
+  {lat: 41.850000, lng: -87.650000, name: 'Art Institute – Chicago, USA'},
+  {lat: 41.850000, lng: -87.650000, name: 'Field Museum – Chicago, USA'},
+  {lat: 41.850000, lng: -87.650000, name: 'Oriental Institute Museum – Chicago, USA'},
+  {lat: 41.850000, lng: -87.650000, name: 'Krannert Art Museum – Chicago, USA'},
+  {lat: 40.433333, lng: -79.984722, name: 'Museum of Art – Pittsburgh, USA'},
+  {lat: 35.983333, lng: -78.884722, name: 'Duke University – Durham NC, USA'},
+  {lat: 35.016667, lng: -89.869167, name: 'Museum of Fine Arts – Memphis, USA'},
+  {lat: 35.016667, lng: -89.869167, name: 'Memphis State University – Memphis, USA'},
+  {lat: 41.300000, lng: -72.916944, name: 'Yale University Art Gallery – New Haven, USA'},
+  {lat: 40.700000, lng: -74.000278, name: 'Brooklyn Museum – New York City, USA'},
+  {lat: 40.700000, lng: -74.000278, name: 'Metropolitan Museum of Art – New York City, USA'},
+  {lat: 39.950000, lng: -75.152500, name: 'The University Museum – Philadelphia, USA'},
+  {lat: 39.950000, lng: -75.152500, name: 'Art Museum – Philadelphia, USA'},
+  {lat: 40.433333, lng: -79.984722, name: 'Carnegie Museum – Pittsburgh, USA'},
+  {lat: 43.150000, lng: -77.601667, name: 'Memorial Art Gallery – Rochester, USA'},
+  {lat: 37.333333, lng: -121.883889, name: 'Rosicrucian Egyptian Museum – San Jose, USA'},
+  {lat: 40.116667, lng: -75.067500, name: 'Glencairn Museum – Bryn Athyn, USA'},
+  {lat: 42.000000, lng: -83.000000, name: 'Kelsey Museum – Ann Arbor, USA'},
+  {lat: 42.000000, lng: -83.000000, name: 'Collection of Samuel A. Goudsmit – Ann Arbor, USA'},
+];
+
+locations.forEach(loc => {
+  L.circleMarker([loc.lat, loc.lng], dotStyle)
+    .bindTooltip(loc.name, {direction: 'top', offset: [0, -6]})
+    .addTo(map);
+});
+</script>
+</body>
+</html>
