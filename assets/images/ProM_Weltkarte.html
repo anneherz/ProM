@@ -1,11 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta property="og:title" content="Global Distribution of Memphite Monuments">
-<meta property="og:description" content="Interactive map showing the worldwide distribution of Memphite monuments documented in the Prosopographia Memphitica database.">
-<meta property="og:image" content="https://anneherz.github.io/ProM/assets/images/ProM_Weltkarte_preview.jpg">
-<meta property="og:url" content="https://anneherz.github.io/ProM/assets/images/ProM_Weltkarte.html">
-<meta property="og:type" content="website">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Prosopographia Memphitica – Global Distribution of Memphite Monuments</title>
@@ -158,11 +153,11 @@ html, body { width: 100%; height: 100%; font-family: 'Georgia', serif; }
 <script>
 
 const map = L.map('map', {
-  center: [15, 10],
-  zoom: 0,
-  minZoom: 0,
+  center: [30, 15],
+  zoom: 2,
+  minZoom: 2,
   maxZoom: 10,
-  zoomControl: true
+  zoomControl: false
 });
 
 L.tileLayer('https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png', {
@@ -170,6 +165,8 @@ L.tileLayer('https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png
   subdomains: 'abcd',
   maxZoom: 20
 }).addTo(map);
+
+L.control.zoom({position: 'bottomright'}).addTo(map);
 
 function getRadius(n) {
   if (n >= 100) return 14;
