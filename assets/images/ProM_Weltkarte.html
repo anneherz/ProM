@@ -1,178 +1,314 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Prosopographia Memphitica – Museumsstandorte</title>
+<title>Prosopographia Memphitica – Global Distribution of Memphite Monuments</title>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
 <style>
 * { box-sizing: border-box; margin: 0; padding: 0; }
-html, body { width: 100%; height: 100%; }
-#map { width: 100%; height: 100%; min-height: 650px; }
+html, body { width: 100%; height: 100%; font-family: 'Georgia', serif; }
+#map { width: 100%; height: 100vh; }
+
+#titlebar {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  z-index: 1000;
+  background: rgba(255,255,255,0.93);
+  border-bottom: 1px solid #ddd;
+  padding: 11px 20px;
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  pointer-events: none;
+}
+#titlebar h1 {
+  font-size: 16px;
+  font-weight: normal;
+  letter-spacing: 0.03em;
+  color: #222;
+}
+#titlebar h1 em { font-style: italic; }
+#titlebar .stats {
+  font-size: 12px;
+  color: #999;
+  font-family: Arial, sans-serif;
+  display: flex;
+  gap: 12px;
+}
+#titlebar .stats span {
+  white-space: nowrap;
+}
+#titlebar .stats span b {
+  color: #e66a1a;
+  font-weight: bold;
+}
+
+#legend {
+  position: absolute;
+  bottom: 28px;
+  left: 14px;
+  z-index: 1000;
+  background: rgba(255,255,255,0.93);
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 10px 14px;
+  font-family: Arial, sans-serif;
+  font-size: 12px;
+  color: #444;
+  line-height: 1.6;
+  min-width: 170px;
+}
+#legend b {
+  display: block;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #999;
+  margin-bottom: 7px;
+}
+.legend-row {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin-bottom: 5px;
+}
+.legend-dot {
+  border-radius: 50%;
+  background: #e66a1a;
+  opacity: 0.85;
+  border: 1.5px solid white;
+  box-shadow: 0 0 0 1px #ccc;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 9px;
+  font-weight: bold;
+  color: white;
+  font-family: Arial, sans-serif;
+}
+#legend .note {
+  margin-top: 8px;
+  padding-top: 7px;
+  border-top: 1px solid #eee;
+  font-size: 10px;
+  color: #bbb;
+}
+
+.leaflet-popup-content-wrapper {
+  border-radius: 4px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.18);
+  font-family: Arial, sans-serif;
+  font-size: 13px;
+}
+.leaflet-popup-content { margin: 12px 15px; line-height: 1.6; max-width: 300px; }
+.popup-location { font-weight: bold; font-size: 14px; color: #222; margin-bottom: 3px; }
+.popup-meta { font-size: 12px; color: #666; margin-bottom: 7px; }
+.popup-meta b { color: #e66a1a; }
+.popup-institutions {
+  font-size: 12px; color: #555; line-height: 1.7;
+  border-top: 1px solid #eee; padding-top: 7px;
+}
+.popup-institutions div::before { content: "• "; color: #e66a1a; }
 </style>
 </head>
 <body>
+
+<div id="titlebar">
+  <h1><em>Prosopographia Memphitica</em> – Global Distribution of Memphite Monuments</h1>
+  <div class="stats">
+    <span><b>1,754</b> objects</span>
+    <span>·</span>
+    <span><b>113</b> provenances</span>
+    <span>·</span>
+    <span><b>94</b> locations</span>
+  </div>
+</div>
+
 <div id="map"></div>
+
+<div id="legend">
+  <b>Objects per provenance</b>
+  <div class="legend-row">
+    <div class="legend-dot" style="width:8px;height:8px;"></div>
+    <span>1–5 objects</span>
+  </div>
+  <div class="legend-row">
+    <div class="legend-dot" style="width:12px;height:12px;"></div>
+    <span>6–20 objects</span>
+  </div>
+  <div class="legend-row">
+    <div class="legend-dot" style="width:18px;height:18px;font-size:8px;">54</div>
+    <span>21–100 objects</span>
+  </div>
+  <div class="legend-row">
+    <div class="legend-dot" style="width:24px;height:24px;font-size:9px;">275</div>
+    <span>100+ objects</span>
+  </div>
+  <div class="note">Click a dot for details</div>
+</div>
+
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
+
 const map = L.map('map', {
-  center: [20, 10],
-  zoom: 1,
-  minZoom: 1,
+  center: [30, 15],
+  zoom: 2,
+  minZoom: 2,
   maxZoom: 10,
   zoomControl: true
 });
-map.setMaxBounds([
-  [-85, -180],
-  [85, 180]
-]);
 
 L.tileLayer('https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png', {
-  attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/">CARTO</a>',
+  attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/">CARTO</a> | <a href="https://www.prosopographia-memphitica.com">Prosopographia Memphitica</a>',
   subdomains: 'abcd',
   maxZoom: 20
 }).addTo(map);
 
-const dotStyle = {
-  radius: 6,
-  fillColor: '#e66a1a',
-  color: '#ffffff',
-  weight: 1.5,
-  opacity: 1,
-  fillOpacity: 0.85
-};
+function getRadius(n) {
+  if (n >= 100) return 14;
+  if (n >= 21)  return 10;
+  if (n >= 6)   return 7;
+  return 5;
+}
 
 const locations = [
-  {lat: 47.066667, lng: 15.450000, name: 'Universalmuseum Joanneum – Graz, Austria'},
-  {lat: 48.200000, lng: 16.369167, name: 'Kunsthistorisches Museum – Vienna, Austria'},
-  {lat: -33.866667, lng: 151.201667, name: 'Nicholson Museum – Sydney, Australia'},
-  {lat: 50.850000, lng: 4.335000, name: 'Art & History Museum – Brussels, Belgium'},
-  {lat: 50.633333, lng: 5.567500, name: 'Musée Le Grand Curtius – Liège, Belgium'},
-  {lat: -22.900000, lng: -43.168333, name: 'Museu Nacional – Rio de Janeiro, Brazil'},
-  {lat: 43.700000, lng: -79.384722, name: 'Royal Ontario Museum – Toronto, Canada'},
-  {lat: 47.550000, lng: 7.567778, name: 'Antikenmuseum Basel – Basel, Switzerland'},
-  {lat: 23.116667, lng: -82.369167, name: 'Museo Nacional Palacio de Bellas Artes – Havana, Cuba'},
-  {lat: 52.516667, lng: 13.402222, name: 'Ägyptisches Museum und Papyrussammlung – Berlin, Germany'},
-  {lat: 50.733333, lng: 7.084444, name: 'Ägyptisches Museum – Bonn, Germany'},
-  {lat: 49.866667, lng: 8.650278, name: 'Hessisches Landesmuseum – Darmstadt, Germany'},
-  {lat: 50.100000, lng: 8.684167, name: 'Liebieghaus – Frankfurt, Germany'},
-  {lat: 53.550000, lng: 9.984722, name: 'Museum für Kunst und Gewerbe – Hamburg, Germany'},
-  {lat: 52.366667, lng: 9.733333, name: 'Museum August Kestner – Hannover, Germany'},
-  {lat: 49.400000, lng: 8.685278, name: 'Ägyptologisches Institut – Heidelberg, Germany'},
-  {lat: 48.666667, lng: 10.151667, name: 'Schloss Hellenstein – Heidenheim, Germany'},
-  {lat: 52.150000, lng: 9.951111, name: 'Roemer- und Pelizaeus-Museum – Hildesheim, Germany'},
-  {lat: 49.000000, lng: 8.401667, name: 'Badisches Landesmuseum – Karlsruhe, Germany'},
-  {lat: 51.333333, lng: 12.368611, name: 'Ägyptisches Museum Georg Steindorff – Leipzig, Germany'},
-  {lat: 48.133333, lng: 11.567222, name: 'Staatliche Sammlung Ägyptischer Kunst – Munich, Germany'},
-  {lat: 48.516667, lng: 9.052222, name: 'Museum der Universität Tübingen – Tübingen, Germany'},
-  {lat: 50.066667, lng: 8.235556, name: 'Museum Wiesbaden – Wiesbaden, Germany'},
-  {lat: 51.533333, lng: 9.918333, name: 'Galerie Eberwein – Göttingen, Germany'},
-  {lat: 51.000000, lng: 14.000000, name: 'Schloss Branitz – Branitz, Germany'},
-  {lat: 55.666667, lng: 12.551667, name: 'National Museum of Denmark – Copenhagen, Denmark'},
-  {lat: 55.666667, lng: 12.551667, name: 'Ny Carlsberg Glyptotek – Copenhagen, Denmark'},
-  {lat: 55.666667, lng: 12.551667, name: 'Thorvaldsens Museum – Copenhagen, Denmark'},
-  {lat: 30.050000, lng: 31.235833, name: 'Egyptian Museum – Cairo, Egypt'},
-  {lat: 30.050000, lng: 31.235833, name: 'The Grand Egyptian Museum – Cairo, Egypt'},
-  {lat: 29.850000, lng: 31.000000, name: 'Main Magazine – Saqqara, Egypt'},
-  {lat: 30.000000, lng: 31.200278, name: 'Main Magazine – Giza, Egypt'},
-  {lat: 29.866667, lng: 31.250000, name: 'Mit Rahina Open Air Museum – Mit Rahina, Egypt'},
-  {lat: 31.333333, lng: 27.233333, name: 'Marsa Matruh Archaeological Museum – Marsa Matruh, Egypt'},
-  {lat: 26.000000, lng: 31.000000, name: 'Sohag Museum – Sohag, Egypt'},
-  {lat: 40.400000, lng: -3.702500, name: 'Museo Nacional del Prado – Madrid, Spain'},
-  {lat: 43.516667, lng: 5.435833, name: 'Musée Granet – Aix-en-Provence, France'},
-  {lat: 49.900000, lng: 2.300000, name: 'Musée de Picardie – Amiens, France'},
-  {lat: 43.933333, lng: 4.800556, name: 'Musée Calvet – Avignon, France'},
-  {lat: 49.633333, lng: -1.602500, name: 'Muséum Emmanuel Liais – Cherbourg-Octeville, France'},
-  {lat: 49.416667, lng: 2.817778, name: 'Musée Municipal Antoine Vivenel – Compiègne, France'},
-  {lat: 45.166667, lng: 5.700833, name: 'Musée de Peinture et de Sculpture – Grenoble, France'},
-  {lat: 45.733333, lng: 4.835556, name: 'Musée des Beaux-Arts – Lyon, France'},
-  {lat: 48.850000, lng: 2.335000, name: 'Bibliothèque Nationale – Paris, France'},
-  {lat: 48.850000, lng: 2.335000, name: 'Musée Auguste Rodin – Paris, France'},
-  {lat: 48.850000, lng: 2.335000, name: 'Musée du Louvre – Paris, France'},
-  {lat: 48.850000, lng: 2.335000, name: 'Musée Guimet – Paris, France'},
-  {lat: 48.850000, lng: 2.335000, name: 'Private Collection (FR) – Paris, France'},
-  {lat: 49.433333, lng: 1.085556, name: 'Musée Départemental des Antiquités – Rouen, France'},
-  {lat: 48.583333, lng: 7.734444, name: 'Palais Rohan, Musée Archéologique – Strasbourg, France'},
-  {lat: 48.583333, lng: 7.734444, name: "Université de Strasbourg, Institut d'égyptologie – Strasbourg, France"},
-  {lat: 43.600000, lng: 1.435278, name: 'Musée Georges Labit – Toulouse, France'},
-  {lat: 47.350000, lng: 3.383333, name: 'Musée municipal Auguste Grasset – Varzy, France'},
-  {lat: 45.733333, lng: 4.835556, name: "Musée des Beaux-Arts et d'Archéologie – Lyon, France"},
-  {lat: 43.283333, lng: 5.367222, name: "Musée d'Archéologie Méditerranéenne – Marseille, France"},
-  {lat: 45.800000, lng: 15.966944, name: 'Archaeological Museum Zagreb – Zagreb, Croatia'},
-  {lat: 47.483333, lng: 19.035000, name: 'Museum of Fine Arts – Budapest, Hungary'},
-  {lat: 53.316667, lng: -6.235000, name: 'National Museum of Ireland – Dublin, Ireland'},
-  {lat: 31.766667, lng: 35.202500, name: 'Israel Museum – Jerusalem, Israel'},
-  {lat: 31.766667, lng: 35.202500, name: 'Flagellation Museum – Jerusalem, Israel'},
-  {lat: 45.983333, lng: 9.250833, name: 'Villa Melzi – Bellagio, Italy'},
-  {lat: 44.483333, lng: 11.333333, name: 'Museo Civico Archeologico – Bologna, Italy'},
-  {lat: 45.800000, lng: 9.083333, name: 'Museo Civico Archeologico P. Giovio – Como, Italy'},
-  {lat: 45.066667, lng: 7.684167, name: 'Museo Egizio – Turin, Italy'},
-  {lat: 45.066667, lng: 7.684167, name: 'Museo Egizio (2) – Turin, Italy'},
-  {lat: 43.766667, lng: 11.235278, name: 'Museo Archeologico Nazionale – Florence, Italy'},
-  {lat: 41.883333, lng: 12.500278, name: 'Università La Sapienza – Rome, Italy'},
-  {lat: 41.883333, lng: 12.500278, name: 'Museo Gregoriano Egizio – Rome, Italy'},
-  {lat: 38.116667, lng: 13.363611, name: "Museo del Papiro 'Corrado Basile' – Palermo, Italy"},
-  {lat: 45.633333, lng: 13.768333, name: 'Civico Museo di Storia ed Arte – Trieste, Italy'},
-  {lat: 35.683333, lng: 139.683333, name: 'Matsuoka Museum of Art – Tokyo, Japan'},
-  {lat: 56.000000, lng: 24.000000, name: 'Art Museum Riga Bourse – Riga, Latvia'},
-  {lat: 52.150000, lng: 4.484722, name: 'Rijksmuseum van Oudheden – Leiden, Netherlands'},
-  {lat: 52.366667, lng: 4.884167, name: 'Allard Pierson Museum – Amsterdam, Netherlands'},
-  {lat: 59.900000, lng: 10.735000, name: 'University of Oslo, Historisk Museum – Oslo, Norway'},
-  {lat: 50.050000, lng: 19.933889, name: 'Archaeological Museum of Kraków – Kraków, Poland'},
-  {lat: 52.216667, lng: 21.000556, name: 'National Museum in Warsaw – Warsaw, Poland'},
-  {lat: 38.716667, lng: -9.133333, name: 'Calouste Gulbenkian Museum – Lisbon, Portugal'},
-  {lat: 55.750000, lng: 37.601667, name: 'State Pushkin Museum of Fine Arts – Moscow, Russia'},
-  {lat: 59.933333, lng: 30.300278, name: 'State Hermitage Museum – St. Petersburg, Russia'},
-  {lat: 1.283333, lng: 103.850000, name: 'Karamat Art Museum – Singapore'},
-  {lat: 59.850000, lng: 17.633333, name: 'Stifts- och Landsbibliotek – Uppsala, Sweden'},
-  {lat: 59.316667, lng: 18.068611, name: 'Victoriamuseet – Stockholm, Sweden'},
-  {lat: 59.316667, lng: 18.068611, name: 'Medelhavsmuseet – Stockholm, Sweden'},
-  {lat: 46.200000, lng: 6.134444, name: 'Private Collection – Geneva, Switzerland'},
-  {lat: 41.000000, lng: 28.935833, name: 'Ancient Oriental Museum – Istanbul, Turkey'},
-  {lat: 57.133333, lng: -2.084167, name: 'Marischal Museum – Aberdeen, Great Britain'},
-  {lat: 52.466667, lng: -1.885833, name: 'City Museum and Art Gallery – Birmingham, Great Britain'},
-  {lat: 52.466667, lng: -1.885833, name: 'Dept. of Classics, Univ. of Birmingham – Birmingham, Great Britain'},
-  {lat: 51.450000, lng: -2.585556, name: 'City of Bristol Museum – Bristol, Great Britain'},
-  {lat: 52.000000, lng: 0.000000, name: 'Fitzwilliam Museum – Cambridge, Great Britain'},
-  {lat: 54.766667, lng: -1.567222, name: 'Durham University Oriental Museum – Durham, Great Britain'},
-  {lat: 55.950000, lng: -3.185278, name: 'National Museums of Scotland – Edinburgh, Great Britain'},
-  {lat: 51.083333, lng: -0.702222, name: 'Haslemere Educational Museum – Haslemere, Great Britain'},
-  {lat: 53.400000, lng: -2.966944, name: 'World Museum – Liverpool, Great Britain'},
-  {lat: 53.400000, lng: -2.966944, name: 'Garstang Museum – Liverpool, Great Britain'},
-  {lat: 51.500000, lng: -0.117500, name: 'British Museum – London, Great Britain'},
-  {lat: 51.500000, lng: -0.117500, name: 'Petrie Museum – London, Great Britain'},
-  {lat: 53.466667, lng: -2.233333, name: 'Manchester Museum – Manchester, Great Britain'},
-  {lat: 53.250000, lng: -2.117222, name: 'West Park Museum – Macclesfield, Great Britain'},
-  {lat: 51.750000, lng: -1.250278, name: 'Ashmolean Museum – Oxford, Great Britain'},
-  {lat: 51.000000, lng: 0.000000, name: 'Collection of Gottlieb Wilhelm Leitner – Woking, Great Britain'},
-  {lat: 39.283333, lng: -76.601111, name: 'Walters Art Gallery – Baltimore, USA'},
-  {lat: 42.350000, lng: -71.051389, name: 'Museum of Fine Arts – Boston, USA'},
-  {lat: 41.850000, lng: -87.650000, name: 'Art Institute – Chicago, USA'},
-  {lat: 41.850000, lng: -87.650000, name: 'Field Museum – Chicago, USA'},
-  {lat: 41.850000, lng: -87.650000, name: 'Oriental Institute Museum – Chicago, USA'},
-  {lat: 41.850000, lng: -87.650000, name: 'Krannert Art Museum – Chicago, USA'},
-  {lat: 40.433333, lng: -79.984722, name: 'Museum of Art – Pittsburgh, USA'},
-  {lat: 35.983333, lng: -78.884722, name: 'Duke University – Durham NC, USA'},
-  {lat: 35.016667, lng: -89.869167, name: 'Museum of Fine Arts – Memphis, USA'},
-  {lat: 35.016667, lng: -89.869167, name: 'Memphis State University – Memphis, USA'},
-  {lat: 41.300000, lng: -72.916944, name: 'Yale University Art Gallery – New Haven, USA'},
-  {lat: 40.700000, lng: -74.000278, name: 'Brooklyn Museum – New York City, USA'},
-  {lat: 40.700000, lng: -74.000278, name: 'Metropolitan Museum of Art – New York City, USA'},
-  {lat: 39.950000, lng: -75.152500, name: 'The University Museum – Philadelphia, USA'},
-  {lat: 39.950000, lng: -75.152500, name: 'Art Museum – Philadelphia, USA'},
-  {lat: 40.433333, lng: -79.984722, name: 'Carnegie Museum – Pittsburgh, USA'},
-  {lat: 43.150000, lng: -77.601667, name: 'Memorial Art Gallery – Rochester, USA'},
-  {lat: 37.333333, lng: -121.883889, name: 'Rosicrucian Egyptian Museum – San Jose, USA'},
-  {lat: 40.116667, lng: -75.067500, name: 'Glencairn Museum – Bryn Athyn, USA'},
-  {lat: 42.000000, lng: -83.000000, name: 'Kelsey Museum – Ann Arbor, USA'},
-  {lat: 42.000000, lng: -83.000000, name: 'Collection of Samuel A. Goudsmit – Ann Arbor, USA'},
+  {lat:30.05,lng:31.235833,town:'Cairo',country:'Egypt',obj:275,prov:2,inst:'Egyptian Museum | The Grand Egyptian Museum'},
+  {lat:52.15,lng:4.484722,town:'Leiden',country:'Netherlands',obj:141,prov:1,inst:'Rijksmuseum van Oudheden'},
+  {lat:48.85,lng:2.335,town:'Paris',country:'France',obj:133,prov:5,inst:'Bibliothèque Nationale | Musée Auguste Rodin | Musée du Louvre | Musée Guimet | Private Collection (FR)'},
+  {lat:52.516667,lng:13.402222,town:'Berlin',country:'Germany',obj:107,prov:1,inst:'Ägyptisches Museum und Papyrussammlung'},
+  {lat:51.5,lng:-0.1175,town:'London',country:'Great Britain',obj:90,prov:2,inst:'British Museum | Petrie Museum of Egyptian Archaeology'},
+  {lat:29.85,lng:31.0,town:'Saqqara',country:'Egypt',obj:68,prov:1,inst:'Main Magazine (Saqqara)'},
+  {lat:45.066667,lng:7.684167,town:'Turin',country:'Italy',obj:54,prov:2,inst:'Museo Egizio'},
+  {lat:40.7,lng:-74.000278,town:'New York City (NY)',country:'USA',obj:33,prov:2,inst:'Metropolitan Museum of Art | The Brooklyn Museum'},
+  {lat:44.483333,lng:11.333333,town:'Bologna',country:'Italy',obj:27,prov:1,inst:'Museo Civico Archeologico'},
+  {lat:52.366667,lng:9.733333,town:'Hannover',country:'Germany',obj:21,prov:1,inst:'Museum August Kestner'},
+  {lat:55.666667,lng:12.551667,town:'Copenhagen',country:'Denmark',obj:20,prov:3,inst:'National Museum of Denmark | Ny Carlsberg Glyptotek | Thorvaldsens Museum'},
+  {lat:48.2,lng:16.369167,town:'Vienna',country:'Austria',obj:18,prov:1,inst:'Kunsthistorisches Museum'},
+  {lat:39.95,lng:-75.1525,town:'Philadelphia (PA)',country:'USA',obj:16,prov:1,inst:'The University Museum'},
+  {lat:50.85,lng:4.335,town:'Brussels',country:'Belgium',obj:15,prov:1,inst:'Art & History Museum'},
+  {lat:42.35,lng:-71.051389,town:'Boston (MA)',country:'USA',obj:14,prov:1,inst:'Museum of Fine Arts'},
+  {lat:41.85,lng:-87.65,town:'Chicago (IL)',country:'USA',obj:14,prov:2,inst:'Field Museum of Natural History | Oriental Institute Museum'},
+  {lat:59.933333,lng:30.300278,town:'St. Petersburgh',country:'Russia',obj:13,prov:1,inst:'State Hermitage Museum'},
+  {lat:49.9,lng:2.3,town:'Amiens',country:'France',obj:11,prov:1,inst:'Musée de Picardie'},
+  {lat:54.766667,lng:-1.567222,town:'Durham',country:'Great Britain',obj:10,prov:1,inst:'Durham University, Oriental Museum'},
+  {lat:41.883333,lng:12.500278,town:'Rome',country:'Italy',obj:10,prov:2,inst:'Museo Gregoriano Egizio | Università La Sapienza, Museo del Vicino Oriente Antico, Egitto e Mediterraneo'},
+  {lat:48.133333,lng:11.567222,town:'Munich',country:'Germany',obj:9,prov:1,inst:'Staatliche Sammlung Ägyptischer Kunst'},
+  {lat:-33.866667,lng:151.201667,town:'Sydney',country:'Australia',obj:9,prov:1,inst:'Nicholson Museum'},
+  {lat:59.316667,lng:18.068611,town:'Stockholm',country:'Sweden',obj:8,prov:2,inst:'Medelhavsmuseet | Victoriamuseet för Egyptiska Fornsaker'},
+  {lat:55.95,lng:-3.185278,town:'Edinburgh',country:'Great Britain',obj:8,prov:1,inst:'National Museums of Scotland, The Royal Museum of Scotland'},
+  {lat:53.466667,lng:-2.233333,town:'Manchester',country:'Great Britain',obj:7,prov:1,inst:'Manchester Museum'},
+  {lat:43.283333,lng:5.367222,town:'Marseille',country:'France',obj:7,prov:1,inst:'Musée d\'Archéologie Mediterranéenne'},
+  {lat:51.45,lng:-2.585556,town:'Bristol',country:'Great Britain',obj:6,prov:1,inst:'City of Bristol Museum and Art Gallery'},
+  {lat:51.533333,lng:9.918333,town:'Göttingen',country:'Germany',obj:5,prov:1,inst:'Galerie Eberwein'},
+  {lat:40.433333,lng:-79.984722,town:'Pittsburgh (PA)',country:'USA',obj:5,prov:2,inst:'Carnegie Museum | Museum of Art'},
+  {lat:52.466667,lng:-1.885833,town:'Birmingham',country:'Great Britain',obj:5,prov:2,inst:'City Museum and Art Gallery | The collection of the Department of Classics, Ancient History and Archaeology, University of Birmingham'},
+  {lat:39.283333,lng:-76.601111,town:'Baltimore (MD)',country:'USA',obj:5,prov:1,inst:'Walters Art Gallery'},
+  {lat:50.1,lng:8.684167,town:'Frankfurt',country:'Germany',obj:5,prov:1,inst:'Liebieghaus, Museum Alter Plastik'},
+  {lat:48.516667,lng:9.052222,town:'Tübingen',country:'Germany',obj:4,prov:1,inst:'Museum der Universität Tübingen. Museum Alte Kulturen. Ägyptische Sammlung'},
+  {lat:45.166667,lng:5.700833,town:'Grenoble',country:'France',obj:4,prov:1,inst:'Musée de Peinture et de Sculpture'},
+  {lat:51.333333,lng:12.368611,town:'Leipzig',country:'Germany',obj:4,prov:1,inst:'Ägyptisches Museum Georg Steindorff der Universität Leipzig'},
+  {lat:47.55,lng:7.567778,town:'Basel',country:'Switzerland',obj:4,prov:1,inst:'Antikenmuseum Basel und Sammlung Ludwig'},
+  {lat:43.933333,lng:4.800556,town:'Avignon',country:'France',obj:4,prov:1,inst:'Musée Calvet'},
+  {lat:43.516667,lng:5.435833,town:'Aix-en-Provence',country:'France',obj:3,prov:1,inst:'Musée Granet'},
+  {lat:23.116667,lng:-82.369167,town:'Havana',country:'Cuba',obj:3,prov:1,inst:'Museo Nacional, Palacio de Bellas Artes'},
+  {lat:45.733333,lng:4.835556,town:'Lyon',country:'France',obj:3,prov:2,inst:'Musée des Beaux-Arts et d\'Archéologie | Musée des Beaux-Arts (Palais Saint-Pierre)'},
+  {lat:38.116667,lng:13.363611,town:'Palermo',country:'Italy',obj:3,prov:1,inst:'Museo del Papiro \'Corrado Basile\''},
+  {lat:45.8,lng:15.966944,town:'Zagreb',country:'Croatia',obj:3,prov:1,inst:'Archaeological Museum Zagreb'},
+  {lat:52.0,lng:0.0,town:'Cambridge',country:'Great Britain',obj:3,prov:1,inst:'Fitzwilliam Museum'},
+  {lat:41.3,lng:-72.916944,town:'New Haven (CT)',country:'USA',obj:3,prov:1,inst:'Yale University Art Gallery'},
+  {lat:43.6,lng:1.435278,town:'Toulouse',country:'France',obj:3,prov:1,inst:'Musée Georges Labit'},
+  {lat:52.366667,lng:4.884167,town:'Amsterdam',country:'The Netherlands',obj:3,prov:1,inst:'Allard Pierson Museum, University of Amsterdam'},
+  {lat:52.216667,lng:21.000556,town:'Warsaw',country:'Poland',obj:2,prov:1,inst:'National Museum in Warsaw'},
+  {lat:30.0,lng:31.200278,town:'Giza',country:'Egypt',obj:2,prov:1,inst:'Main Magazine (Giza)'},
+  {lat:29.866667,lng:31.25,town:'Mit Rahina',country:'Egypt',obj:2,prov:1,inst:'Mit Rahina Open Air Museum'},
+  {lat:31.766667,lng:35.2025,town:'Jerusalem',country:'Israel',obj:2,prov:2,inst:'Flagellation Museum, Museum of the Studium Biblicum Franciscanum | Israel Museum'},
+  {lat:49.416667,lng:2.817778,town:'Compiègne',country:'France',obj:2,prov:1,inst:'Musée Municipal Antoine Vivenel'},
+  {lat:52.15,lng:9.951111,town:'Hildesheim',country:'Germany',obj:2,prov:1,inst:'Roemer- und Pelizaeus-Museum Hildesheim'},
+  {lat:55.75,lng:37.601667,town:'Moscow',country:'Russia',obj:2,prov:1,inst:'State Pushkin Museum of Fine Arts'},
+  {lat:48.583333,lng:7.734444,town:'Strasbourg',country:'France',obj:2,prov:2,inst:'Palais Rohan, Musée Archéologique | Université de Strasbourg, Institut d\'égyptologie'},
+  {lat:43.7,lng:-79.384722,town:'Toronto',country:'Canada',obj:2,prov:1,inst:'Royal Ontario Museum'},
+  {lat:-22.9,lng:-43.168333,town:'Rio de Janeiro',country:'Brazil',obj:2,prov:1,inst:'Museu Nacional'},
+  {lat:31.333333,lng:27.233333,town:'Marsa Matruh',country:'Egypt',obj:2,prov:1,inst:'Marsa Matruh Archaeological Museum'},
+  {lat:59.9,lng:10.735,town:'Oslo',country:'Norway',obj:1,prov:1,inst:'University of Oslo, Historisk Museum'},
+  {lat:51.75,lng:-1.250278,town:'Oxford',country:'Great Britain',obj:1,prov:1,inst:'Ashmolean Museum'},
+  {lat:50.633333,lng:5.5675,town:'Liège',country:'Belgium',obj:1,prov:1,inst:'Musée Le Grand Curtius'},
+  {lat:50.05,lng:19.933889,town:'Kraków/Cracow',country:'Poland',obj:1,prov:1,inst:'Archaeological Museum of Kraków'},
+  {lat:49.433333,lng:1.085556,town:'Rouen',country:'France',obj:1,prov:1,inst:'Musée Départemental des Antiquités de la Seine-Maritime'},
+  {lat:48.666667,lng:10.151667,town:'Heidenheim',country:'Germany',obj:1,prov:1,inst:'Schloss Hellenstein'},
+  {lat:49.4,lng:8.685278,town:'Heidelberg',country:'Germany',obj:1,prov:1,inst:'Sammlung des Ägyptologischen Instituts der Universität Heidelberg'},
+  {lat:51.0,lng:14.0,town:'Branitz',country:'Germany',obj:1,prov:1,inst:'Schloss Branitz'},
+  {lat:53.55,lng:9.984722,town:'Hamburg',country:'Germany',obj:1,prov:1,inst:'Museum für Kunst und Gewerbe'},
+  {lat:47.066667,lng:15.45,town:'Graz',country:'Austria',obj:1,prov:1,inst:'Universalmuseum Joanneum'},
+  {lat:46.2,lng:6.134444,town:'Geneva',country:'Switzerland',obj:1,prov:1,inst:'Private Collection (Geneva)'},
+  {lat:59.85,lng:17.633333,town:'Uppsala',country:'Sweden',obj:1,prov:1,inst:'Stifts- och Landsbibliotek'},
+  {lat:47.35,lng:3.383333,town:'Varzy',country:'France',obj:1,prov:1,inst:'Musée municipal Auguste Grasset'},
+  {lat:43.766667,lng:11.235278,town:'Florence',country:'Italy',obj:1,prov:1,inst:'Museo Archeologico Nazionale'},
+  {lat:53.316667,lng:-6.235,town:'Dublin',country:'Ireland',obj:1,prov:1,inst:'National Museum of Ireland'},
+  {lat:50.066667,lng:8.235556,town:'Wiesbaden',country:'Germany',obj:1,prov:1,inst:'Museum Wiesbaden Sammlung Nassauischer Altertümer'},
+  {lat:49.866667,lng:8.650278,town:'Darmstadt',country:'Germany',obj:1,prov:1,inst:'Hessisches Landesmuseum'},
+  {lat:45.8,lng:9.083333,town:'Como',country:'Italy',obj:1,prov:1,inst:'Museo Civico Archeologico P. Giovio'},
+  {lat:49.633333,lng:-1.6025,town:'Cherbourg-Octeville',country:'France',obj:1,prov:1,inst:'Muséum Emmanuel Liais'},
+  {lat:40.116667,lng:-75.0675,town:'Bryn Athyn (PA)',country:'USA',obj:1,prov:1,inst:'Glencairn Museum'},
+  {lat:47.483333,lng:19.035,town:'Budapest',country:'Hungary',obj:1,prov:1,inst:'Museum of Fine Arts'},
+  {lat:35.983333,lng:-78.884722,town:'Durham (NC)',country:'USA',obj:1,prov:1,inst:'Duke University'},
+  {lat:50.733333,lng:7.084444,town:'Bonn',country:'Germany',obj:1,prov:1,inst:'Ägyptisches Museum'},
+  {lat:45.983333,lng:9.250833,town:'Bellagio',country:'Italy',obj:1,prov:1,inst:'Villa Melzi'},
+  {lat:35.683333,lng:139.683333,town:'Tokyo (Pref. Tokyo)',country:'Japan',obj:1,prov:1,inst:'Matsuoka Museum of Art'},
+  {lat:1.283333,lng:103.85,town:'Singapore',country:'Republic of Singapore',obj:1,prov:1,inst:'Karamat Art Museum'},
+  {lat:43.15,lng:-77.601667,town:'Rochester (NY)',country:'USA',obj:1,prov:1,inst:'Memorial Art Gallery'},
+  {lat:37.333333,lng:-121.883889,town:'San Jose (CA)',country:'USA',obj:1,prov:1,inst:'Rosicrucian Egyptian Museum and Art Gallery'},
+  {lat:26.0,lng:31.0,town:'Sohag',country:'Egypt',obj:1,prov:1,inst:'Sohag Museum'},
+  {lat:42.0,lng:-83.0,town:'Ann Arbor (MI)',country:'USA',obj:1,prov:2,inst:'Collection of Samuel A. Goudsmit | University of Michigan, Kelsey Museum of Ancient and Mediaeval Archaeology'},
+  {lat:41.0,lng:28.935833,town:'Istanbul',country:'Turkey',obj:1,prov:1,inst:'Ancient Oriental Museum'},
+  {lat:56.0,lng:24.0,town:'Riga',country:'Latvia',obj:1,prov:1,inst:'The Art Museum Riga Bourse'},
+  {lat:40.4,lng:-3.7025,town:'Madrid',country:'Spain',obj:1,prov:1,inst:'Museo Nacional del Prado'},
+  {lat:53.25,lng:-2.117222,town:'Macclesfield',country:'Great Britain',obj:1,prov:1,inst:'West Park Museum and Art Gallery'},
+  {lat:53.4,lng:-2.966944,town:'Liverpool',country:'Great Britain',obj:1,prov:1,inst:'World Museum'},
+  {lat:51.0,lng:0.0,town:'Woking',country:'Great Britain',obj:1,prov:1,inst:'Collection of Gottlieb Wilhelm Leitner'},
+  {lat:38.716667,lng:-9.133333,town:'Lisbon',country:'Portugal',obj:1,prov:1,inst:'Calouste Gulbenkian Museum'},
 ];
 
 locations.forEach(loc => {
-  L.circleMarker([loc.lat, loc.lng], dotStyle)
-    .bindTooltip(loc.name, {direction: 'top', offset: [0, -6]})
-    .addTo(map);
+  const r = getRadius(loc.obj);
+  const showLabel = loc.obj >= 21;
+
+  const marker = L.circleMarker([loc.lat, loc.lng], {
+    radius: r,
+    fillColor: '#e66a1a',
+    color: '#ffffff',
+    weight: 1.5,
+    opacity: 1,
+    fillOpacity: 0.85
+  }).addTo(map);
+
+  const instList = loc.inst.split(' | ')
+    .map(i => '<div>' + i + '</div>').join('');
+
+  const objLabel  = loc.obj  === 1 ? '1 object'    : loc.obj  + ' objects';
+  const provLabel = loc.prov === 1 ? '1 provenance' : loc.prov + ' provenances';
+
+  const popup =
+    '<div class="popup-location">' + loc.town + ', ' + loc.country + '</div>' +
+    '<div class="popup-meta"><b>' + objLabel + '</b> &nbsp;·&nbsp; ' + provLabel + '</div>' +
+    '<div class="popup-institutions">' + instList + '</div>';
+
+  marker.bindPopup(popup, {maxWidth: 320, offset: [0, -4]});
+
+  if (showLabel) {
+    const icon = L.divIcon({
+      html: '<div style="width:' + (r*2) + 'px;height:' + (r*2) + 'px;line-height:' + (r*2) + 'px;text-align:center;font-size:9px;font-weight:bold;color:white;font-family:Arial,sans-serif;">' + loc.obj + '</div>',
+      className: '',
+      iconSize: [r*2, r*2],
+      iconAnchor: [r, r]
+    });
+    L.marker([loc.lat, loc.lng], {icon, interactive: false}).addTo(map);
+  }
 });
+
+setTimeout(() => { map.panBy([0, -25], {animate: false}); }, 100);
+
 </script>
 </body>
 </html>
