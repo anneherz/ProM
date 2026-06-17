@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Saqqara – Amarna-Period Object Distribution</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Georgia',serif;background:#f4f0ea;color:#2c2416;}
+#header{background:#fff;border-bottom:1px solid #d4ccc0;padding:11px 20px 9px;
+  display:flex;align-items:baseline;gap:16px;flex-wrap:wrap;}
+#header h1{font-size:14px;font-weight:normal;font-style:italic;color:#2c2416;}
+.stat{font-size:12px;color:#6b5a42;}.stat strong{color:#2c2416;}
+#map{width:100%;height:calc(100vh - 100px);}
+
+.legend{background:rgba(255,253,249,0.97);border:1px solid #d4ccc0;border-radius:4px;
+  padding:10px 14px;font-size:12px;color:#3d2e1a;min-width:215px;}
+.legend-title{font-size:10px;font-weight:bold;text-transform:uppercase;
+  letter-spacing:.09em;margin-bottom:8px;color:#6b5a42;}
+.legend-row{display:flex;align-items:center;gap:8px;margin-bottom:5px;line-height:1.3;}
+.leg-swatch{width:13px;height:13px;border-radius:50%;flex-shrink:0;border:1px solid rgba(0,0,0,0.18);}
+.leg-swatch.square{border-radius:2px;}
+.leg-text{flex:1;}.leg-nums{font-size:10.5px;color:#8a7460;white-space:nowrap;margin-left:auto;padding-left:8px;}
+.legend-sep{border-top:1px solid #e8e0d4;margin:6px 0;}
+
+.zone-label{background:none!important;border:none!important;box-shadow:none!important;}
+.zone-label span{font-family:'Georgia',serif;font-size:11px;font-weight:bold;
+  letter-spacing:.12em;text-transform:uppercase;white-space:nowrap;
+  text-shadow:1px 1px 0 #fff,-1px -1px 0 #fff,1px -1px 0 #fff,-1px 1px 0 #fff,0 1px 2px rgba(255,255,255,.9);}
+
+.leaflet-popup-content-wrapper{border-radius:4px;box-shadow:0 2px 12px rgba(0,0,0,.17);
+  border:1px solid #d4ccc0;padding:0;font-family:'Georgia',serif;}
+.leaflet-popup-content{margin:0!important;width:300px!important;}
+.popup-inner{padding:12px 14px 10px;max-height:400px;overflow-y:auto;}
+.popup-zone-tag{display:inline-block;font-size:9.5px;text-transform:uppercase;
+  letter-spacing:.08em;padding:1px 6px;border-radius:2px;margin-bottom:5px;color:#fff;font-weight:bold;}
+.popup-inner h3{font-size:13px;font-weight:bold;color:#2c2416;margin-bottom:2px;}
+.popup-count{font-size:12px;color:#7a3f1e;font-weight:bold;margin-bottom:8px;}
+.obj-list{list-style:none;font-size:11px;color:#3d2e1a;border-top:1px solid #e8e0d4;
+  padding-top:5px;max-height:240px;overflow-y:auto;}
+.obj-item{padding:4px 0 3px;border-bottom:1px dotted #ece4d8;}
+.obj-subtype{font-style:italic;color:#5a4a35;font-size:10.5px;margin-bottom:1px;}
+.obj-inv-row{display:flex;align-items:baseline;gap:5px;flex-wrap:wrap;}
+.obj-inv{font-family:'Courier New',monospace;font-size:10.5px;color:#2c2416;background:#f5f0e8;
+  padding:0 4px;border-radius:2px;}
+.obj-museum{font-size:10px;color:#6b5a42;}
+.obj-insitu{font-size:10px;color:#4a7a5e;font-style:italic;}
+.more{font-style:italic;color:#a08870;padding-top:2px;font-size:11px;}
+</style>
+</head>
+<body>
+<div id="header">
+  <h1>Saqqara / Memphis – Amarna-Period Object Distribution</h1>
+  <span class="stat"><strong>123</strong> objects with known location</span>
+  <span class="stat"><strong>23</strong> contexts</span>
+</div>
+<div id="map"></div>
+<script>
+var ZONE_COLORS={"Falaise du Bubasteion": "#c97a2b", "Unas-Cemetery": "#4a7a5e", "Teti-Cemetery": "#2f7f8f", "Serapeum": "#8c3b3b", "Temple of Ptah": "#b59a2c", "Other": "#6b6b9a"};
+var mapPoints=[{"id_location": 177, "name": "Tomb of Amenemone", "zone": "Teti-Cemetery", "lat": 29.876567, "lon": 31.221903, "count": 20, "objects": [{"id": 1543, "type": "architectural element", "subtype": "column", "inv": "TNE 94: F120", "museum": null}, {"id": 1540, "type": "architectural element", "subtype": "column", "inv": "TNE 94: F121", "museum": "Main Magazine (Saqqara)"}, {"id": 1538, "type": "architectural element", "subtype": "column", "inv": "TNE 94: F122", "museum": "Main Magazine (Saqqara)"}, {"id": 1539, "type": "architectural element", "subtype": "column", "inv": "TNE 96: F3 +TNE 94: 123", "museum": "Main Magazine (Saqqara)"}, {"id": 248, "type": "architectural element", "subtype": "jamb", "inv": "GL 298", "museum": "Staatliche Sammlung Ägyptischer Kunst"}, {"id": 712, "type": "architectural element", "subtype": "pyramidion", "inv": "JE 41665", "museum": "Egyptian Museum"}, {"id": 801, "type": "architectural element", "subtype": "wall-fragment", "inv": "ÆIN 716", "museum": "Ny Carlsberg Glyptotek"}, {"id": 40, "type": "architectural element", "subtype": "wall-fragment", "inv": "JE 11975", "museum": "Egyptian Museum"}, {"id": 715, "type": "architectural element", "subtype": "wall-fragment", "inv": "TN 17.6.25.1a", "museum": "Egyptian Museum"}, {"id": 716, "type": "architectural element", "subtype": "wall-fragment", "inv": "TN 17.6.25.1b", "museum": "Egyptian Museum"}, {"id": 717, "type": "architectural element", "subtype": "wall-fragment", "inv": "TN 17.6.25.1c", "museum": "Egyptian Museum"}, {"id": 718, "type": "architectural element", "subtype": "wall-fragment", "inv": "TN 17.6.25.1d", "museum": "Egyptian Museum"}, {"id": 719, "type": "architectural element", "subtype": "wall-fragment", "inv": "TN 17.6.25.1e", "museum": "Egyptian Museum"}, {"id": 720, "type": "architectural element", "subtype": "wall-fragment", "inv": "TN 17.6.25.1f", "museum": "Egyptian Museum"}, {"id": 1468, "type": "architectural element", "subtype": "wall-fragment", "inv": "TN 5.7.11", "museum": "Egyptian Museum"}, {"id": 1537, "type": "architectural element", "subtype": "wall-fragment", "inv": "TNE 94: F105", "museum": "Main Magazine (Saqqara)"}, {"id": 660, "type": "architectural unit", "subtype": "tomb", "inv": "213/TPC, 2 (Loret)", "museum": null}, {"id": 713, "type": "statue", "subtype": "seated figure", "inv": "TN 8.6.24.10", "museum": "Egyptian Museum"}, {"id": 176, "type": "stela", "subtype": "rectangular-stela", "inv": "TN 10.6.24.8", "museum": "Egyptian Museum"}, {"id": 1542, "type": "(tomb) equipment", "subtype": "shabti", "inv": "TNE 96: 123", "museum": null}]}, {"id_location": 151, "name": "Tomb of Iniuia", "zone": "Unas-Cemetery", "lat": 29.865944, "lon": 31.217, "count": 15, "objects": [{"id": 724, "type": "architectural element", "subtype": "column", "inv": "ÄM 1627", "museum": "Ägyptisches Museum und Papyrussammlung"}, {"id": 725, "type": "architectural element", "subtype": "column", "inv": "ÄM 1628", "museum": "Ägyptisches Museum und Papyrussammlung"}, {"id": 2187, "type": "architectural element", "subtype": "lintel", "inv": "R 93-53 A+B, R 93-56", "museum": "Main Magazine (Saqqara)"}, {"id": 730, "type": "architectural element", "subtype": "pyramidion", "inv": "D 14", "museum": "Musée du Louvre"}, {"id": 2188, "type": "architectural element", "subtype": "wall-fragment", "inv": "R 93-20, R 93-5, R 93-64", "museum": "Nicholson Museum"}, {"id": 731, "type": "architectural element", "subtype": "wall-fragment", "inv": "TN 14.6.24.29", "museum": "Egyptian Museum"}, {"id": 63, "type": "architectural element", "subtype": "wall-fragment", "inv": "TN 25.6.24.7", "museum": "Egyptian Museum"}, {"id": 732, "type": "architectural element", "subtype": "wall-fragment", "inv": "TN 3.7.24.13", "museum": "Egyptian Museum"}, {"id": 658, "type": "architectural unit", "subtype": "tomb", "inv": "009/USC", "museum": null}, {"id": 723, "type": "stela", "subtype": "falsedoor-stela", "inv": "1864246", "museum": "Manchester Museum"}, {"id": 737, "type": "stela", "subtype": "falsedoor-stela", "inv": null, "museum": "Main Magazine (Saqqara)"}, {"id": 728, "type": "stela", "subtype": "round-topped stela", "inv": "JE 10079", "museum": "Egyptian Museum"}, {"id": 734, "type": "stela", "subtype": "round-topped stela", "inv": "R 93-24, R 93-26–28, R 93-29a–e, R 93-76", "museum": "Main Magazine (Saqqara)"}, {"id": 726, "type": "(tomb) equipment", "subtype": "sarcophagus", "inv": "D 2", "museum": "Musée du Louvre"}, {"id": 729, "type": "(tomb) equipment", "subtype": "shabti", "inv": "MFA 1977.717", "museum": "Museum of Fine Arts"}]}, {"id_location": 175, "name": "Tomb of Pay & Raia", "zone": "Unas-Cemetery", "lat": 29.865933, "lon": 31.217178, "count": 11, "objects": [{"id": 860, "type": "architectural element", "subtype": "jamb", "inv": "2600", "museum": "Museo Egizio"}, {"id": 868, "type": "architectural element", "subtype": "lintel", "inv": "(lintel, no inv.)", "museum": null}, {"id": 756, "type": "architectural element", "subtype": "pyramidion", "inv": "D 21", "museum": "Musée du Louvre"}, {"id": 861, "type": "architectural element", "subtype": "wall-fragment", "inv": "2601", "museum": "Museo Egizio"}, {"id": 862, "type": "architectural element", "subtype": "wall-fragment", "inv": "NI 104 & 235", "museum": "Musée Auguste Rodin"}, {"id": 2190, "type": "architectural element", "subtype": "wall-fragment", "inv": "(wall-fragment, no inv.)", "museum": null}, {"id": 2191, "type": "stela", "subtype": "falsedoor-stela", "inv": "(stela, no inv.)", "museum": null}, {"id": 864, "type": "stela", "subtype": "round-topped stela", "inv": "BM EA 156", "museum": "Sotheby's"}, {"id": 865, "type": "stela", "subtype": "round-topped stela", "inv": "MMA 04.2.527 + R 94-76 et al.", "museum": "Metropolitan Museum of Art"}, {"id": 96, "type": "(tomb) equipment", "subtype": "shabti", "inv": "N 2657", "museum": "Musée du Louvre"}, {"id": 870, "type": "(tomb) equipment", "subtype": "shabti", "inv": "SAK 2009-24", "museum": "Main Magazine (Saqqara)"}]}, {"id_location": 174, "name": "Tomb of Ry", "zone": "Unas-Cemetery", "lat": 29.865906, "lon": 31.217425, "count": 10, "objects": [{"id": 2125, "type": "architectural element", "subtype": "doorway", "inv": "CTS-SB-06202", "museum": "Flagellation Museum, Museum of the Studium Biblicum Franciscanum"}, {"id": 1554, "type": "architectural element", "subtype": "pyramidion", "inv": "JE 48840", "museum": "Egyptian Museum"}, {"id": 2074, "type": "architectural element", "subtype": "wall-fragment", "inv": "37.39 E", "museum": "The Brooklyn Museum"}, {"id": 1557, "type": "architectural element", "subtype": "wall-fragment", "inv": "ÄM 7275", "museum": "Ägyptisches Museum und Papyrussammlung"}, {"id": 1550, "type": "architectural element", "subtype": "wall-fragment", "inv": "ÄM 7277", "museum": "Ägyptisches Museum und Papyrussammlung"}, {"id": 77, "type": "architectural element", "subtype": "wall-fragment", "inv": "ÄM 7278", "museum": "Ägyptisches Museum und Papyrussammlung"}, {"id": 2124, "type": "architectural element", "subtype": "wall-fragment", "inv": "R94-78", "museum": "Main Magazine (Saqqara)"}, {"id": 2073, "type": "architectural unit", "subtype": "tomb", "inv": "038/USC, LS 25", "museum": null}, {"id": 1549, "type": "stela", "subtype": "falsedoor-stela", "inv": "ÄM 7290", "museum": "Ägyptisches Museum und Papyrussammlung"}, {"id": 287, "type": "stela", "subtype": "unspecified", "inv": "37.46 E", "museum": "The Brooklyn Museum"}]}, {"id_location": 178, "name": "Tomb of Serbna", "zone": "Unas-Cemetery", "lat": 29.866611, "lon": 31.217464, "count": 9, "objects": [{"id": 1243, "type": "small finds", "subtype": "jewellery & amulets", "inv": "1039", "museum": "Muséum Emmanuel Liais"}, {"id": 1240, "type": "small finds", "subtype": "jewellery & amulets", "inv": "ÄM 1785", "museum": "Ägyptisches Museum und Papyrussammlung"}, {"id": 1241, "type": "small finds", "subtype": "jewellery & amulets", "inv": "ÄM 8665", "museum": "Ägyptisches Museum und Papyrussammlung"}, {"id": 1872, "type": "small finds", "subtype": "jewellery & amulets", "inv": "E 2208", "museum": "Musée du Louvre"}, {"id": 1914, "type": "small finds", "subtype": "jewellery & amulets", "inv": "E 3860", "museum": "Musée du Louvre"}, {"id": 415, "type": "small finds", "subtype": "tools & implements", "inv": "ÄM 1284", "museum": "Ägyptisches Museum und Papyrussammlung"}, {"id": 1745, "type": "small finds", "subtype": "tools & implements", "inv": null, "museum": null}, {"id": 1744, "type": "small finds", "subtype": "vessels & container", "inv": "ÄM 1882", "museum": "Ägyptisches Museum und Papyrussammlung"}, {"id": 1242, "type": "(tomb) equipment", "subtype": "canopics", "inv": "144", "museum": "Musée municipal Auguste Grasset"}]}, {"id_location": 148, "name": "Tomb of Meryneith", "zone": "Unas-Cemetery", "lat": 29.866078, "lon": 31.217489, "count": 9, "objects": [{"id": 2213, "type": "architectural element", "subtype": "wall-fragment", "inv": "2001-R49 et al.", "museum": null}, {"id": 1696, "type": "architectural element", "subtype": "wall-fragment", "inv": "ÄM 12694", "museum": "Ägyptisches Museum und Papyrussammlung"}, {"id": 225, "type": "architectural element", "subtype": "wall-fragment", "inv": "ÄM 2070", "museum": "Ägyptisches Museum und Papyrussammlung"}, {"id": 224, "type": "architectural element", "subtype": "wall-fragment", "inv": "E 10595", "museum": "Oriental Institute Museum"}, {"id": 1714, "type": "architectural element", "subtype": "wall-fragment", "inv": "MMA 21.2.25", "museum": "Metropolitan Museum of Art"}, {"id": 1689, "type": "architectural element", "subtype": "wall-fragment", "inv": null, "museum": "Private Collection (USA)"}, {"id": 226, "type": "architectural element", "subtype": "wall-fragment", "inv": null, "museum": "Main Magazine (Giza)"}, {"id": 671, "type": "architectural unit", "subtype": "tomb", "inv": "032/USC, H9", "museum": null}, {"id": 1023, "type": "statue", "subtype": "seated figure", "inv": "JE 99076", "museum": "Egyptian Museum"}]}, {"id_location": 149, "name": "Tomb of Aperia", "zone": "Falaise du Bubasteion", "lat": 29.873058, "lon": 31.224428, "count": 7, "objects": [{"id": 661, "type": "architectural unit", "subtype": "tomb", "inv": "352/Bub, Bub. I.1", "museum": null}, {"id": 877, "type": "small finds", "subtype": "jewellery & amulets", "inv": "JE 99122", "museum": "Egyptian Museum"}, {"id": 879, "type": "small finds", "subtype": "tools & implements", "inv": null, "museum": null}, {"id": 443, "type": "stela", "subtype": "unspecified", "inv": null, "museum": null}, {"id": 75, "type": "(tomb) equipment", "subtype": "canopics", "inv": null, "museum": null}, {"id": 880, "type": "(tomb) equipment", "subtype": "shabti", "inv": null, "museum": null}, {"id": 881, "type": "small finds", "subtype": "jewellery & amulets", "inv": null, "museum": null}]}, {"id_location": 152, "name": "Tomb of Ipuia", "zone": "Teti-Cemetery", "lat": 29.8763, "lon": 31.221606, "count": 7, "objects": [{"id": 1463, "type": "architectural element", "subtype": "wall-fragment", "inv": "TN 17.6.24.13", "museum": "Egyptian Museum"}, {"id": 581, "type": "architectural element", "subtype": "wall-fragment", "inv": "TN 21.6.24.12", "museum": "Egyptian Museum"}, {"id": 25, "type": "architectural element", "subtype": "wall-fragment", "inv": "TN 21.6.24.16", "museum": "Egyptian Museum"}, {"id": 2101, "type": "architectural unit", "subtype": "tomb", "inv": "212/TPC, S 2730", "museum": null}, {"id": 582, "type": "statue", "subtype": "standing figure", "inv": "JE 44884", "museum": "Egyptian Museum"}, {"id": 900, "type": "stela", "subtype": "round-topped stela", "inv": "JE 44722", "museum": "Egyptian Museum"}, {"id": 1462, "type": "stela", "subtype": "unspecified", "inv": "TN 27.3.25.17", "museum": "Egyptian Museum"}]}, {"id_location": 179, "name": "Tomb of Ptahmay", "zone": "Teti-Cemetery", "lat": 29.876258, "lon": 31.221836, "count": 6, "objects": [{"id": 151, "type": "architectural element", "subtype": "lintel", "inv": "TN 8.11.26.6", "museum": "Egyptian Museum"}, {"id": 1466, "type": "architectural element", "subtype": "wall-fragment", "inv": "TN 11.1.25.12", "museum": "Egyptian Museum"}, {"id": 940, "type": "architectural element", "subtype": "wall-fragment", "inv": "TN 14.6.24.2", "museum": "Egyptian Museum"}, {"id": 1467, "type": "architectural element", "subtype": "wall-fragment", "inv": "TN 1.7.24.5", "museum": "Egyptian Museum"}, {"id": 938, "type": "architectural element", "subtype": "wall-fragment", "inv": "TN 3.7.24.12", "museum": "Egyptian Museum"}, {"id": 939, "type": "architectural element", "subtype": "wall-fragment", "inv": "TN 5.7.24.8", "museum": "Egyptian Museum"}]}, {"id_location": 140, "name": "Tomb of Ptahemwia", "zone": "Unas-Cemetery", "lat": 29.866044, "lon": 31.217792, "count": 5, "objects": [{"id": 528, "type": "stela", "subtype": "falsedoor-stela", "inv": "2008-R52", "museum": "Main Magazine (Saqqara)"}, {"id": 649, "type": "architectural element", "subtype": "jamb", "inv": "JE 8383", "museum": "Egyptian Museum"}, {"id": 2220, "type": "architectural element", "subtype": "wall-fragment", "inv": "(wall-fragment, no inv.)", "museum": null}, {"id": 157, "type": "architectural element", "subtype": "pilaster", "inv": "MCA-EGI-EG 1891", "museum": "Museo Civico Archeologico"}, {"id": 666, "type": "architectural unit", "subtype": "tomb", "inv": "025/USC", "museum": null}]}, {"id_location": 153, "name": "Tomb of Hatiay", "zone": "Teti-Cemetery", "lat": 29.87645, "lon": 31.22255, "count": 4, "objects": [{"id": 2214, "type": "stela", "subtype": "rectangular-stela", "inv": "(stela, no inv.)", "museum": null}, {"id": 2229, "type": "architectural element", "subtype": "wall-fragment", "inv": "(wall-fragment, no inv.)", "museum": "Main Magazine (Saqqara)"}, {"id": 2225, "type": "architectural unit", "subtype": "tomb", "inv": "228/TPC", "museum": null}, {"id": 2216, "type": "stela", "subtype": "round-topped stela", "inv": "(stela, no inv.)", "museum": "Main Magazine (Saqqara)"}]}, {"id_location": 158, "name": "Tomb of Merya", "zone": "Teti-Cemetery", "lat": 29.876222, "lon": 31.221633, "count": 4, "objects": [{"id": 1449, "type": "architectural element", "subtype": "wall-fragment", "inv": "JE 44925", "museum": "Egyptian Museum"}, {"id": 205, "type": "architectural element", "subtype": "wall-fragment", "inv": "JE 44926–44928", "museum": "Egyptian Museum"}, {"id": 1450, "type": "architectural element", "subtype": "wall-fragment", "inv": "JE 44930", "museum": "Egyptian Museum"}, {"id": 2100, "type": "architectural unit", "subtype": "tomb", "inv": "220/TPC, S 2727", "museum": null}]}, {"id_location": 171, "name": "Temple of Ptah", "zone": "Temple of Ptah", "lat": 29.852342, "lon": 31.254, "count": 3, "objects": [{"id": 45, "type": "architectural element", "subtype": "libation basin", "inv": null, "museum": null}, {"id": 1667, "type": "stela", "subtype": "round-topped stela", "inv": "UC 14470", "museum": "Petrie Museum of Egyptian Archaeology"}, {"id": 216, "type": "stela", "subtype": "unspecified", "inv": "CG 34186", "museum": "Egyptian Museum"}]}, {"id_location": 166, "name": "Serapeum", "zone": "Serapeum", "lat": 29.874719, "lon": 31.212417, "count": 2, "objects": [{"id": 193, "type": "stela", "subtype": "round-topped stela", "inv": "IM 5305", "museum": "Musée du Louvre"}, {"id": 711, "type": "architectural element", "subtype": "jamb", "inv": "E 3028 a", "museum": "Musée du Louvre"}]}, {"id_location": 168, "name": "Tomb of Panakhtemdedu", "zone": "Unas-Cemetery", "lat": 29.866036, "lon": 31.217239, "count": 2, "objects": [{"id": 2248, "type": "architectural unit", "subtype": "tomb", "inv": "155/USC, 2009/20", "museum": null}, {"id": 531, "type": "stela", "subtype": "unspecified", "inv": "SAK 2009-R21", "museum": "Main Magazine (Saqqara)"}]}, {"id_location": 178, "name": "Tomb of Ny", "zone": "Unas-Cemetery", "lat": 29.866911, "lon": 31.217164, "count": 2, "objects": [{"id": 2, "type": "stela", "subtype": "falsedoor-stela", "inv": "10864", "museum": "Ancient Oriental Museum"}, {"id": 1699, "type": "stela", "subtype": "round-topped stela", "inv": "2001-R277, 2013-R31", "museum": "Main Magazine (Saqqara)"}]}, {"id_location": 150, "name": "Tomb of Djehutymose", "zone": "Falaise du Bubasteion", "lat": 29.873028, "lon": 31.223969, "count": 1, "objects": [{"id": 505, "type": "architectural unit", "subtype": "tomb", "inv": "363/Bub, Bub. I.19", "museum": null}]}, {"id_location": 164, "name": "Tomb of Raiay", "zone": "Falaise du Bubasteion", "lat": 29.872992, "lon": 31.223725, "count": 1, "objects": [{"id": 506, "type": "architectural unit", "subtype": "tomb", "inv": "360/Bub, Bub. I.27", "museum": null}]}, {"id_location": 170, "name": "Tomb of Huy", "zone": "Teti-Cemetery", "lat": 29.876183, "lon": -31.222194, "count": 1, "objects": [{"id": 339, "type": "stela", "subtype": "falsedoor-stela", "inv": "JE 10174", "museum": "Egyptian Museum"}]}, {"id_location": 176, "name": "Tomb of Maia", "zone": "Falaise du Bubasteion", "lat": 29.873039, "lon": 31.223881, "count": 1, "objects": [{"id": 1319, "type": "architectural unit", "subtype": "tomb", "inv": "355/Bub, Bub. I.20", "museum": null}]}, {"id_location": 160, "name": "Tomb of Pakharu", "zone": "Teti-Cemetery", "lat": 29.87625, "lon": 31.2223, "count": 1, "objects": [{"id": 2184, "type": "architectural unit", "subtype": "tomb", "inv": "216/TPC", "museum": null}]}, {"id_location": 154, "name": "Tomb of Hatiay", "zone": "Teti-Cemetery", "lat": 29.876394, "lon": 31.222533, "count": 1, "objects": [{"id": 2215, "type": "architectural unit", "subtype": "tomb", "inv": "227/TPC", "museum": null}]}, {"id_location": 179, "name": "Tomb of Amenemhat", "zone": "Teti-Cemetery", "lat": 29.876558, "lon": 31.221536, "count": 1, "objects": [{"id": 46, "type": "stela", "subtype": "falsedoor-stela", "inv": "MG 1963", "museum": "Musée de Peinture et de Sculpture"}]}];
+var zoneLabels=[{"zone": "Falaise du Bubasteion", "lat": 29.8745, "lon": 31.2268, "anchor": "left"}, {"zone": "Unas-Cemetery", "lat": 29.8642, "lon": 31.2153, "anchor": "left"}, {"zone": "Teti-Cemetery", "lat": 29.878, "lon": 31.2208, "anchor": "left"}, {"zone": "Serapeum", "lat": 29.8757, "lon": 31.2108, "anchor": "right"}, {"zone": "Temple of Ptah", "lat": 29.85, "lon": 31.254, "anchor": "left"}];
+var legendZones=[{"zone": "Unas-Cemetery", "col": "#4a7a5e", "n_tombs": 8, "n_sites": 0, "n_obj": 63, "is_non_tomb": false}, {"zone": "Teti-Cemetery", "col": "#2f7f8f", "n_tombs": 9, "n_sites": 0, "n_obj": 45, "is_non_tomb": false}, {"zone": "Falaise du Bubasteion", "col": "#c97a2b", "n_tombs": 4, "n_sites": 0, "n_obj": 10, "is_non_tomb": false}, {"zone": "Serapeum", "col": "#8c3b3b", "n_tombs": 0, "n_sites": 1, "n_obj": 2, "is_non_tomb": true}, {"zone": "Temple of Ptah", "col": "#b59a2c", "n_tombs": 0, "n_sites": 1, "n_obj": 3, "is_non_tomb": true}];
+var NON_TOMBS=["Serapeum", "Temple of Ptah"];
+
+var map=L.map('map',{center:[29.869,31.220],zoom:14,minZoom:11,maxZoom:18});
+L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',{
+  attribution:'&copy; OpenStreetMap contributors &copy; CARTO',subdomains:'abcd',maxZoom:20
+}).addTo(map);
+
+function getRadius(n){
+  if(n<=1)return 6;if(n<=3)return 8;if(n<=6)return 11;
+  if(n<=10)return 14;if(n<=15)return 17;return 21;
+}
+
+mapPoints.forEach(function(pt){
+  var col=ZONE_COLORS[pt.zone]||'#666';
+  var r=getRadius(pt.count);
+  var isNonTomb=NON_TOMBS.indexOf(pt.zone)>=0;
+  var marker;
+
+  if(isNonTomb){
+    var sz=r*2;
+    var icon=L.divIcon({className:'',
+      html:'<div style="width:'+sz+'px;height:'+sz+'px;background:'+col+
+           ';border:1px solid rgba(0,0,0,.25);border-radius:2px;opacity:.88;"></div>',
+      iconSize:[sz,sz],iconAnchor:[r,r],popupAnchor:[0,-r]});
+    marker=L.marker([pt.lat,pt.lon],{icon:icon}).addTo(map);
+  }else{
+    marker=L.circleMarker([pt.lat,pt.lon],{
+      radius:r,fillColor:col,color:'rgba(0,0,0,.25)',weight:1,fillOpacity:.88
+    }).addTo(map);
+  }
+
+  // Build object rows with inv + museum
+  var objRows='';
+  pt.objects.slice(0,25).forEach(function(o){
+    var subtype=o.subtype||o.type||'';
+    var invHtml='';
+    if(o.inv){
+      invHtml='<span class="obj-inv">'+o.inv+'</span>';
+    }
+    var placeHtml='';
+    if(o.museum){
+      placeHtml='<span class="obj-museum">'+o.museum+'</span>';
+    }else{
+      placeHtml='<span class="obj-insitu">in situ / Main Magazine</span>';
+    }
+    objRows+='<li class="obj-item">'
+      +'<div class="obj-subtype">'+subtype+'</div>'
+      +'<div class="obj-inv-row">'+invHtml+placeHtml+'</div>'
+      +'</li>';
+  });
+  if(pt.objects.length>25)objRows+='<li class="more">… and '+(pt.objects.length-25)+' more</li>';
+
+  var popup='<div class="popup-inner">'
+    +'<span class="popup-zone-tag" style="background:'+col+';">'+pt.zone+'</span>'
+    +'<h3>'+pt.name+'</h3>'
+    +'<div class="popup-count">'+pt.count+' object'+(pt.count>1?'s':'')+'</div>'
+    +'<ul class="obj-list">'+objRows+'</ul></div>';
+  marker.bindPopup(popup,{maxWidth:320});
+
+  if(pt.count>=4&&!isNonTomb){
+    var lbl=L.divIcon({className:'',
+      html:'<span style="font-family:Georgia,serif;font-size:9px;color:#fff;font-weight:bold;text-shadow:0 0 2px rgba(0,0,0,.8);">'+pt.count+'</span>',
+      iconSize:[r*2,r*2],iconAnchor:[r,r]});
+    L.marker([pt.lat,pt.lon],{icon:lbl,interactive:false}).addTo(map);
+  }
+
+  marker.bindTooltip(pt.name,{permanent:false,direction:'top',offset:[0,-r-2]});
+});
+
+// Zone labels
+zoneLabels.forEach(function(lbl){
+  var col=ZONE_COLORS[lbl.zone]||'#555';
+  var anchor=lbl.anchor==='right'?'text-align:right;':'';
+  var icon=L.divIcon({className:'zone-label',
+    html:'<span style="color:'+col+';'+anchor+'">'+lbl.zone+'</span>',
+    iconSize:[160,20],iconAnchor:lbl.anchor==='right'?[160,10]:[0,10]});
+  L.marker([lbl.lat,lbl.lon],{icon:icon,interactive:false,zIndexOffset:-100}).addTo(map);
+});
+
+// Legend
+var legend=L.control({position:'bottomright'});
+legend.onAdd=function(){
+  var div=L.DomUtil.create('div','legend');
+  var html='<div class="legend-title">Cemetery area</div>';
+  var hasSep=false;
+  legendZones.forEach(function(z){
+    if(z.is_non_tomb&&!hasSep){html+='<div class="legend-sep"></div>';hasSep=true;}
+    var shape=z.is_non_tomb
+      ?'<span class="leg-swatch square" style="background:'+z.col+';"></span>'
+      :'<span class="leg-swatch" style="background:'+z.col+';"></span>';
+    var counts=z.is_non_tomb
+      ?z.n_obj+' obj.'
+      :z.n_tombs+' tomb'+(z.n_tombs>1?'s':'')+' · '+z.n_obj+' obj.';
+    html+='<div class="legend-row">'+shape
+      +'<span class="leg-text">'+z.zone+'</span>'
+      +'<span class="leg-nums">'+counts+'</span></div>';
+  });
+  html+='<div class="legend-sep"></div>'
+    +'<div class="legend-row"><span class="leg-swatch" style="background:#888;"></span><span class="leg-text">tomb context</span></div>'
+    +'<div class="legend-row"><span class="leg-swatch square" style="background:#888;"></span><span class="leg-text">findspot (no tomb)</span></div>';
+  div.innerHTML=html;
+  return div;
+};
+legend.addTo(map);
+</script>
+</body>
+</html>
