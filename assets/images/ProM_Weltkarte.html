@@ -27,8 +27,8 @@
 
 <style>
 * { box-sizing: border-box; margin: 0; padding: 0; }
-html, body { width: 100%; height: 100%; font-family: 'Georgia', serif; }
-#map { width: 100%; height: calc(100vh - 74px); }
+html, body { width: 100%; height: 100%; height: 100dvh; font-family: 'Georgia', serif; }
+#map { width: 100%; height: calc(100vh - 74px); height: calc(100dvh - 74px); }
 
 #titlebar {
   position: absolute; top: 0; left: 0; right: 0; z-index: 1000;
@@ -79,6 +79,24 @@ html, body { width: 100%; height: 100%; font-family: 'Georgia', serif; }
 .footer-prom:hover{text-decoration:underline;}
 .footer-author{color:#c8b89a;}
 .footer-sep{color:#6b5a42;margin:0 4px;}
+
+@media(max-width:600px){
+  #map{height:calc(100vh - 52px);height:calc(100dvh - 52px);}
+  #titlebar{padding:7px 12px;}
+  #titlebar h1{font-size:13px;}
+  #titlebar .stats{font-size:10.5px;gap:6px;flex-wrap:wrap;}
+  #legend{bottom:60px;right:8px;padding:7px 10px;font-size:10.5px;min-width:0;}
+  #legend b{font-size:9px;}
+  .legend-dot{flex-shrink:0;}
+  .leaflet-popup-content{max-width:calc(100vw - 40px)!important;}
+  .popup-location{font-size:13px;}
+  .popup-table td{font-size:11px;}
+  #footer{padding:6px 12px;gap:10px;}
+  .footer-logo{height:36px;width:36px;}
+  .footer-meta{font-size:9.5px;}
+  .footer-author span:last-child,
+  .footer-author .footer-sep:last-of-type{display:none;}
+}
 </style>
 </head>
 <body>
